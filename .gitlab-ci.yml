@@ -1,0 +1,31 @@
+stages:
+  - buildntest
+  - docker
+
+buildntest:
+  image: node:12.18-alpine3.12
+  stage: buildntest
+  script:
+    - yarn install
+    - yarn test
+    - yarn compile
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-node
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - build/bundle.js
+    reports:
+      junit: frontend/junit.xml
+
+docker:
+  image: docker:19.03.11
+  stage: docker
+  services:
+    - docker:19.03.11-dind
+  script:
+    - cd build
+    - docker login -u "${DOCKER_USER}" -p "${DOCKER_PAT}"
+    - docker build . guardianmultimedia/pluto-logtool:$CI_JOB_IID
+    - docker push guardianmultimedia/pluto-logtool:$CI_JOB_IID
