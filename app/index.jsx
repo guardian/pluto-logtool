@@ -11,7 +11,7 @@ import {BrowserRouter, Link, Route, Switch, Redirect, withRouter} from 'react-ro
 //library.add(faFolder, faFolderOpen, faTimes, faSearch, faCog, faUser, faSignOutAlt);
 
 
-ReactDOM.render(
+render(
   <h1>Hello, world!</h1>,
-  document.getElementById('root')
+  document.getElementById('app')
 );
