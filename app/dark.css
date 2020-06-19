@@ -3,3 +3,135 @@ body {
   color: #ffffff;
   font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
 }
+
+div.title_box {
+  background-color: #222222;
+  font-size: 26px;
+  padding: 8px;
+  margin: 4px;
+  border-radius: 6px;
+  float: left;
+  width: 1400px;
+}
+
+div.controls_box {
+  height: 80px;
+  padding: 8px;
+  margin: 4px;
+  clear: left;
+  float: left;
+  width: 1400px;
+}
+
+div.headings_box {
+  background-color: #222222;
+  /*font-size: 26px;*/
+  padding: 8px;
+  margin: 4px;
+  border-radius: 6px;
+  clear: left;
+  float: left;
+  width: 1400px;
+}
+
+div.job_box_normal {
+  background-color: #222222;
+  /*font-size: 26px;*/
+  padding: 8px;
+  margin: 4px;
+  border-radius: 6px;
+  clear: left;
+  float: left;
+  width: 1400px;
+}
+
+div.job_box_failed {
+  background-color: #400000;
+  /*font-size: 26px;*/
+  padding: 8px;
+  margin: 4px;
+  border-radius: 6px;
+  clear: left;
+  float: left;
+  width: 1400px;
+}
+
+div.select_heading {
+  width: 100px;
+  float: left;
+}
+
+div.id_heading {
+  width: 100px;
+  float: left;
+}
+
+div.type_heading {
+  width: 120px;
+  float: left;
+}
+
+div.status_heading {
+  width: 120px;
+  float: left;
+}
+
+div.progress_heading {
+  width: 160px;
+  float: left;
+}
+
+div.user_heading {
+  width: 100px;
+  float: left;
+}
+
+div.started_heading {
+  width: 220px;
+  float: left;
+}
+
+div.priority_heading {
+  width: 100px;
+  float: left;
+}
+
+div.select_data {
+  width: 100px;
+  float: left;
+}
+
+div.id_data {
+  width: 100px;
+  float: left;
+}
+
+div.type_data {
+  width: 120px;
+  float: left;
+}
+
+div.status_data {
+  width: 120px;
+  float: left;
+}
+
+div.progress_data {
+  width: 160px;
+  float: left;
+}
+
+div.user_data {
+  width: 100px;
+  float: left;
+}
+
+div.started_data {
+  width: 220px;
+  float: left;
+}
+
+div.priority_data {
+  width: 100px;
+  float: left;
+}
