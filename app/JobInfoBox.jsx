@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import StatusFormatter from './StatusFormatter.jsx';
+import TypeFormatter from './TypeFormatter.jsx';
+import PriorityFormatter from './PriorityFormatter.jsx';
 import moment from 'moment';
 
 class JobInfoBox extends React.Component {
@@ -12,6 +15,9 @@ class JobInfoBox extends React.Component {
   returnStatusForCSS(status) {
     if (status == 'FAILED_TOTAL') {
       return "job_box_failed";
+    }
+    if (status == 'FINISHED') {
+      return "job_box_finished";
     }
     return "job_box_normal";
   }
@@ -26,10 +32,10 @@ render() {
       {this.props.jobData.jobId}
     </div>
     <div class="type_data">
-      {this.props.jobData.type}
+      {<TypeFormatter type={this.props.jobData.type}/>}
     </div>
     <div class="status_data">
-      {this.props.jobData.status}
+      {<StatusFormatter status={this.props.jobData.status}/>}
     </div>
     <div class="progress_data">
       {stepNumber}/{this.props.jobData.totalSteps}
@@ -38,10 +44,10 @@ render() {
       {this.props.jobData.user}
     </div>
     <div class="started_data">
-      {moment(this.props.jobData.started).format("HH:mm:ss ddd Do MMM YYYY")}
+      {moment(this.props.jobData.started).format("D/M/YYYY H:mm")}
     </div>
     <div class="priority_data">
-      {this.props.jobData.priority}
+      {<PriorityFormatter priority={this.props.jobData.priority}/>}
     </div>
   </div>
   }

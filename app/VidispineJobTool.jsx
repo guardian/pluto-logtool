@@ -59,10 +59,12 @@ this.state = {
   render() {
     return (
       <div>
+        <div class="grid">
         <div class="title_box">Vidispine Job Tool</div>
         <div class="controls_box">
           {this.state.someData.hits} jobs
         </div>
+        
         <div class="headings_box">
           <div class="select_heading">
             &nbsp;
@@ -95,7 +97,7 @@ this.state = {
            {
              this.state.someData.job.map(item =><JobInfoBox jobData={item} jobId={item.jobId}/>)
            }
-
+          </div>
       </div>
     )
   }
