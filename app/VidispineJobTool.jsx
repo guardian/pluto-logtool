@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Contacts from './components/contacts';
 import JobInfoBox from './JobInfoBox.jsx';
 
 //let url = 'http://localhost:8080/API/job';
