@@ -64,13 +64,16 @@ this.state = {
         <div class="controls_box">
           {this.state.someData.hits} jobs
         </div>
-        
+
         <div class="headings_box">
           <div class="select_heading">
             &nbsp;
           </div>
           <div class="id_heading">
             Id.
+          </div>
+          <div class="filename_heading">
+            Filename
           </div>
           <div class="type_heading">
             Type

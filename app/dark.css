@@ -4,6 +4,11 @@ body {
   font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
 }
 
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 div.grid {
   display: grid;
   grid-template-columns: 1400px;
@@ -40,7 +45,7 @@ div.headings_box {
   grid-column-end: 1;
   width: 1400px;
   display: grid;
-  grid-template-columns: 40px 100px 180px 180px 160px 160px 140px 100px;
+  grid-template-columns: 40px 100px 280px 180px 180px 160px 160px 140px 100px;
   grid-template-rows: 30px;
 }
 
@@ -53,7 +58,7 @@ div.job_box_normal {
   grid-column-end: 1;
   width: 1400px;
   display: grid;
-  grid-template-columns: 40px 100px 180px 180px 160px 160px 140px 100px;
+  grid-template-columns: 40px 100px 280px 180px 180px 160px 160px 140px 100px;
   grid-template-rows: 50px;
   font-size: 14px;
 }
@@ -67,7 +72,7 @@ div.job_box_failed {
   grid-column-end: 1;
   width: 1400px;
   display: grid;
-  grid-template-columns: 40px 100px 180px 180px 160px 160px 140px 100px;
+  grid-template-columns: 40px 100px 280px 180px 180px 160px 160px 140px 100px;
   grid-template-rows: 50px;
   font-size: 14px;
 }
@@ -81,7 +86,7 @@ div.job_box_finished {
   grid-column-end: 1;
   width: 1400px;
   display: grid;
-  grid-template-columns: 40px 100px 180px 180px 160px 160px 140px 100px;
+  grid-template-columns: 40px 100px 280px 180px 180px 160px 160px 140px 100px;
   grid-template-rows: 50px;
   font-size: 14px;
 }
@@ -94,28 +99,32 @@ div.id_heading {
   grid-column-start: 2;
 }
 
-div.type_heading {
+div.filename_heading {
   grid-column-start: 3;
 }
 
-div.status_heading {
+div.type_heading {
   grid-column-start: 4;
 }
 
-div.progress_heading {
+div.status_heading {
   grid-column-start: 5;
 }
 
-div.user_heading {
+div.progress_heading {
   grid-column-start: 6;
 }
 
-div.started_heading {
+div.user_heading {
   grid-column-start: 7;
 }
 
-div.priority_heading {
+div.started_heading {
   grid-column-start: 8;
+}
+
+div.priority_heading {
+  grid-column-start: 9;
 }
 
 div.select_data {
@@ -126,26 +135,70 @@ div.id_data {
   grid-column-start: 2;
 }
 
-div.type_data {
+div.filename_data {
   grid-column-start: 3;
 }
 
-div.status_data {
+div.type_data {
   grid-column-start: 4;
 }
 
-div.progress_data {
+div.status_data {
   grid-column-start: 5;
 }
 
-div.user_data {
+div.progress_data {
   grid-column-start: 6;
 }
 
-div.started_data {
+div.user_data {
   grid-column-start: 7;
 }
 
-div.priority_data {
+div.started_data {
   grid-column-start: 8;
+}
+
+div.priority_data {
+  grid-column-start: 9;
+}
+
+div.job_page_grid {
+  display: grid;
+  grid-template-columns: 1400px;
+  grid-template-rows: 50px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px auto;
+}
+
+div.job_page_title_box {
+  background-color: #222222;
+  font-size: 26px;
+  padding-top: 10px;
+  padding-left: 10px;
+  margin: 2px;
+  border-radius: 6px;
+  width: 1412px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+div.job_data_box {
+  background-color: #222222;
+  padding: 14px;
+  margin: 2px;
+  border-radius: 6px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  width: 1400px;
+  display: grid;
+  grid-template-columns: 200px 1000px;
+  grid-template-rows: 40px;
+  font-size: 13px;
+}
+
+div.job_data_label {
+  grid-column-start: 1;
+}
+
+div.job_data_value {
+  grid-column-start: 2;
 }
