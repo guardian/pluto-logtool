@@ -34,6 +34,9 @@ div.controls_box {
   width: 1400px;
   grid-column-start: 1;
   grid-column-end: 1;
+  display: grid;
+  grid-template-columns: 1190px 100px 50px 50px;
+  grid-template-rows: 70px;
 }
 
 div.headings_box {
@@ -49,7 +52,7 @@ div.headings_box {
   grid-template-rows: 30px;
 }
 
-div.job_box_normal {
+a.job_box_normal {
   background-color: #222222;
   padding-top: 18px;
   margin: 2px;
@@ -63,7 +66,7 @@ div.job_box_normal {
   font-size: 14px;
 }
 
-div.job_box_failed {
+a.job_box_failed {
   background-color: #400000;
   padding-top: 18px;
   margin: 2px;
@@ -77,7 +80,7 @@ div.job_box_failed {
   font-size: 14px;
 }
 
-div.job_box_finished {
+a.job_box_finished {
   background-color: #004000;
   padding-top: 18px;
   margin: 2px;
@@ -200,5 +203,49 @@ div.job_data_label {
 }
 
 div.job_data_value {
+  grid-column-start: 2;
+}
+
+div.last_page {
+  background-color: #222222;
+  width: 40px;
+  height: 40px;
+  padding-top: 5px;
+  padding-left: 6px;
+  border-radius: 3px;
+  grid-column-start: 3;
+}
+
+div.next_page {
+  background-color: #222222;
+  width: 40px;
+  height: 40px;
+  padding-top: 5px;
+  padding-left: 6px;
+  border-radius: 3px;
+  grid-column-start: 4;
+}
+
+div.arrow_right {
+  width: 0;
+  height: 0;
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+  border-left: 35px solid #ffffff;
+}
+
+div.arrow_left {
+  width: 0;
+  height: 0;
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+  border-right:35px solid #ffffff;
+}
+
+div.job_number {
+  grid-column-start: 1;
+}
+
+div.page_number {
   grid-column-start: 2;
 }

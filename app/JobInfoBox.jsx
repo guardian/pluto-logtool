@@ -50,12 +50,12 @@ class JobInfoBox extends React.Component {
 render() {
   const stepNumber = this.props.jobData.hasOwnProperty("currentStep") ? this.props.jobData.currentStep.number : 0;
   const fileName = this.getValue(this.props.jobData.data, "originalFilename");
-  return <div class={this.returnStatusForCSS(this.props.jobData.status)} id={this.props.jobId}>
+  return <Link to={"/job/" + this.props.jobData.jobId} class={this.returnStatusForCSS(this.props.jobData.status)} id={this.props.jobId}>
     <div class="select_data">
       &nbsp;
     </div>
     <div class="id_data">
-      <Link to={"/job/" + this.props.jobData.jobId}>{this.props.jobData.jobId}</Link>
+      {this.props.jobData.jobId}
     </div>
     <div class="filename_data">
       {fileName}
@@ -78,7 +78,7 @@ render() {
     <div class="priority_data">
       {<PriorityFormatter priority={this.props.jobData.priority}/>}
     </div>
-  </div>
+  </Link>
   }
 }
 

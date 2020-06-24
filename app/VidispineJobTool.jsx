@@ -17,14 +17,17 @@ class VidispineJobTool extends Component {
 /*all the usual stuff....*/
 
 constructor(props){
-super(props);
-this.state = {
-  someData: {
-    hits: 0,
-    job: []
-  }
+  super(props);
+  this.state = {
+    someData: {
+      hits: 0,
+      job: []
+    },
+    pageNumber: 1
+  };
 }
-}
+
+
 
   setStatePromise(newState) {
     return new Promise((resolve,reject)=>this.setState(newState, ()=>resolve()));
@@ -54,6 +57,25 @@ this.state = {
     this.getJobData('job?metadata=true&step=true&number=16&first=1&sort=jobId%20desc');
   }
 
+  pageHigher = () => {
+    console.log(this.state.pageNumber)
+    this.setState({ pageNumber: this.state.pageNumber + 1 });
+    var pageToLoad = 1;
+    if (this.state.pageNumber > 0) {
+      pageToLoad = this.state.pageNumber * 16 + 1;
+    }
+    this.getJobData('job?metadata=true&step=true&number=16&first=' + pageToLoad + '&sort=jobId%20desc');
+  }
+
+  pageLower = () => {
+    console.log(this.state.pageNumber)
+    this.setState({ pageNumber: this.state.pageNumber - 1 });
+    var pageToLoadTwo = 1;
+    if (this.state.pageNumber > 0) {
+      pageToLoadTwo = this.state.pageNumber * 16 - 31;
+    }
+    this.getJobData('job?metadata=true&step=true&number=16&first=' + pageToLoadTwo + '&sort=jobId%20desc');
+  }
 
   render() {
     return (
@@ -61,7 +83,18 @@ this.state = {
         <div class="grid">
         <div class="title_box">Vidispine Job Tool</div>
         <div class="controls_box">
-          {this.state.someData.hits} jobs
+          <div class="job_number">
+            {this.state.someData.hits} jobs
+          </div>
+          <div class="page_number">
+            Page {this.state.pageNumber}
+          </div>
+          <div class="last_page" onClick={this.pageLower}>
+            <div class="arrow_left"></div>
+          </div>
+          <div class="next_page" onClick={this.pageHigher}>
+            <div class="arrow_right"></div>
+          </div>
         </div>
 
         <div class="headings_box">
