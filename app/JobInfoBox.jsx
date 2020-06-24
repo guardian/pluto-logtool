@@ -26,20 +26,11 @@ class JobInfoBox extends React.Component {
   getValue(data,findthis) {
     var returnNow = 0;
     for (let [key, value] of Object.entries(data)) {
-      //console.log(`Part 1`);
-      //console.log(`${key}: ${value}`);
-      //for (let [key2, value2] of Object.entries(key)) {
-        //console.log(`Part 2`);
-        //console.log(`${key2}: ${value2}`);
-      //}
       for (let [key3, value3] of Object.entries(value)) {
-        //console.log(`Part 3`);
-        //console.log(`${key3}: ${value3}`);
         if (returnNow == 1) {
           return value3;
         }
         if (findthis == value3) {
-          //console.log(`Found`);
           returnNow = 1;
         }
       }

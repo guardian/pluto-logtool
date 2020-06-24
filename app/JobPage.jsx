@@ -12,20 +12,7 @@ import StatusFormatter from './StatusFormatter.jsx';
 import TypeFormatter from './TypeFormatter.jsx';
 import PriorityFormatter from './PriorityFormatter.jsx';
 
-//let url = 'http://localhost:8080/API/job';
-
-//headers.append('Authorization', 'Basic ' + encodedString);
-//headers.append('Accept', 'application/json');
-
-
 class JobPage extends Component {
-  //static propTypes = {
-  //  vidispineBaseUrl: PropTypes.string.isRequired
-  //};
-
-  //this.props.vidispineBaseUrl = 'http://localhost:8080';
-
-/*all the usual stuff....*/
 
 constructor(props){
 super(props);
@@ -45,7 +32,6 @@ this.state = {
     const password = 'admin';
     const headers = new Headers();
     const encodedString = new Buffer(username + ":" + password).toString('base64');
-    //const bearerToken = window.localStorage.getItem("bearer-token-key");  //see adfs-test-pureclient for more info on this
     const url = "http://localhost:8080" + "/API/" + endpoint;
     await this.setStatePromise({loading: true});
     const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Basic " + encodedString}});

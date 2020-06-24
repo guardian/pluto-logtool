@@ -1,20 +1,7 @@
 import React, {Component} from 'react';
 import JobInfoBox from './JobInfoBox.jsx';
 
-//let url = 'http://localhost:8080/API/job';
-
-//headers.append('Authorization', 'Basic ' + encodedString);
-//headers.append('Accept', 'application/json');
-
-
 class VidispineJobTool extends Component {
-  //static propTypes = {
-  //  vidispineBaseUrl: PropTypes.string.isRequired
-  //};
-
-  //this.props.vidispineBaseUrl = 'http://localhost:8080';
-
-/*all the usual stuff....*/
 
 constructor(props){
   super(props);
@@ -27,8 +14,6 @@ constructor(props){
   };
 }
 
-
-
   setStatePromise(newState) {
     return new Promise((resolve,reject)=>this.setState(newState, ()=>resolve()));
   }
@@ -38,7 +23,6 @@ constructor(props){
     const password = 'admin';
     const headers = new Headers();
     const encodedString = new Buffer(username + ":" + password).toString('base64');
-    //const bearerToken = window.localStorage.getItem("bearer-token-key");  //see adfs-test-pureclient for more info on this
     const url = "http://localhost:8080" + "/API/" + endpoint;
     await this.setStatePromise({loading: true});
     const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Basic " + encodedString}});
@@ -96,7 +80,6 @@ constructor(props){
             <div class="arrow_right"></div>
           </div>
         </div>
-
         <div class="headings_box">
           <div class="select_heading">
             &nbsp;
@@ -126,9 +109,6 @@ constructor(props){
             Priority
           </div>
         </div>
-          {
-            //this.state.someData.job.map((item,idx)=><li key={idx}>{item.jobId} {item.type} {item.status} {item.currentStep.number}/{item.totalSteps} steps {item.started}</li>)
-           }
            {
              this.state.someData.job.map(item =><JobInfoBox jobData={item} jobId={item.jobId}/>)
            }
