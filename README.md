@@ -8,7 +8,7 @@
 **Functions**
 
 1. View pages of Vidispine jobs.
-2. View information on a individual Vidispine job.
+2. View information on an individual Vidispine job.
 
 **Installation and Set Up**
 
