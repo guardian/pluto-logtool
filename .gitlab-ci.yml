@@ -27,5 +27,5 @@ docker:
   script:
     - cd build
     - docker login -u "${DOCKER_USER}" -p "${DOCKER_PAT}"
-    - docker build . guardianmultimedia/pluto-logtool:$CI_JOB_IID
-    - docker push guardianmultimedia/pluto-logtool:$CI_JOB_IID
+    - docker build . -t guardianmultimedia/pluto-logtool:$CI_PIPELINE_IID
+    - docker push guardianmultimedia/pluto-logtool:$CI_PIPELINE_IID
