@@ -6,7 +6,7 @@ class VidispineJobTool extends Component {
 constructor(props){
   super(props);
   this.state = {
-    someData: {
+    vidispineData: {
       hits: 0,
       job: []
     },
@@ -30,7 +30,7 @@ constructor(props){
     switch(result.status) {
     case 200:
       const returnedData = await result.json();
-      return this.setStatePromise({loading: false, someData: returnedData});
+      return this.setStatePromise({loading: false, vidispineData: returnedData});
     default:
       const errorContent = await result.text();
       return this.setStatePromise({loading: false, lastError: errorContent});
@@ -68,7 +68,7 @@ constructor(props){
         <div class="title_box">Vidispine Job Tool</div>
         <div class="controls_box">
           <div class="job_number">
-            {this.state.someData.hits} jobs
+            {this.state.vidispineData.hits} jobs
           </div>
           <div class="page_number">
             Page {this.state.pageNumber}
@@ -110,7 +110,7 @@ constructor(props){
           </div>
         </div>
            {
-             this.state.someData.job.map(item =><JobInfoBox jobData={item} jobId={item.jobId}/>)
+             this.state.vidispineData.job.map(item =><JobInfoBox jobData={item} jobId={item.jobId}/>)
            }
           </div>
       </div>

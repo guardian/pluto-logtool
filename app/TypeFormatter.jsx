@@ -8,70 +8,56 @@ class TypeFormatter extends React.Component {
   };
 
   returnType(type) {
-    if (type == 'RAW_IMPORT') {
-      return "Raw Import";
+    switch(type) {
+      case "RAW_IMPORT":
+        return "Raw Import";
+      case "NONE":
+        return "None";
+      case "IMPORT":
+        return "Import";
+      case "PLACEHOLDER_IMPORT":
+        return "Placeholder Import";
+      case "AUTO_IMPORT":
+        return "Auto Import";
+      case "SHAPE_IMPORT":
+        return "Shape Import";
+      case "SIDECAR_IMPORT":
+        return "Sidecar Import";
+      case "ESSENCE_VERSION":
+        return "Essence Version";
+      case "TRANSCODE":
+        return "Transcode";
+      case "TRANSCODE_RANGE":
+        return "Transcode Range";
+      case "CONFORM":
+        return "Conform";
+      case "TIMELINE":
+        return "Timeline";
+      case "THUMBNAIL":
+        return "Thumbnail";
+      case "ANALYZE":
+        return "Analyze";
+      case "SHAPE_UPDATE":
+        return "Shape Update";
+      case "RAW_TRANSCODE":
+        return "Raw Transcode";
+      case "EXPORT":
+        return "Export";
+      case "COPY_FILE":
+        return "Copy File";
+      case "MOVE_FILE":
+        return "Move File";
+      case "DELETE_FILE":
+        return "Delete File";
+      case "LIST_ITEMS":
+        return "List Items";
+      case "EXPORT":
+        return "Export";
+      case "COPY_FILE":
+        return "Copy File";
+      default:
+       return type;
     }
-    if (type == 'NONE') {
-      return "None";
-    }
-    if (type == 'IMPORT') {
-      return "Import";
-    }
-    if (type == 'PLACEHOLDER_IMPORT') {
-      return "Placeholder Import";
-    }
-    if (type == 'AUTO_IMPORT') {
-      return "Auto Import";
-    }
-    if (type == 'SHAPE_IMPORT') {
-      return "Shape Import";
-    }
-    if (type == 'SIDECAR_IMPORT') {
-      return "Sidecar Import";
-    }
-    if (type == 'ESSENCE_VERSION') {
-      return "Essence Version";
-    }
-    if (type == 'TRANSCODE') {
-      return "Transcode";
-    }
-    if (type == 'TRANSCODE_RANGE') {
-      return "Transcode Range";
-    }
-    if (type == 'CONFORM') {
-      return "Conform";
-    }
-    if (type == 'TIMELINE') {
-      return "Timeline";
-    }
-    if (type == 'THUMBNAIL') {
-      return "Thumbnail";
-    }
-    if (type == 'ANALYZE') {
-      return "Analyze";
-    }
-    if (type == 'SHAPE_UPDATE') {
-      return "Shape Update";
-    }
-    if (type == 'RAW_TRANSCODE') {
-      return "Raw Transcode";
-    }
-    if (type == 'EXPORT') {
-      return "Export";
-    }
-    if (type == 'COPY_FILE') {
-      return "Copy File";
-    }
-    if (type == 'MOVE_FILE') {
-      return "Move File";
-    }
-    if (type == 'DELETE_FILE') {
-      return "Delete File";
-    }
-    if (type == 'LIST_ITEMS') {
-      return "List Items";
-    }
-    return type;
   }
 
 render() {

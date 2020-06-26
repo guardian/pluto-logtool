@@ -14,6 +14,7 @@ class JobInfoBox extends React.Component {
   };
 
   returnStatusForCSS(status) {
+    // Accepts a status. If the status has a special CSS statement with a custom background colour, return the name of the correct CSS statement. If not return the name of the CSS statement for normal job boxes.
     if (status == 'FAILED_TOTAL') {
       return "job_box_failed";
     }
