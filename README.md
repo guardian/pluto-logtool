@@ -2,7 +2,7 @@
 
 **Requirements**
 
-- A World Wide Web server
+- Docker
 - A World Wide Web browser
 
 **Functions**
@@ -12,10 +12,10 @@
 
 **Installation and Set Up**
 
-1. Install the supplied files in the route of your Web server. Make sure the permissions are correct for the Web server to be able to read them.
-2. Make sure the Web server is configured to pass all requests to index.html. On Nginx you can do this by placing a line like 'try_files $uri /index.html;' at the bottom of the location block of the configuration file.
+1. Find the Docker image name in the CI section of GitLab, for example 'guardianmultimedia/pluto-logtool:23'.
+2. Run it like this: docker run --rm -p 8000:80 guardianmultimedia/pluto-logtool:23
 3. At the moment the Vidispine host, username, and password are hardcoded into VidispineJobTool.jsx and JobPage.jsx. If the defaults are not suitable you will need to change these with an editor and save them.
-4. Access your Web server with your Web browser. If everything is working you should see the job list page.
+4. Access your Web server with your Web browser at http://localhost:8000. If everything is working you should see the job list page.
 
 **Notes**
 
