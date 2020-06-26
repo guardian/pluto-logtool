@@ -128,15 +128,15 @@ constructor(props){
     if (this.state.pageNumber > 1) {
       placeToReturnEnd = (this.state.pageNumber * this.state.pageSize) + 1;
     }
-    if (placeToReturnEnd > this.state.someData.hits) {
-      placeToReturnEnd = this.state.someData.hits;
+    if (placeToReturnEnd > this.state.vidispineData.hits) {
+      placeToReturnEnd = this.state.vidispineData.hits;
     }
     return placeToReturnEnd;
   }
 
   totalPages() {
     var totalToReturn = 1;
-    totalToReturn = Math.ceil(this.state.someData.hits / this.state.pageSize);
+    totalToReturn = Math.ceil(this.state.vidispineData.hits / this.state.pageSize);
     return totalToReturn;
   }
 
@@ -172,7 +172,7 @@ constructor(props){
             128
           </div>
           <div class="job_number">
-            Showing {this.placeToShow()} to {this.placeToShowEnd()} of {this.state.someData.hits} jobs
+            Showing {this.placeToShow()} to {this.placeToShowEnd()} of {this.state.vidispineData.hits} jobs
           </div>
           <div class="middle_placeholder">
             &nbsp;
