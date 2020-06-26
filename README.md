@@ -2,7 +2,7 @@
 
 **Requirements**
 
-- A World Wide Web server
+- Docker
 - A World Wide Web browser
 
 **Functions**
