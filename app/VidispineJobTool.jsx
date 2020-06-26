@@ -142,8 +142,6 @@ constructor(props){
 
   handleSubmit(event) {
     event.preventDefault();
-    //this.setState({ pageNumber: this.element.value });
-
     this.setState({
       pageNumber: parseInt(this.element.value)
     },() => {
@@ -184,8 +182,8 @@ constructor(props){
           </div>
           <div class="page_form">
             <form onSubmit={this.handleSubmit}>
-              <input size="4" type="text" ref={el => this.element = el} />
-              <input type="submit" value="Go" />
+              <input class="page_input" size="4" type="text" ref={el => this.element = el} />
+              <input class="go_button" type="submit" value="Go" />
             </form>
           </div>
           <div class="last_page" onClick={this.pageLower}>
