@@ -17,7 +17,7 @@ class JobPage extends Component {
 constructor(props){
 super(props);
 this.state = {
-  someData: {
+  vidispineData: {
     data: []
   }
 }
@@ -39,7 +39,7 @@ this.state = {
     switch(result.status) {
     case 200:
       const returnedData = await result.json();
-      return this.setStatePromise({loading: false, someData: returnedData});
+      return this.setStatePromise({loading: false, vidispineData: returnedData});
     default:
       const errorContent = await result.text();
       return this.setStatePromise({loading: false, lastError: errorContent});
@@ -68,11 +68,11 @@ this.state = {
 
   render() {
     const id = this.props.match.params.id;
-    const fileName = this.getValue(this.state.someData.data, "originalFilename");
-    const stepNumber = this.state.someData.hasOwnProperty("currentStep") ? this.state.someData.currentStep.number : 0;
-    const itemId = this.getValue(this.state.someData.data, "itemId");
-    const fullPath = this.getValue(this.state.someData.data, "sourceUri");
-    const tags = this.getValue(this.state.someData.data, "tags");
+    const fileName = this.getValue(this.state.vidispineData.data, "originalFilename");
+    const stepNumber = this.state.vidispineData.hasOwnProperty("currentStep") ? this.state.vidispineData.currentStep.number : 0;
+    const itemId = this.getValue(this.state.vidispineData.data, "itemId");
+    const fullPath = this.getValue(this.state.vidispineData.data, "sourceUri");
+    const tags = this.getValue(this.state.vidispineData.data, "tags");
     return (
       <div>
         <div class="job_page_grid">
@@ -84,7 +84,7 @@ this.state = {
               Progress:
             </div>
             <div class="job_data_value">
-              {stepNumber}/{this.state.someData.totalSteps}
+              {stepNumber}/{this.state.vidispineData.totalSteps}
             </div>
           </div>
           <div class="job_data_box">
@@ -100,7 +100,7 @@ this.state = {
               Started:
             </div>
             <div class="job_data_value">
-              {moment(this.state.someData.started).format("D/M/YYYY H:mm")}
+              {moment(this.state.vidispineData.started).format("D/M/YYYY H:mm")}
             </div>
           </div>
           <div class="job_data_box">
@@ -108,7 +108,7 @@ this.state = {
               User:
             </div>
             <div class="job_data_value">
-              {this.state.someData.user}
+              {this.state.vidispineData.user}
             </div>
           </div>
           <div class="job_data_box">
@@ -116,7 +116,7 @@ this.state = {
               Type:
             </div>
             <div class="job_data_value">
-              {<TypeFormatter type={this.state.someData.type}/>}
+              {<TypeFormatter type={this.state.vidispineData.type}/>}
             </div>
           </div>
           <div class="job_data_box">
@@ -124,7 +124,7 @@ this.state = {
               Status:
             </div>
             <div class="job_data_value">
-              {<StatusFormatter status={this.state.someData.status}/>}
+              {<StatusFormatter status={this.state.vidispineData.status}/>}
             </div>
           </div>
           <div class="job_data_box">
@@ -164,7 +164,7 @@ this.state = {
               Job Steps:
             </div>
             <div class="job_data_value">
-              {stepNumber} of {this.state.someData.totalSteps}
+              {stepNumber} of {this.state.vidispineData.totalSteps}
             </div>
           </div>
         </div>

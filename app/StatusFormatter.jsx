@@ -8,34 +8,28 @@ class StatusFormatter extends React.Component {
   };
 
   returnStatus(status) {
-    if (status == 'FAILED_TOTAL') {
-      return "Failed";
+    switch(status) {
+      case "FAILED_TOTAL":
+        return "Failed";
+      case "READY":
+        return "Ready";
+      case "STARTED":
+        return "Started";
+      case "VIDINET_JOB":
+        return "Vidinet";
+      case "FINISHED":
+        return "Finished";
+      case "FINISHED_WARNING":
+        return "Finished with Warning";
+      case "WAITING":
+        return "Waiting";
+      case "ABORTED_PENDING":
+        return "Aborted Pending";
+      case "ABORTED":
+        return "Aborted";
+      default:
+       return status;
     }
-    if (status == 'READY') {
-      return "Ready";
-    }
-    if (status == 'STARTED') {
-      return "Started";
-    }
-    if (status == 'VIDINET_JOB') {
-      return "Vidinet";
-    }
-    if (status == 'FINISHED') {
-      return "Finished";
-    }
-    if (status == 'FINISHED_WARNING') {
-      return "Finished with Warning";
-    }
-    if (status == 'WAITING') {
-      return "Waiting";
-    }
-    if (status == 'ABORTED_PENDING') {
-      return "Aborted Pending";
-    }
-    if (status == 'ABORTED') {
-      return "Aborted";
-    }
-    return status;
   }
 
 render() {
