@@ -56,6 +56,12 @@ this.state = {
     this.getJobData('job/' + idToLoad + '?metadata=true');
   }
 
+  /**
+   * find a given data key in returned json from Vidispine
+   * @param data the json data to search
+   * @param findthis the key to return the value of
+   * @returns {string|unknown} the value of the key
+   */
   getValue(data,findthis) {
     var returnNow = 0;
     for (let [key, value] of Object.entries(data)) {
