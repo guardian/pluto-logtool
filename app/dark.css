@@ -178,9 +178,12 @@ div.job_page_title_box {
   padding-left: 10px;
   margin: 2px;
   border-radius: 6px;
-  width: 1412px;
+  width: 1418px;
   grid-column-start: 1;
   grid-column-end: 1;
+  display: grid;
+  grid-template-columns: 1250px 150px;
+  grid-template-rows: 45px;
 }
 
 div.job_data_box {
@@ -358,4 +361,14 @@ input.page_input {
   border-radius: 6px;
   height: 22px;
   border: 2px solid #ffffff;
+}
+
+div.abort_button {
+  background-color: #000000;
+  font-size: 16px;
+  padding-top: 5px;
+  border-radius: 6px;
+  width: 100px;
+  padding-left: 56px;
+  height: 22px;
 }
