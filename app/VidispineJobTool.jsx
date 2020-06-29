@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import JobInfoBox from './JobInfoBox.jsx';
 
 class VidispineJobTool extends Component {
+
+  static propTypes = {
+      vidispine_host: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired,
+      password: PropTypes.string.isRequired,
+    };
 
 constructor(props){
   super(props);
@@ -21,11 +28,9 @@ constructor(props){
   }
 
   async getJobData(endpoint) {
-    const username = 'admin';
-    const password = 'admin';
     const headers = new Headers();
-    const encodedString = new Buffer(username + ":" + password).toString('base64');
-    const url = "http://localhost:8080" + "/API/" + endpoint;
+    const encodedString = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
+    const url = this.props.vidispine_host + "/API/" + endpoint;
     await this.setStatePromise({loading: true});
     const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Basic " + encodedString}});
 
