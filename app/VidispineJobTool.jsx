@@ -215,7 +215,7 @@ constructor(props){
             Status
           </div>
           <div class="progress_heading">
-            Progress (Steps)
+            Progress
           </div>
           <div class="user_heading">
             User
