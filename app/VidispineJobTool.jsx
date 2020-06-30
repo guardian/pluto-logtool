@@ -49,27 +49,33 @@ constructor(props){
   }
 
   pageHigher = () => {
-    this.setState({
-      pageNumber: this.state.pageNumber + 1
-    },() => {
-      var placeToLoad = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoad = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
-      }
-      this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc');
-    });
+    const totalNumberOfPages = this.totalPages();
+
+    if (this.state.pageNumber < totalNumberOfPages) {
+      this.setState({
+        pageNumber: this.state.pageNumber + 1
+      },() => {
+        var placeToLoad = 1;
+        if (this.state.pageNumber > 1) {
+          placeToLoad = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc');
+      });
+    }
   }
 
   pageLower = () => {
-    this.setState({
-      pageNumber: this.state.pageNumber - 1
-    },() => {
-      var placeToLoadTwo = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoadTwo = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
-      }
-      this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadTwo + '&sort=jobId%20desc');
-    });
+    if (this.state.pageNumber > 1) {
+      this.setState({
+        pageNumber: this.state.pageNumber - 1
+      },() => {
+        var placeToLoadTwo = 1;
+        if (this.state.pageNumber > 1) {
+          placeToLoadTwo = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadTwo + '&sort=jobId%20desc');
+      });
+    }
   }
 
   pageSize16 = () => {
