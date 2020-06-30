@@ -21,6 +21,12 @@ class JobInfoBox extends React.Component {
     if (status == 'FINISHED') {
       return "job_box_finished";
     }
+    if (status == 'FINISHED_WARNING') {
+      return "job_box_warning";
+    }
+    if (status == 'ABORTED') {
+      return "job_box_aborted";
+    }
     return "job_box_normal";
   }
 
