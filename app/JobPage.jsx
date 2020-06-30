@@ -197,6 +197,14 @@ this.state = {
           </div>
           <div class="job_data_box">
             <div class="job_data_label">
+              Priority:
+            </div>
+            <div class="job_data_value">
+              {<PriorityFormatter priority={this.state.vidispineData.priority}/>}
+            </div>
+          </div>
+          <div class="job_data_box">
+            <div class="job_data_label">
               Job Steps:
             </div>
             <div class="job_data_value">
