@@ -153,15 +153,25 @@ constructor(props){
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({
-      pageNumber: parseInt(this.element.value)
-    },() => {
-      var placeToLoadSub = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoadSub = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-      }
-      this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc');
-    });
+    const totalNumberOfPagesSubmit = this.totalPages();
+    const inputNumber = parseInt(this.element.value);
+    var pageToGoTo = inputNumber;
+
+    if (inputNumber > totalNumberOfPagesSubmit) {
+      pageToGoTo = totalNumberOfPagesSubmit;
+    }
+
+    if (inputNumber > 0) {
+      this.setState({
+        pageNumber: pageToGoTo
+      },() => {
+        var placeToLoadSub = 1;
+        if (this.state.pageNumber > 1) {
+          placeToLoadSub = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc');
+      });
+    }
   }
 
   render() {
