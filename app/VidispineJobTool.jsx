@@ -194,6 +194,7 @@ constructor(props){
           placeToLoadSub = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
         }
         this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc');
+        this.element.value = "";
       });
     }
   }
