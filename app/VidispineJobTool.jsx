@@ -246,7 +246,9 @@ constructor(props){
 
   handleChange = selectedOption => {
     this.setState(
-      { selectedOption },
+      { selectedOption,
+        pageNumber: 1
+      },
       () => {
         var placeToLoadStatus = 1;
         if (this.state.pageNumber > 1) {
