@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import Select from 'react-select'
 import JobInfoBox from './JobInfoBox.jsx';
+import chroma from 'chroma-js';
 
 class VidispineJobTool extends Component {
 
@@ -18,7 +20,8 @@ constructor(props){
       job: []
     },
     pageNumber: 1,
-    pageSize: 16
+    pageSize: 16,
+    selectedOption: null,
   };
   this.handleSubmit = this.handleSubmit.bind(this);
 }
@@ -59,7 +62,13 @@ constructor(props){
         if (this.state.pageNumber > 1) {
           placeToLoad = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
         }
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc');
+        var selectedData = 'all';
+        if (this.state.selectedOption != null) {
+          selectedData = this.state.selectedOption.reduce((result, item) => {
+            return `${result}${item.value},`
+          }, "")
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc&state=' + selectedData);
       });
     }
   }
@@ -73,7 +82,13 @@ constructor(props){
         if (this.state.pageNumber > 1) {
           placeToLoadTwo = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
         }
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadTwo + '&sort=jobId%20desc');
+        var selectedData = 'all';
+        if (this.state.selectedOption != null) {
+          selectedData = this.state.selectedOption.reduce((result, item) => {
+            return `${result}${item.value},`
+          }, "")
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadTwo + '&sort=jobId%20desc&state=' + selectedData);
       });
     }
   }
@@ -86,7 +101,13 @@ constructor(props){
       if (this.state.pageNumber > 1) {
         placeToLoad16 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
       }
-      this.getJobData('job?metadata=true&step=true&number=16&first=' + placeToLoad16 + '&sort=jobId%20desc');
+      var selectedData = 'all';
+      if (this.state.selectedOption != null) {
+        selectedData = this.state.selectedOption.reduce((result, item) => {
+          return `${result}${item.value},`
+        }, "")
+      }
+      this.getJobData('job?metadata=true&step=true&number=16&first=' + placeToLoad16 + '&sort=jobId%20desc&state=' + selectedData);
     });
   }
 
@@ -106,7 +127,13 @@ constructor(props){
       if (this.state.pageNumber > 1) {
         placeToLoad32 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
       }
-      this.getJobData('job?metadata=true&step=true&number=32&first=' + placeToLoad32 + '&sort=jobId%20desc');
+      var selectedData = 'all';
+      if (this.state.selectedOption != null) {
+        selectedData = this.state.selectedOption.reduce((result, item) => {
+          return `${result}${item.value},`
+        }, "")
+      }
+      this.getJobData('job?metadata=true&step=true&number=32&first=' + placeToLoad32 + '&sort=jobId%20desc&state=' + selectedData);
     });
   }
 
@@ -126,7 +153,13 @@ constructor(props){
       if (this.state.pageNumber > 1) {
         placeToLoad64 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
       }
-      this.getJobData('job?metadata=true&step=true&number=64&first=' + placeToLoad64 + '&sort=jobId%20desc');
+      var selectedData = 'all';
+      if (this.state.selectedOption != null) {
+        selectedData = this.state.selectedOption.reduce((result, item) => {
+          return `${result}${item.value},`
+        }, "")
+      }
+      this.getJobData('job?metadata=true&step=true&number=64&first=' + placeToLoad64 + '&sort=jobId%20desc&state=' + selectedData);
     });
   }
 
@@ -146,7 +179,13 @@ constructor(props){
         if (this.state.pageNumber > 1) {
         placeToLoad128 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
       }
-      this.getJobData('job?metadata=true&step=true&number=128&first=' + placeToLoad128 + '&sort=jobId%20desc');
+      var selectedData = 'all';
+      if (this.state.selectedOption != null) {
+        selectedData = this.state.selectedOption.reduce((result, item) => {
+          return `${result}${item.value},`
+        }, "")
+      }
+      this.getJobData('job?metadata=true&step=true&number=128&first=' + placeToLoad128 + '&sort=jobId%20desc&state=' + selectedData);
     });
   }
 
@@ -193,13 +232,100 @@ constructor(props){
         if (this.state.pageNumber > 1) {
           placeToLoadSub = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
         }
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc');
+        var selectedData = 'all';
+        if (this.state.selectedOption != null) {
+          selectedData = this.state.selectedOption.reduce((result, item) => {
+            return `${result}${item.value},`
+          }, "")
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc&state=' + selectedData);
         this.element.value = "";
       });
     }
   }
 
+  handleChange = selectedOption => {
+    this.setState(
+      { selectedOption },
+      () => {
+        var placeToLoadStatus = 1;
+        if (this.state.pageNumber > 1) {
+          placeToLoadStatus = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
+        }
+        var selectedData = 'all';
+        if (this.state.selectedOption != null) {
+          selectedData = this.state.selectedOption.reduce((result, item) => {
+            return `${result}${item.value},`
+          }, "")
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadStatus + '&sort=jobId%20desc&state=' + selectedData);
+      }
+    );
+  };
+
   render() {
+    const statusOptions = [
+      { value: 'ABORTED', label: 'Aborted', color: '#ffffff' },
+      { value: 'ABORTED_PENDING', label: 'Aborted Pending', color: '#ffffff' },
+      { value: 'FAILED_TOTAL', label: 'Failed', color: '#ffffff' },
+      { value: 'FINISHED', label: 'Finished', color: '#ffffff' },
+      { value: 'FINISHED_WARNING', label: 'Finished with Warning', color: '#ffffff' },
+      { value: 'READY', label: 'Ready', color: '#ffffff' },
+      { value: 'STARTED', label: 'Started', color: '#ffffff' },
+      { value: 'VIDINET_JOB', label: 'Vidinet', color: '#ffffff' },
+      { value: 'WAITING', label: 'Waiting', color: '#ffffff' },
+    ];
+    const statusStyles = {
+      control: styles => ({ ...styles, backgroundColor: 'black', width: '300' }),
+      menu: styles => ({ ...styles, backgroundColor: 'black', width: '300' }),
+      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+        const color = chroma(data.color);
+        return {
+          ...styles,
+          backgroundColor: isDisabled
+            ? null
+            : isSelected
+            ? data.color
+            : isFocused
+            ? color.alpha(0.1).css()
+            : null,
+          color: isDisabled
+            ? '#ccc'
+            : isSelected
+            ? chroma.contrast(color, 'white') > 2
+              ? 'white'
+              : 'black'
+            : data.color,
+          cursor: isDisabled ? 'not-allowed' : 'default',
+
+          ':active': {
+            ...styles[':active'],
+            backgroundColor: !isDisabled && (isSelected ? data.color : color.alpha(0.3).css()),
+          },
+        };
+      },
+      multiValue: (styles, { data }) => {
+        const color = chroma(data.color);
+        return {
+          ...styles,
+          backgroundColor: color.alpha(0.1).css(),
+        };
+      },
+      multiValueLabel: (styles, { data }) => ({
+        ...styles,
+        color: data.color,
+      }),
+      multiValueRemove: (styles, { data }) => ({
+        ...styles,
+        color: data.color,
+        ':hover': {
+          backgroundColor: data.color,
+          color: 'white',
+        },
+      }),
+    };
+    const { selectedOption } = this.state;
+
     return (
       <div>
         <div class="grid">
@@ -220,8 +346,20 @@ constructor(props){
           <div class="job_number">
             Showing {this.placeToShow()} to {this.placeToShowEnd()} of {this.state.vidispineData.hits} jobs
           </div>
+          <div class="state_label">
+            State:
+          </div>
           <div class="middle_placeholder">
-            &nbsp;
+            <Select
+              isMulti
+              name="colors"
+              options={statusOptions}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              styles={statusStyles}
+              value={selectedOption}
+              onChange={this.handleChange}
+              />
           </div>
           <div class="page_number">
             Page {this.state.pageNumber} of {this.totalPages()}
@@ -268,9 +406,11 @@ constructor(props){
             Priority
           </div>
         </div>
-           {
+           {this.state.vidispineData.job && this.state.vidispineData.job.length > 0 ? (
              this.state.vidispineData.job.map(item =><JobInfoBox jobData={item} jobId={item.jobId}/>)
-           }
+           ) : (
+             <div class="no_jobs_found">No jobs found</div>
+           )}
           </div>
       </div>
     )
