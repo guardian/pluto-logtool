@@ -34,7 +34,7 @@ div.controls_box {
   grid-column-start: 1;
   grid-column-end: 1;
   display: grid;
-  grid-template-columns: 30px 30px 30px 160px 50px 860px 140px 54px 50px;
+  grid-template-columns: 30px 30px 30px 160px 400px 50px 460px 140px 54px 50px;
   grid-template-rows: 35px 35px;
 }
 
@@ -246,7 +246,7 @@ div.last_page {
   padding-top: 5px;
   padding-left: 6px;
   border-radius: 5px;
-  grid-column-start: 8;
+  grid-column-start: 9;
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 21px;
@@ -259,7 +259,7 @@ div.next_page {
   padding-top: 5px;
   padding-left: 6px;
   border-radius: 5px;
-  grid-column-start: 9;
+  grid-column-start: 10;
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 21px;
@@ -297,7 +297,7 @@ div.job_number {
 }
 
 div.page_number {
-  grid-column-start: 7;
+  grid-column-start: 8;
   width: 120px;
   margin-top: 12px;
   border-radius: 3px;
@@ -360,18 +360,22 @@ div.size_button_128 {
   font-size: 14px;
 }
 
-div.state_label{
+div.middle_placeholder {
   grid-column-start: 5;
 }
 
-div.middle_placeholder {
+div.state_label{
   grid-column-start: 6;
+}
+
+div.middle_placeholder {
+  grid-column-start: 7;
 }
 
 div.page_form {
   margin-top: 18px;
   grid-row-start: 2;
-  grid-column-start: 7;
+  grid-column-start: 8;
   margin-left: 32px;
 }
 

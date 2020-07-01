@@ -348,19 +348,24 @@ constructor(props){
           <div class="job_number">
             Showing {this.placeToShow()} to {this.placeToShowEnd()} of {this.state.vidispineData.hits} jobs
           </div>
+          <div class="left_placeholder">
+            &nbsp;
+          </div>
           <div class="state_label">
             State:
           </div>
           <div class="middle_placeholder">
             <Select
               isMulti
-              name="colors"
+              name="statusSelect"
               options={statusOptions}
               className="basic-multi-select"
               classNamePrefix="select"
               styles={statusStyles}
               value={selectedOption}
               onChange={this.handleChange}
+              isClearable={false}
+              components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
               />
           </div>
           <div class="page_number">
