@@ -21,6 +21,7 @@ constructor(props){
     pageNumber: 1,
     pageSize: 16,
     selectedOption: null,
+    selectedOptionType: null,
   };
   this.handleSubmit = this.handleSubmit.bind(this);
 }
@@ -67,7 +68,13 @@ constructor(props){
             return `${result}${item.value},`
           }, "")
         }
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc&state=' + selectedData);
+        var selectedDataType = 'all';
+        if (this.state.selectedOptionType != null) {
+          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+            return `${result}${item.value},`
+          }, "")
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
       });
     }
   }
@@ -87,7 +94,13 @@ constructor(props){
             return `${result}${item.value},`
           }, "")
         }
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadTwo + '&sort=jobId%20desc&state=' + selectedData);
+        var selectedDataType = 'all';
+        if (this.state.selectedOptionType != null) {
+          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+            return `${result}${item.value},`
+          }, "")
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadTwo + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
       });
     }
   }
@@ -106,7 +119,13 @@ constructor(props){
           return `${result}${item.value},`
         }, "")
       }
-      this.getJobData('job?metadata=true&step=true&number=16&first=' + placeToLoad16 + '&sort=jobId%20desc&state=' + selectedData);
+      var selectedDataType = 'all';
+      if (this.state.selectedOptionType != null) {
+        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+          return `${result}${item.value},`
+        }, "")
+      }
+      this.getJobData('job?metadata=true&step=true&number=16&first=' + placeToLoad16 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
     });
   }
 
@@ -132,7 +151,13 @@ constructor(props){
           return `${result}${item.value},`
         }, "")
       }
-      this.getJobData('job?metadata=true&step=true&number=32&first=' + placeToLoad32 + '&sort=jobId%20desc&state=' + selectedData);
+      var selectedDataType = 'all';
+      if (this.state.selectedOptionType != null) {
+        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+          return `${result}${item.value},`
+        }, "")
+      }
+      this.getJobData('job?metadata=true&step=true&number=32&first=' + placeToLoad32 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
     });
   }
 
@@ -158,7 +183,13 @@ constructor(props){
           return `${result}${item.value},`
         }, "")
       }
-      this.getJobData('job?metadata=true&step=true&number=64&first=' + placeToLoad64 + '&sort=jobId%20desc&state=' + selectedData);
+      var selectedDataType = 'all';
+      if (this.state.selectedOptionType != null) {
+        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+          return `${result}${item.value},`
+        }, "")
+      }
+      this.getJobData('job?metadata=true&step=true&number=64&first=' + placeToLoad64 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
     });
   }
 
@@ -184,7 +215,13 @@ constructor(props){
           return `${result}${item.value},`
         }, "")
       }
-      this.getJobData('job?metadata=true&step=true&number=128&first=' + placeToLoad128 + '&sort=jobId%20desc&state=' + selectedData);
+      var selectedDataType = 'all';
+      if (this.state.selectedOptionType != null) {
+        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+          return `${result}${item.value},`
+        }, "")
+      }
+      this.getJobData('job?metadata=true&step=true&number=128&first=' + placeToLoad128 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
     });
   }
 
@@ -237,7 +274,13 @@ constructor(props){
             return `${result}${item.value},`
           }, "")
         }
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc&state=' + selectedData);
+        var selectedDataType = 'all';
+        if (this.state.selectedOptionType != null) {
+          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+            return `${result}${item.value},`
+          }, "")
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
         this.element.value = "";
       });
     }
@@ -259,7 +302,40 @@ constructor(props){
             return `${result}${item.value},`
           }, "")
         }
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadStatus + '&sort=jobId%20desc&state=' + selectedData);
+        var selectedDataType = 'all';
+        if (this.state.selectedOptionType != null) {
+          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+            return `${result}${item.value},`
+          }, "")
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadStatus + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+      }
+    );
+  };
+
+  handleChangeType = selectedOptionType => {
+    this.setState(
+      { selectedOptionType,
+        pageNumber: 1
+      },
+      () => {
+        var placeToLoadStatus = 1;
+        if (this.state.pageNumber > 1) {
+          placeToLoadStatus = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
+        }
+        var selectedData = 'all';
+        if (this.state.selectedOption != null) {
+          selectedData = this.state.selectedOption.reduce((result, item) => {
+            return `${result}${item.value},`
+          }, "")
+        }
+        var selectedDataType = 'all';
+        if (this.state.selectedOptionType != null) {
+          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+            return `${result}${item.value},`
+          }, "")
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadStatus + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
       }
     );
   };
@@ -275,6 +351,29 @@ constructor(props){
       { value: 'STARTED', label: 'Started', color: '#ffffff' },
       { value: 'VIDINET_JOB', label: 'Vidinet', color: '#ffffff' },
       { value: 'WAITING', label: 'Waiting', color: '#ffffff' },
+    ];
+    const typeOptions = [
+      { value: 'ANALYZE', label: 'Analyze', color: '#ffffff' },
+      { value: 'AUTO_IMPORT', label: 'Auto Import', color: '#ffffff' },
+      { value: 'CONFORM', label: 'Conform', color: '#ffffff' },
+      { value: 'COPY_FILE', label: 'Copy File', color: '#ffffff' },
+      { value: 'DELETE_FILE', label: 'Delete File', color: '#ffffff' },
+      { value: 'ESSENCE_VERSION', label: 'Essence Version', color: '#ffffff' },
+      { value: 'EXPORT', label: 'Export', color: '#ffffff' },
+      { value: 'IMPORT', label: 'Import', color: '#ffffff' },
+      { value: 'LIST_ITEMS', label: 'List Items', color: '#ffffff' },
+      { value: 'MOVE_FILE', label: 'Move File', color: '#ffffff' },
+      { value: 'NONE', label: 'None', color: '#ffffff' },
+      { value: 'PLACEHOLDER_IMPORT', label: 'Placeholder Import', color: '#ffffff' },
+      { value: 'RAW_IMPORT', label: 'Raw Import', color: '#ffffff' },
+      { value: 'RAW_TRANSCODE', label: 'Raw Transcode', color: '#ffffff' },
+      { value: 'SHAPE_IMPORT', label: 'Shape Import', color: '#ffffff' },
+      { value: 'SHAPE_UPDATE', label: 'Shape Update', color: '#ffffff' },
+      { value: 'SIDECAR_IMPORT', label: 'Sidecar Import', color: '#ffffff' },
+      { value: 'THUMBNAIL', label: 'Thumbnail', color: '#ffffff' },
+      { value: 'TIMELINE', label: 'Timeline', color: '#ffffff' },
+      { value: 'TRANSCODE', label: 'Transcode', color: '#ffffff' },
+      { value: 'TRANSCODE_RANGE', label: 'Transcode Range', color: '#ffffff' },
     ];
     const statusStyles = {
       control: (provided, state) => ({
@@ -327,6 +426,7 @@ constructor(props){
       }),
     };
     const { selectedOption } = this.state;
+    const { selectedOptionType } = this.state;
 
     return (
       <div>
@@ -354,7 +454,7 @@ constructor(props){
           <div class="state_label">
             State:
           </div>
-          <div class="middle_placeholder">
+          <div class="state_input">
             <Select
               isMulti
               name="statusSelect"
@@ -364,6 +464,23 @@ constructor(props){
               styles={statusStyles}
               value={selectedOption}
               onChange={this.handleChange}
+              isClearable={false}
+              components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null, Placeholder:() => null }}
+              />
+          </div>
+          <div class="type_label">
+            Type:
+          </div>
+          <div class="type_input">
+            <Select
+              isMulti
+              name="typeSelect"
+              options={typeOptions}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              styles={statusStyles}
+              value={selectedOptionType}
+              onChange={this.handleChangeType}
               isClearable={false}
               components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null, Placeholder:() => null }}
               />
