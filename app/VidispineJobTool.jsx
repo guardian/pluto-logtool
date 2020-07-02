@@ -277,7 +277,17 @@ constructor(props){
       { value: 'WAITING', label: 'Waiting', color: '#ffffff' },
     ];
     const statusStyles = {
-      control: styles => ({ ...styles, backgroundColor: 'black', width: '200px', fontSize: '13px', border: '2px solid white' }),
+      control: (provided, state) => ({
+        ...provided,
+        width: '200px',
+        backgroundColor: 'black',
+        fontSize: '13px',
+        border: state.isFocused ? '2px solid white' : '2px solid white',
+        boxShadow: state.isFocused ? 0 : 0,
+        '&:hover': {
+           border: state.isFocused ? '2px solid white' : '2px solid white'
+        }
+      }),
       menu: styles => ({ ...styles, backgroundColor: 'black', width: '200px', fontSize: '13px' }),
       option: (styles, { data, isDisabled, isFocused, isSelected }) => {
         return {
