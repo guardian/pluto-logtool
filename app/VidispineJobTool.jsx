@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select'
 import JobInfoBox from './JobInfoBox.jsx';
-import chroma from 'chroma-js';
 
 class VidispineJobTool extends Component {
 
@@ -278,10 +277,9 @@ constructor(props){
       { value: 'WAITING', label: 'Waiting', color: '#ffffff' },
     ];
     const statusStyles = {
-      control: styles => ({ ...styles, backgroundColor: 'black', width: '300' }),
-      menu: styles => ({ ...styles, backgroundColor: 'black', width: '300' }),
+      control: styles => ({ ...styles, backgroundColor: 'black', width: '200px', fontSize: '13px', border: '2px solid white' }),
+      menu: styles => ({ ...styles, backgroundColor: 'black', width: '200px', fontSize: '13px' }),
       option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-        const color = chroma(data.color);
         return {
           ...styles,
           backgroundColor: isDisabled
@@ -289,28 +287,20 @@ constructor(props){
             : isSelected
             ? data.color
             : isFocused
-            ? color.alpha(0.1).css()
+            ? '#222222'
             : null,
-          color: isDisabled
-            ? '#ccc'
-            : isSelected
-            ? chroma.contrast(color, 'white') > 2
-              ? 'white'
-              : 'black'
-            : data.color,
           cursor: isDisabled ? 'not-allowed' : 'default',
 
           ':active': {
             ...styles[':active'],
-            backgroundColor: !isDisabled && (isSelected ? data.color : color.alpha(0.3).css()),
+            backgroundColor: '#222222',
           },
         };
       },
       multiValue: (styles, { data }) => {
-        const color = chroma(data.color);
         return {
           ...styles,
-          backgroundColor: color.alpha(0.1).css(),
+          backgroundColor: '#222222',
         };
       },
       multiValueLabel: (styles, { data }) => ({
@@ -321,7 +311,7 @@ constructor(props){
         ...styles,
         color: data.color,
         ':hover': {
-          backgroundColor: data.color,
+          backgroundColor: '#333333',
           color: 'white',
         },
       }),
@@ -365,7 +355,7 @@ constructor(props){
               value={selectedOption}
               onChange={this.handleChange}
               isClearable={false}
-              components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
+              components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null, Placeholder:() => null }}
               />
           </div>
           <div class="page_number">

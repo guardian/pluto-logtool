@@ -360,16 +360,25 @@ div.size_button_128 {
   font-size: 14px;
 }
 
-div.middle_placeholder {
+div.left_placeholder {
   grid-column-start: 5;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
 
 div.state_label{
   grid-column-start: 6;
+  font-size: 14px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 12px;
 }
 
 div.middle_placeholder {
   grid-column-start: 7;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 4px;
 }
 
 div.page_form {
