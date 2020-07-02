@@ -425,56 +425,6 @@ constructor(props){
         },
       }),
     };
-    const typeStyles = {
-      control: (provided, state) => ({
-        ...provided,
-        width: '200px',
-        backgroundColor: 'black',
-        fontSize: '13px',
-        border: state.isFocused ? '2px solid white' : '2px solid white',
-        boxShadow: state.isFocused ? 0 : 0,
-        '&:hover': {
-           border: state.isFocused ? '2px solid white' : '2px solid white'
-        }
-      }),
-      menu: styles => ({ ...styles, backgroundColor: 'black', width: '200px', fontSize: '13px' }),
-      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-        return {
-          ...styles,
-          backgroundColor: isDisabled
-            ? null
-            : isSelected
-            ? data.color
-            : isFocused
-            ? '#222222'
-            : null,
-          cursor: isDisabled ? 'not-allowed' : 'default',
-
-          ':active': {
-            ...styles[':active'],
-            backgroundColor: '#222222',
-          },
-        };
-      },
-      multiValue: (styles, { data }) => {
-        return {
-          ...styles,
-          backgroundColor: '#222222',
-        };
-      },
-      multiValueLabel: (styles, { data }) => ({
-        ...styles,
-        color: data.color,
-      }),
-      multiValueRemove: (styles, { data }) => ({
-        ...styles,
-        color: data.color,
-        ':hover': {
-          backgroundColor: '#333333',
-          color: 'white',
-        },
-      }),
-    };
     const { selectedOption } = this.state;
     const { selectedOptionType } = this.state;
 
@@ -528,7 +478,7 @@ constructor(props){
               options={typeOptions}
               className="basic-multi-select"
               classNamePrefix="select"
-              styles={typeStyles}
+              styles={statusStyles}
               value={selectedOptionType}
               onChange={this.handleChangeType}
               isClearable={false}
