@@ -47,8 +47,29 @@ constructor(props){
     }
   }
 
+  getDataForRefresh = () => {
+    var placeToLoad = 1;
+    if (this.state.pageNumber > 1) {
+      placeToLoad = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
+    }
+    var selectedData = 'all';
+    if (this.state.selectedOption != null) {
+      selectedData = this.state.selectedOption.reduce((result, item) => {
+        return `${result}${item.value},`
+      }, "")
+    }
+    var selectedDataType = 'all';
+    if (this.state.selectedOptionType != null) {
+      selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+        return `${result}${item.value},`
+      }, "")
+    }
+    this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+  }
+
   componentDidMount() {
     this.getJobData('job?metadata=true&step=true&number=16&first=1&sort=jobId%20desc');
+    setInterval(this.getDataForRefresh, 5000);
   }
 
   pageHigher = () => {

@@ -51,9 +51,14 @@ this.state = {
     }
   }
 
+  getDataForRefresh = () => {
+    this.getJobData('job/' + this.props.match.params.id + '?metadata=true');
+  }
+
   componentDidMount() {
     const idToLoad = this.props.match.params.id;
     this.getJobData('job/' + idToLoad + '?metadata=true');
+    setInterval(this.getDataForRefresh, 5000);
   }
 
   getValue(data,findthis) {
