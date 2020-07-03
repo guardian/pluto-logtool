@@ -109,6 +109,7 @@ this.state = {
     const itemId = this.getValue(this.state.vidispineData.data, "itemId");
     const fullPath = this.getValue(this.state.vidispineData.data, "sourceUri");
     const tags = this.getValue(this.state.vidispineData.data, "tags");
+    document.title = "Job " + id + " for " + fileName + " - Vidispine Job Tool";
     return (
       <div>
         <div class="job_page_grid">
