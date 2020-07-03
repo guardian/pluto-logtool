@@ -59,7 +59,7 @@ class JobInfoBox extends React.Component {
 render() {
   const stepNumber = this.props.jobData.hasOwnProperty("currentStep") ? this.props.jobData.currentStep.number : 0;
   const fileName = this.getValue(this.props.jobData.data, "originalFilename");
-  return <Link to={"/job/" + this.props.jobData.jobId} class={this.returnStatusForCSS(this.props.jobData.status)} id={this.props.jobId}>
+  return <Link to={"/job/" + this.props.jobData.jobId} class={this.returnStatusForCSS(this.props.jobData.status)} id={this.props.jobId} target="_blank">
     <div class="select_data">
       &nbsp;
     </div>
