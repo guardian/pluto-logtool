@@ -434,6 +434,7 @@ div.abort_button {
   width: 100px;
   padding-left: 56px;
   height: 22px;
+  cursor: pointer;
 }
 
 div.progress_bar_background {
