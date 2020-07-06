@@ -36,17 +36,11 @@ class VidispineJobTool extends Component {
   }
 
   handleChangeValue = e => {
-    console.log(e.target.id);
-    console.log(e.target.name);
-    console.log(e.target.checked);
     this.setState({
       ['value'+e.target.name]: e.target.checked,
       ['id'+e.target.name]: e.target.id,
       autoRefresh: false
     });
-    //this.setState({['id'+e.target.name]: e.target.id});
-    //console.log('handleChangeValue', e)
-    //console.log('this.state', this.state);
   }
 
   setStatePromise(newState) {
@@ -315,8 +309,6 @@ class VidispineJobTool extends Component {
     var pageToGoTo = inputNumber;
 
     if (this.state.button === 1) {
-      //console.log("Button 1 clicked!");
-      //alert('Button 1 clicked!');
       console.log('handleSubmit', event)
       console.log('this.state', this.state);
       const target = event.target;
@@ -339,7 +331,6 @@ class VidispineJobTool extends Component {
       }
     }
     if (this.state.button === 2) {
-      //console.log("Button 2 clicked!");
       if (inputNumber > totalNumberOfPagesSubmit) {
         pageToGoTo = totalNumberOfPagesSubmit;
       }

@@ -11,7 +11,7 @@ a {
 
 div.grid {
   display: grid;
-  grid-template-columns: 1400px;
+  grid-template-columns: 1800px;
   grid-template-rows: 50px 90px 40px repeat(128, 56px) auto;
 }
 
@@ -22,7 +22,7 @@ div.title_box {
   padding-left: 10px;
   margin: 2px;
   border-radius: 6px;
-  width: 1390px;
+  width: 1790px;
   grid-column-start: 1;
   grid-column-end: 1;
 }
@@ -30,11 +30,11 @@ div.title_box {
 div.controls_box {
   height: 80px;
   margin: 2px;
-  width: 1400px;
+  width: 1800px;
   grid-column-start: 1;
   grid-column-end: 1;
   display: grid;
-  grid-template-columns: 30px 30px 30px 160px 350px 50px 230px 50px 230px 140px 54px 50px;
+  grid-template-columns: 30px 30px 30px 160px 750px 50px 230px 50px 230px 140px 54px 50px;
   grid-template-rows: 35px 35px;
 }
 
@@ -45,9 +45,9 @@ div.headings_box {
   border-radius: 6px;
   grid-column-start: 1;
   grid-column-end: 1;
-  width: 1400px;
+  width: 1800px;
   display: grid;
-  grid-template-columns: 40px 100px 280px 180px 180px 160px 160px 140px 100px;
+  grid-template-columns: 60px 160px 620px 180px 180px 160px 200px 140px 100px;
   grid-template-rows: 30px;
 }
 
@@ -57,9 +57,9 @@ div.job_box_normal {
   border-radius: 6px;
   grid-column-start: 1;
   grid-column-end: 1;
-  width: 1400px;
+  width: 1800px;
   display: grid;
-  grid-template-columns: 40px 1300px;
+  grid-template-columns: 60px 1700px;
   grid-template-rows: 50px;
   font-size: 14px;
 }
@@ -70,9 +70,9 @@ div.job_box_failed {
   border-radius: 6px;
   grid-column-start: 1;
   grid-column-end: 1;
-  width: 1400px;
+  width: 1800px;
   display: grid;
-  grid-template-columns: 40px 1300px;
+  grid-template-columns: 60px 1700px;
   grid-template-rows: 50px;
   font-size: 14px;
 }
@@ -83,9 +83,9 @@ div.job_box_finished {
   border-radius: 6px;
   grid-column-start: 1;
   grid-column-end: 1;
-  width: 1400px;
+  width: 1800px;
   display: grid;
-  grid-template-columns: 40px 1300px;
+  grid-template-columns: 60px 1700px;
   grid-template-rows: 50px;
   font-size: 14px;
 }
@@ -96,9 +96,9 @@ div.job_box_warning {
   border-radius: 6px;
   grid-column-start: 1;
   grid-column-end: 1;
-  width: 1400px;
+  width: 1800px;
   display: grid;
-  grid-template-columns: 40px 1300px;
+  grid-template-columns: 60px 1700px;
   grid-template-rows: 50px;
   font-size: 14px;
 }
@@ -109,9 +109,9 @@ div.job_box_aborted {
   border-radius: 6px;
   grid-column-start: 1;
   grid-column-end: 1;
-  width: 1400px;
+  width: 1800px;
   display: grid;
-  grid-template-columns: 40px 1300px;
+  grid-template-columns: 60px 1700px;
   grid-template-rows: 50px;
   font-size: 14px;
 }
@@ -120,7 +120,7 @@ a.job_page_link {
   grid-column-start: 2;
   padding-top: 18px;
   display: grid;
-  grid-template-columns: 100px 280px 180px 180px 160px 160px 140px 100px;
+  grid-template-columns: 160px 620px 180px 180px 160px 200px 140px 100px;
   grid-template-rows: 50px;
 }
 
@@ -162,6 +162,8 @@ div.priority_heading {
 
 div.select_data {
   grid-column-start: 1;
+  padding-left: 16px;
+  padding-top: 16px;
 }
 
 div.id_data {
@@ -383,7 +385,8 @@ input.abort_selected_button {
   font-size: 14px;
   padding: 6px;
   border-radius: 2px;
-  margin-left: 4px;
+  margin-left: 600px;
+  margin-top: 30px;
   cursor: pointer;
 }
 
