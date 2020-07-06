@@ -66,6 +66,12 @@ class VidispineJobTool extends Component {
   }
 
   getDataForRefresh = () => {
+    if (this.state.autoRefresh) {
+      this.getJobDataWrapper();
+    }
+  }
+
+  getJobDataWrapper() {
     var placeToLoad = 1;
     if (this.state.pageNumber > 1) {
       placeToLoad = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
@@ -82,9 +88,7 @@ class VidispineJobTool extends Component {
         return `${result}${item.value},`
       }, "")
     }
-    if (this.state.autoRefresh) {
-      this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
-    }
+    this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
   }
 
   componentDidMount() {
@@ -100,24 +104,8 @@ class VidispineJobTool extends Component {
         pageNumber: this.state.pageNumber + 1,
         autoRefresh: true
       },() => {
-        var placeToLoad = 1;
-        if (this.state.pageNumber > 1) {
-          placeToLoad = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
-        }
-        var selectedData = 'all';
-        if (this.state.selectedOption != null) {
-          selectedData = this.state.selectedOption.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
-        var selectedDataType = 'all';
-        if (this.state.selectedOptionType != null) {
-          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
         this.clearSelections();
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+        this.getJobDataWrapper();
       });
     }
   }
@@ -128,24 +116,8 @@ class VidispineJobTool extends Component {
         pageNumber: this.state.pageNumber - 1,
         autoRefresh: true
       },() => {
-        var placeToLoadTwo = 1;
-        if (this.state.pageNumber > 1) {
-          placeToLoadTwo = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
-        }
-        var selectedData = 'all';
-        if (this.state.selectedOption != null) {
-          selectedData = this.state.selectedOption.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
-        var selectedDataType = 'all';
-        if (this.state.selectedOptionType != null) {
-          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
         this.clearSelections();
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadTwo + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+        this.getJobDataWrapper();
       });
     }
   }
@@ -155,24 +127,8 @@ class VidispineJobTool extends Component {
       pageSize: 16,
       autoRefresh: true
     },() => {
-      var placeToLoad16 = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoad16 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-      }
-      var selectedData = 'all';
-      if (this.state.selectedOption != null) {
-        selectedData = this.state.selectedOption.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
-      var selectedDataType = 'all';
-      if (this.state.selectedOptionType != null) {
-        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
       this.clearSelections();
-      this.getJobData('job?metadata=true&step=true&number=16&first=' + placeToLoad16 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+      this.getJobDataWrapper();
     });
   }
 
@@ -189,24 +145,8 @@ class VidispineJobTool extends Component {
       pageNumber: pageNumberToSet32,
       autoRefresh: true
     },() => {
-      var placeToLoad32 = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoad32 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-      }
-      var selectedData = 'all';
-      if (this.state.selectedOption != null) {
-        selectedData = this.state.selectedOption.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
-      var selectedDataType = 'all';
-      if (this.state.selectedOptionType != null) {
-        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
       this.clearSelections();
-      this.getJobData('job?metadata=true&step=true&number=32&first=' + placeToLoad32 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+      this.getJobDataWrapper();
     });
   }
 
@@ -223,24 +163,8 @@ class VidispineJobTool extends Component {
       pageNumber: pageNumberToSet64,
       autoRefresh: true
     },() => {
-      var placeToLoad64 = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoad64 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-      }
-      var selectedData = 'all';
-      if (this.state.selectedOption != null) {
-        selectedData = this.state.selectedOption.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
-      var selectedDataType = 'all';
-      if (this.state.selectedOptionType != null) {
-        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
       this.clearSelections();
-      this.getJobData('job?metadata=true&step=true&number=64&first=' + placeToLoad64 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+      this.getJobDataWrapper();
     });
   }
 
@@ -257,24 +181,8 @@ class VidispineJobTool extends Component {
       pageNumber: pageNumberToSet128,
       autoRefresh: true
     },() => {
-      var placeToLoad128 = 1;
-        if (this.state.pageNumber > 1) {
-        placeToLoad128 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-      }
-      var selectedData = 'all';
-      if (this.state.selectedOption != null) {
-        selectedData = this.state.selectedOption.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
-      var selectedDataType = 'all';
-      if (this.state.selectedOptionType != null) {
-        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
       this.clearSelections();
-      this.getJobData('job?metadata=true&step=true&number=128&first=' + placeToLoad128 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+      this.getJobDataWrapper();
     });
   }
 
@@ -341,24 +249,8 @@ class VidispineJobTool extends Component {
           pageNumber: pageToGoTo,
           autoRefresh: true
         },() => {
-          var placeToLoadSub = 1;
-          if (this.state.pageNumber > 1) {
-            placeToLoadSub = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-          }
-          var selectedData = 'all';
-          if (this.state.selectedOption != null) {
-            selectedData = this.state.selectedOption.reduce((result, item) => {
-              return `${result}${item.value},`
-            }, "")
-          }
-          var selectedDataType = 'all';
-          if (this.state.selectedOptionType != null) {
-            selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-              return `${result}${item.value},`
-            }, "")
-          }
           this.clearSelections();
-          this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+          this.getJobDataWrapper();
           this.element.value = "";
         });
       }
@@ -372,24 +264,8 @@ class VidispineJobTool extends Component {
         autoRefresh: true
       },
       () => {
-        var placeToLoadStatus = 1;
-        if (this.state.pageNumber > 1) {
-          placeToLoadStatus = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-        }
-        var selectedData = 'all';
-        if (this.state.selectedOption != null) {
-          selectedData = this.state.selectedOption.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
-        var selectedDataType = 'all';
-        if (this.state.selectedOptionType != null) {
-          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
         this.clearSelections();
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadStatus + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+        this.getJobDataWrapper();
       }
     );
   };
@@ -401,24 +277,8 @@ class VidispineJobTool extends Component {
         autoRefresh: true
       },
       () => {
-        var placeToLoadStatus = 1;
-        if (this.state.pageNumber > 1) {
-          placeToLoadStatus = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-        }
-        var selectedData = 'all';
-        if (this.state.selectedOption != null) {
-          selectedData = this.state.selectedOption.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
-        var selectedDataType = 'all';
-        if (this.state.selectedOptionType != null) {
-          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
         this.clearSelections();
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadStatus + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+        this.getJobDataWrapper();
       }
     );
   };
