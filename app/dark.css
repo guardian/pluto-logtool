@@ -34,7 +34,7 @@ div.controls_box {
   grid-column-start: 1;
   grid-column-end: 1;
   display: grid;
-  grid-template-columns: 30px 30px 30px 160px 750px 50px 230px 50px 230px 140px 54px 50px;
+  grid-template-columns: 30px 30px 30px 160px 180px 200px 220px 150px 50px 230px 50px 230px 140px 54px 50px;
   grid-template-rows: 35px 35px;
 }
 
@@ -251,7 +251,7 @@ div.last_page {
   padding-top: 5px;
   padding-left: 6px;
   border-radius: 5px;
-  grid-column-start: 11;
+  grid-column-start: 14;
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 21px;
@@ -265,7 +265,7 @@ div.next_page {
   padding-top: 5px;
   padding-left: 6px;
   border-radius: 5px;
-  grid-column-start: 12;
+  grid-column-start: 15;
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 21px;
@@ -304,7 +304,7 @@ div.job_number {
 }
 
 div.page_number {
-  grid-column-start: 10;
+  grid-column-start: 13;
   width: 120px;
   margin-top: 12px;
   border-radius: 3px;
@@ -371,8 +371,35 @@ div.size_button_128 {
   cursor: pointer;
 }
 
-div.left_placeholder {
+div.select_all {
   grid-column-start: 5;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  background-color: #222222;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 30px;
+  margin-top: 30px;
+  padding: 6px;
+  font-size: 14px;
+  width: 62px;
+  height: 14px;
+}
+
+div.rerun_selected {
+  grid-column-start: 6;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+div.priority_selected {
+  grid-column-start: 7;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+div.abort_selected {
+  grid-column-start: 8;
   grid-row-start: 1;
   grid-row-end: 2;
 }
@@ -385,13 +412,13 @@ input.abort_selected_button {
   font-size: 14px;
   padding: 6px;
   border-radius: 2px;
-  margin-left: 600px;
+  margin-left: 2px;
   margin-top: 30px;
   cursor: pointer;
 }
 
 div.state_label{
-  grid-column-start: 6;
+  grid-column-start: 9;
   font-size: 14px;
   grid-row-start: 1;
   grid-row-end: 2;
@@ -399,14 +426,14 @@ div.state_label{
 }
 
 div.state_input {
-  grid-column-start: 7;
+  grid-column-start: 10;
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 4px;
 }
 
 div.type_label{
-  grid-column-start: 8;
+  grid-column-start: 11;
   font-size: 14px;
   grid-row-start: 1;
   grid-row-end: 2;
@@ -414,7 +441,7 @@ div.type_label{
 }
 
 div.type_input {
-  grid-column-start: 9;
+  grid-column-start: 12;
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 4px;
@@ -423,7 +450,7 @@ div.type_input {
 div.page_form {
   margin-top: 18px;
   grid-row-start: 2;
-  grid-column-start: 10;
+  grid-column-start: 13;
   margin-left: 32px;
 }
 

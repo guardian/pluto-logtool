@@ -24,6 +24,7 @@ class VidispineJobTool extends Component {
       selectedOptionType: null,
       button: 1,
       autoRefresh: true,
+      selectAllSwitch: false,
     };
     var loopPlace = 0;
     const loopSize = 127;
@@ -423,13 +424,33 @@ class VidispineJobTool extends Component {
   };
 
   clearSelections(){
-    console.log('Clear running');
     var loopPlaceClear = 0;
     const loopSizeClear = 127;
     while (loopPlaceClear <= loopSizeClear) {
       this.state[`value${loopPlaceClear}`] = false;
       this.state[`id${loopPlaceClear}`] = '';
       loopPlaceClear++;
+    }
+  }
+
+  selectAll = () => {
+    if (this.state.selectAllSwitch == false) {
+      var loopPlaceAll = 0;
+      while (loopPlaceAll < this.state.pageSize) {
+        this.state[`value${loopPlaceAll}`] = true;
+        this.state[`id${loopPlaceAll}`] = this.state.vidispineData.job[`${loopPlaceAll}`].jobId;
+        loopPlaceAll++;
+      }
+      this.setState({
+        selectAllSwitch: true,
+        autoRefresh: false
+      });
+    } else {
+      this.clearSelections();
+      this.setState({
+        selectAllSwitch: false,
+        autoRefresh: true
+      });
     }
   }
 
@@ -542,7 +563,16 @@ class VidispineJobTool extends Component {
           <div class="job_number">
             Showing {this.placeToShow()} to {this.placeToShowEnd()} of {this.state.vidispineData.hits} jobs
           </div>
-          <div class="left_placeholder">
+          <div class="select_all" onClick={this.selectAll}>
+              Select All
+          </div>
+          <div class="rerun_selected">
+            &nbsp;
+          </div>
+          <div class="priority_selected">
+            &nbsp;
+          </div>
+          <div class="abort_selected">
             <input class="abort_selected_button" onClick={() => (this.state.button = 1)} type="submit" value="Abort Selected" />
           </div>
           <div class="state_label">
