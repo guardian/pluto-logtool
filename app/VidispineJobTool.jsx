@@ -11,20 +11,38 @@ class VidispineJobTool extends Component {
       password: PropTypes.string.isRequired,
     };
 
-constructor(props){
-  super(props);
-  this.state = {
-    vidispineData: {
-      hits: 0,
-      job: []
-    },
-    pageNumber: 1,
-    pageSize: 16,
-    selectedOption: null,
-    selectedOptionType: null,
-  };
-  this.handleSubmit = this.handleSubmit.bind(this);
-}
+  constructor(props){
+    super(props);
+    this.state = {
+      vidispineData: {
+        hits: 0,
+        job: []
+      },
+      pageNumber: 1,
+      pageSize: 16,
+      selectedOption: null,
+      selectedOptionType: null,
+      button: 1,
+    };
+    var loopPlace = 0;
+    const loopSize = 127;
+    while (loopPlace <= loopSize) {
+      this.state[`value${loopPlace}`] = false;
+      this.state[`id${loopPlace}`] = '';
+      loopPlace++;
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChangeValue = e => {
+    console.log(e.target.id);
+    console.log(e.target.name);
+    console.log(e.target.checked);
+    this.setState({['value'+e.target.name]: e.target.checked});
+    this.setState({['id'+e.target.name]: e.target.id});
+    //console.log('handleChangeValue', e)
+    //console.log('this.state', this.state);
+  }
 
   setStatePromise(newState) {
     return new Promise((resolve,reject)=>this.setState(newState, ()=>resolve()));
@@ -277,33 +295,62 @@ constructor(props){
     const inputNumber = parseInt(this.element.value);
     var pageToGoTo = inputNumber;
 
-    if (inputNumber > totalNumberOfPagesSubmit) {
-      pageToGoTo = totalNumberOfPagesSubmit;
-    }
+    if (this.state.button === 1) {
+      //console.log("Button 1 clicked!");
+      //alert('Button 1 clicked!');
+      console.log('handleSubmit', event)
+      console.log('this.state', this.state);
+      const target = event.target;
+      var formData = new FormData(target);
 
-    if (inputNumber > 0) {
-      this.setState({
-        pageNumber: pageToGoTo
-      },() => {
-        var placeToLoadSub = 1;
-        if (this.state.pageNumber > 1) {
-          placeToLoadSub = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
+      for (var [key, value] of formData.entries()) {
+        console.log(key, value);
+      }
+
+      var loopPlaceSubmit = 0;
+      const loopSizeSubmit = 127;
+      while (loopPlaceSubmit <= loopSizeSubmit) {
+        if (this.state[`value${loopPlaceSubmit}`] == true) {
+          console.log('Found one at place: '+loopPlaceSubmit);
+          const encodedStringAbort = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
+          const urlAbort = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceSubmit}`];
+          fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringAbort}, method: 'DELETE'});
         }
-        var selectedData = 'all';
-        if (this.state.selectedOption != null) {
-          selectedData = this.state.selectedOption.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
-        var selectedDataType = 'all';
-        if (this.state.selectedOptionType != null) {
-          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
-        this.element.value = "";
-      });
+
+        //this.state[`id${loopPlaceSumbit}`] = '';
+        loopPlaceSubmit++;
+      }
+    }
+    if (this.state.button === 2) {
+      //console.log("Button 2 clicked!");
+      if (inputNumber > totalNumberOfPagesSubmit) {
+        pageToGoTo = totalNumberOfPagesSubmit;
+      }
+
+      if (inputNumber > 0) {
+        this.setState({
+          pageNumber: pageToGoTo
+        },() => {
+          var placeToLoadSub = 1;
+          if (this.state.pageNumber > 1) {
+            placeToLoadSub = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
+          }
+          var selectedData = 'all';
+          if (this.state.selectedOption != null) {
+            selectedData = this.state.selectedOption.reduce((result, item) => {
+              return `${result}${item.value},`
+            }, "")
+          }
+          var selectedDataType = 'all';
+          if (this.state.selectedOptionType != null) {
+            selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
+              return `${result}${item.value},`
+            }, "")
+          }
+          this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+          this.element.value = "";
+        });
+      }
     }
   }
 
@@ -451,6 +498,7 @@ constructor(props){
 
     return (
       <div>
+        <form onSubmit={this.handleSubmit}>
         <div class="grid">
         <div class="title_box">Vidispine Job Tool</div>
         <div class="controls_box">
@@ -470,7 +518,7 @@ constructor(props){
             Showing {this.placeToShow()} to {this.placeToShowEnd()} of {this.state.vidispineData.hits} jobs
           </div>
           <div class="left_placeholder">
-            &nbsp;
+            <input onClick={() => (this.state.button = 1)} type="submit" value="Abort Selected" />
           </div>
           <div class="state_label">
             State:
@@ -511,10 +559,10 @@ constructor(props){
             Page {this.state.pageNumber} of {this.totalPages()}
           </div>
           <div class="page_form">
-            <form onSubmit={this.handleSubmit}>
+
               <input class="page_input" size="4" type="text" ref={el => this.element = el} />
-              <input class="go_button" type="submit" value="Go" />
-            </form>
+              <input onClick={() => (this.state.button = 2)} class="go_button" type="submit" value="Go" onclick="clicked='Go'"/>
+
           </div>
           <div class="last_page" onClick={this.pageLower}>
             <div class="arrow_left"></div>
@@ -553,11 +601,12 @@ constructor(props){
           </div>
         </div>
            {this.state.vidispineData.job && this.state.vidispineData.job.length > 0 ? (
-             this.state.vidispineData.job.map(item =><JobInfoBox jobData={item} jobId={item.jobId}/>)
+             this.state.vidispineData.job.map((item, i) =><JobInfoBox mapPlace={i} jobData={item} jobId={item.jobId} value={this.state[`value${i}`]} onChangeValue={this.handleChangeValue}/>)
            ) : (
              <div class="no_jobs_found">No jobs found</div>
            )}
           </div>
+          </form>
       </div>
     )
   }
