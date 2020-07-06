@@ -62,7 +62,7 @@ render() {
   const fileName = this.getValue(this.props.jobData.data, "originalFilename");
   return <div class={this.returnStatusForCSS(this.props.jobData.status)}>
     <div class="select_data">
-      <input type="checkbox" id={this.props.jobId} defaultChecked={this.props.value} onChange={this.props.onChangeValue} name={this.props.mapPlace} />
+      <input type="checkbox" id={this.props.jobId} checked={this.props.value} onChange={this.props.onChangeValue} name={this.props.mapPlace} />
     </div>
     <Link to={"/job/" + this.props.jobData.jobId} class="job_page_link" id={this.props.jobId} target="_blank">
       <div class="id_data">
