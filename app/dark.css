@@ -200,7 +200,7 @@ div.priority_data {
 
 div.job_page_grid {
   display: grid;
-  grid-template-columns: 1400px;
+  grid-template-columns: 1800px;
   grid-template-rows: 50px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px auto;
 }
 
@@ -211,11 +211,11 @@ div.job_page_title_box {
   padding-left: 10px;
   margin: 2px;
   border-radius: 6px;
-  width: 1418px;
+  width: 1818px;
   grid-column-start: 1;
   grid-column-end: 1;
   display: grid;
-  grid-template-columns: 1250px 150px;
+  grid-template-columns: 1650px 150px;
   grid-template-rows: 45px;
 }
 
@@ -226,9 +226,9 @@ div.job_data_box {
   border-radius: 6px;
   grid-column-start: 1;
   grid-column-end: 1;
-  width: 1428px;
+  width: 1828px;
   display: grid;
-  grid-template-columns: 200px 1228px;
+  grid-template-columns: 200px 1628px;
   grid-template-rows: 40px;
   font-size: 13px;
 }
@@ -531,7 +531,7 @@ div.progress_bar {
 div.progress_bar_background_job_page {
   background-color: #000000;
   border-radius: 3px;
-  width: 1218px;
+  width: 1618px;
   height: 19px;
 }
 
