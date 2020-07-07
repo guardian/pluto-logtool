@@ -241,14 +241,12 @@ class VidispineJobTool extends Component {
   handleSubmitPriority(event) {
     event.preventDefault();
     this.closeModal();
-    console.log('Form submitted with: '+this.elementPriority.value);
     var loopPlacePriority = 0;
     const loopSizePriority = 127;
+    const encodedStringPriority = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
     while (loopPlacePriority <= loopSizePriority) {
       if (this.state[`value${loopPlacePriority}`] == true) {
-        console.log('Found one at place: '+loopPlacePriority);
-        const encodedStringPriority = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
-        const urlPriority = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlacePriority}`] + "?priority=" + this.elementPriority.value;
+        var urlPriority = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlacePriority}`] + "?priority=" + this.elementPriority.value;
         fetch(urlPriority, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringPriority}, method: 'PUT'});
       }
       loopPlacePriority++;
@@ -258,11 +256,10 @@ class VidispineJobTool extends Component {
   abortSelected = () => {
     var loopPlaceSubmit = 0;
     const loopSizeSubmit = 127;
+    const encodedStringAbort = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
     while (loopPlaceSubmit <= loopSizeSubmit) {
       if (this.state[`value${loopPlaceSubmit}`] == true) {
-        console.log('Found one at place: '+loopPlaceSubmit);
-        const encodedStringAbort = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
-        const urlAbort = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceSubmit}`];
+        var urlAbort = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceSubmit}`];
         fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringAbort}, method: 'DELETE'});
       }
       loopPlaceSubmit++;
@@ -332,6 +329,19 @@ class VidispineJobTool extends Component {
 
   closeModal() {
     this.setState({ open: false });
+  }
+
+  rerunSelected = () => {
+    var loopPlaceRe = 0;
+    const loopSizeRe = 127;
+    const encodedStringRe = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
+    while (loopPlaceRe <= loopSizeRe) {
+      if (this.state[`value${loopPlaceRe}`] == true) {
+        var urlRe = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceRe}`] + "/re-run";
+        fetch(urlRe, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringRe}, method: 'POST'});
+      }
+      loopPlaceRe++;
+    }
   }
 
   render() {
@@ -446,7 +456,7 @@ class VidispineJobTool extends Component {
               Select All
           </div>
           <div class="rerun_selected">
-            &nbsp;
+            <input class="rerun_selected_button" onClick={this.rerunSelected} type="submit" value="Rerun Selected" />
           </div>
           <div class="priority_selected">
             <button class="priority_button" onClick={this.openModal}>
