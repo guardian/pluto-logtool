@@ -172,6 +172,10 @@ div.id_data {
 
 div.filename_data {
   grid-column-start: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
 }
 
 div.type_data {
@@ -188,6 +192,10 @@ div.progress_data {
 
 div.user_data {
   grid-column-start: 6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
 }
 
 div.started_data {
@@ -219,6 +227,13 @@ div.job_page_title_box {
   grid-template-rows: 45px;
 }
 
+div.job_page_title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
+}
+
 div.job_data_box {
   background-color: #222222;
   padding: 0px;
@@ -242,6 +257,10 @@ div.job_data_label {
 div.job_data_value {
   padding-top: 14px;
   grid-column-start: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
 }
 
 div.last_page {

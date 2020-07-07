@@ -114,7 +114,7 @@ this.state = {
       <div>
         <div class="job_page_grid">
           <div class="job_page_title_box">
-            <div>
+            <div class="job_page_title">
               Job {id} for {fileName}
             </div>
             {this.displayAbort(this.state.vidispineData.status)}
