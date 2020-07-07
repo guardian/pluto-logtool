@@ -404,6 +404,19 @@ div.abort_selected {
   grid-row-end: 2;
 }
 
+button.priority_button {
+  background-color: #222222;
+  color: #ffffff;
+  border: 0px;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding: 6px;
+  border-radius: 2px;
+  margin-left: 2px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
 input.abort_selected_button {
   background-color: #222222;
   color: #ffffff;
@@ -523,4 +536,39 @@ div.job_data_progress_bar {
 div.no_jobs_found {
   margin: 20px;
   font-size: 30px;
+}
+
+.modal {
+  font-size: 12px;
+  background-color: black;
+}
+.modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #000000;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
 }

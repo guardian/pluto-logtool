@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select'
 import JobInfoBox from './JobInfoBox.jsx';
+import Popup from "reactjs-popup";
 
 class VidispineJobTool extends Component {
 
@@ -25,6 +26,7 @@ class VidispineJobTool extends Component {
       button: 1,
       autoRefresh: true,
       selectAllSwitch: false,
+      open: false,
     };
     var loopPlace = 0;
     const loopSize = 127;
@@ -34,6 +36,9 @@ class VidispineJobTool extends Component {
       loopPlace++;
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitPriority = this.handleSubmitPriority.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   handleChangeValue = e => {
@@ -217,43 +222,60 @@ class VidispineJobTool extends Component {
     const inputNumber = parseInt(this.element.value);
     var pageToGoTo = inputNumber;
 
-    if (this.state.button === 1) {
-      console.log('handleSubmit', event)
-      console.log('this.state', this.state);
-      const target = event.target;
-      var formData = new FormData(target);
-
-      for (var [key, value] of formData.entries()) {
-        console.log(key, value);
-      }
-
-      var loopPlaceSubmit = 0;
-      const loopSizeSubmit = 127;
-      while (loopPlaceSubmit <= loopSizeSubmit) {
-        if (this.state[`value${loopPlaceSubmit}`] == true) {
-          console.log('Found one at place: '+loopPlaceSubmit);
-          const encodedStringAbort = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
-          const urlAbort = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceSubmit}`];
-          fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringAbort}, method: 'DELETE'});
-        }
-        loopPlaceSubmit++;
-      }
+    if (inputNumber > totalNumberOfPagesSubmit) {
+      pageToGoTo = totalNumberOfPagesSubmit;
     }
-    if (this.state.button === 2) {
-      if (inputNumber > totalNumberOfPagesSubmit) {
-        pageToGoTo = totalNumberOfPagesSubmit;
-      }
 
-      if (inputNumber > 0) {
-        this.setState({
-          pageNumber: pageToGoTo,
-          autoRefresh: true
-        },() => {
-          this.clearSelections();
-          this.getJobDataWrapper();
-          this.element.value = "";
-        });
+    if (inputNumber > 0) {
+      this.setState({
+        pageNumber: pageToGoTo,
+        autoRefresh: true
+      },() => {
+        this.clearSelections();
+        this.getJobDataWrapper();
+        this.element.value = "";
+      });
+    }
+  }
+
+  handleSubmitPriority(event) {
+    event.preventDefault();
+    this.closeModal();
+    //console.log('handleSubmitPriority', event)
+    //console.log('this.state', this.state);
+    //const target = event.target;
+    //var formData = new FormData(target);
+
+    //for (var [key, value] of formData.entries()) {
+    //  console.log(key, value);
+    //}
+
+    //alert('Form submitted');
+    console.log('Form submitted with: '+this.elementPriority.value);
+    var loopPlacePriority = 0;
+    const loopSizePriority = 127;
+    while (loopPlacePriority <= loopSizePriority) {
+      if (this.state[`value${loopPlacePriority}`] == true) {
+        console.log('Found one at place: '+loopPlacePriority);
+        const encodedStringPriority = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
+        const urlPriority = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlacePriority}`] + "?priority=" + this.elementPriority.value;
+        fetch(urlPriority, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringPriority}, method: 'PUT'});
       }
+      loopPlacePriority++;
+    }
+  }
+
+  abortSelected = () => {
+    var loopPlaceSubmit = 0;
+    const loopSizeSubmit = 127;
+    while (loopPlaceSubmit <= loopSizeSubmit) {
+      if (this.state[`value${loopPlaceSubmit}`] == true) {
+        console.log('Found one at place: '+loopPlaceSubmit);
+        const encodedStringAbort = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
+        const urlAbort = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceSubmit}`];
+        fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringAbort}, method: 'DELETE'});
+      }
+      loopPlaceSubmit++;
     }
   }
 
@@ -312,6 +334,14 @@ class VidispineJobTool extends Component {
         autoRefresh: true
       });
     }
+  }
+
+  openModal() {
+    this.setState({ open: true });
+  }
+
+  closeModal() {
+    this.setState({ open: false });
   }
 
   render() {
@@ -404,7 +434,6 @@ class VidispineJobTool extends Component {
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
         <div class="grid">
         <div class="title_box">Vidispine Job Tool</div>
         <div class="controls_box">
@@ -430,10 +459,46 @@ class VidispineJobTool extends Component {
             &nbsp;
           </div>
           <div class="priority_selected">
-            &nbsp;
+          <button class="priority_button" onClick={this.openModal}>
+            Set Priority of Selected
+          </button>
+          <Popup
+            open={this.state.open}
+            onClose={this.closeModal}
+          >
+              <div className="modal">
+                <a className="close" onClick={this.closeModal}>
+                  &times;
+                </a>
+                <div className="header"> Change Priority of Jobs </div>
+                <div className="content">
+                  {" "}
+                  <form onSubmit={this.handleSubmitPriority}>
+                    <select ref={el => this.elementPriority = el}>
+                      <option>IMMEDIATE</option>
+                      <option>HIGHEST</option>
+                      <option>HIGH</option>
+                      <option>MEDIUM</option>
+                      <option>LOW</option>
+                      <option>LOWEST</option>
+                    </select>
+                    <input type="submit" value="Change" />
+                  </form>
+                </div>
+                <div className="actions">
+                  <button
+                    className="button"
+                    onClick={this.closeModal}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+
+          </Popup>
           </div>
           <div class="abort_selected">
-            <input class="abort_selected_button" onClick={() => (this.state.button = 1)} type="submit" value="Abort Selected" />
+            <input class="abort_selected_button" onClick={this.abortSelected} type="submit" value="Abort Selected" />
           </div>
           <div class="state_label">
             State:
@@ -474,10 +539,10 @@ class VidispineJobTool extends Component {
             Page {this.state.pageNumber} of {this.totalPages()}
           </div>
           <div class="page_form">
-
+            <form onSubmit={this.handleSubmit}>
               <input class="page_input" size="4" type="text" ref={el => this.element = el} />
               <input onClick={() => (this.state.button = 2)} class="go_button" type="submit" value="Go" onclick="clicked='Go'"/>
-
+            </form>
           </div>
           <div class="last_page" onClick={this.pageLower}>
             <div class="arrow_left"></div>
@@ -521,7 +586,6 @@ class VidispineJobTool extends Component {
              <div class="no_jobs_found">No jobs found</div>
            )}
           </div>
-          </form>
       </div>
     )
   }
