@@ -540,11 +540,9 @@ div.no_jobs_found {
 
 .modal {
   font-size: 12px;
-  background-color: black;
 }
 .modal > .header {
   width: 100%;
-  border-bottom: 1px solid gray;
   font-size: 18px;
   text-align: center;
   padding: 5px;
@@ -552,12 +550,6 @@ div.no_jobs_found {
 .modal > .content {
   width: 100%;
   padding: 10px 5px;
-}
-.modal > .actions {
-  width: 100%;
-  padding: 10px 5px;
-  margin: auto;
-  text-align: center;
 }
 .modal > .close {
   cursor: pointer;
@@ -571,4 +563,30 @@ div.no_jobs_found {
   background: #000000;
   border-radius: 18px;
   border: 1px solid #cfcece;
+}
+
+input.priority_submit_button {
+  background-color: #222222;
+  color: #ffffff;
+  border: 0px;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding-top: 4px;
+  border-radius: 2px;
+  height: 30px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+button.priority_cancel_button {
+  background-color: #222222;
+  color: #ffffff;
+  border: 0px;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding-top: 4px;
+  border-radius: 2px;
+  height: 30px;
+  margin-left: 8px;
+  cursor: pointer;
 }

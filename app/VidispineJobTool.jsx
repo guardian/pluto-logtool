@@ -241,16 +241,6 @@ class VidispineJobTool extends Component {
   handleSubmitPriority(event) {
     event.preventDefault();
     this.closeModal();
-    //console.log('handleSubmitPriority', event)
-    //console.log('this.state', this.state);
-    //const target = event.target;
-    //var formData = new FormData(target);
-
-    //for (var [key, value] of formData.entries()) {
-    //  console.log(key, value);
-    //}
-
-    //alert('Form submitted');
     console.log('Form submitted with: '+this.elementPriority.value);
     var loopPlacePriority = 0;
     const loopSizePriority = 127;
@@ -459,43 +449,41 @@ class VidispineJobTool extends Component {
             &nbsp;
           </div>
           <div class="priority_selected">
-          <button class="priority_button" onClick={this.openModal}>
-            Set Priority of Selected
-          </button>
-          <Popup
-            open={this.state.open}
-            onClose={this.closeModal}
-          >
-              <div className="modal">
-                <a className="close" onClick={this.closeModal}>
-                  &times;
-                </a>
-                <div className="header"> Change Priority of Jobs </div>
-                <div className="content">
-                  {" "}
-                  <form onSubmit={this.handleSubmitPriority}>
-                    <select ref={el => this.elementPriority = el}>
-                      <option>IMMEDIATE</option>
-                      <option>HIGHEST</option>
-                      <option>HIGH</option>
-                      <option>MEDIUM</option>
-                      <option>LOW</option>
-                      <option>LOWEST</option>
-                    </select>
-                    <input type="submit" value="Change" />
-                  </form>
+            <button class="priority_button" onClick={this.openModal}>
+              Set Priority of Selected
+            </button>
+            <Popup
+              open={this.state.open}
+              onClose={this.closeModal}
+              contentStyle={{width: "280px", height: "90px", border: "0px", backgroundColor: "black", borderRadius: "10px"}}
+            >
+                <div className="modal">
+                  <a className="close" onClick={this.closeModal}>
+                    &times;
+                  </a>
+                  <div className="header"> Change Priority of Jobs </div>
+                  <div className="content">
+                    {" "}
+                    <form onSubmit={this.handleSubmitPriority}>
+                      <select ref={el => this.elementPriority = el}>
+                        <option>IMMEDIATE</option>
+                        <option>HIGHEST</option>
+                        <option>HIGH</option>
+                        <option>MEDIUM</option>
+                        <option>LOW</option>
+                        <option>LOWEST</option>
+                      </select>
+                      <input class="priority_submit_button" type="submit" value="Change" />
+                      <button
+                        class="priority_cancel_button"
+                        onClick={this.closeModal}
+                      >
+                        Cancel
+                      </button>
+                    </form>
+                  </div>
                 </div>
-                <div className="actions">
-                  <button
-                    className="button"
-                    onClick={this.closeModal}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-
-          </Popup>
+            </Popup>
           </div>
           <div class="abort_selected">
             <input class="abort_selected_button" onClick={this.abortSelected} type="submit" value="Abort Selected" />
