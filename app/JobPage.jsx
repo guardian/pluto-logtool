@@ -102,6 +102,22 @@ this.state = {
     )
   }
 
+  returnStatusForCSS(status) {
+    if (status == 'FAILED_TOTAL') {
+      return "job_data_box_failed";
+    }
+    if (status == 'FINISHED') {
+      return "job_data_box_finished";
+    }
+    if (status == 'FINISHED_WARNING') {
+      return "job_data_box_warning";
+    }
+    if (status == 'ABORTED') {
+      return "job_data_box_aborted";
+    }
+    return "job_data_box";
+  }
+
   render() {
     const id = this.props.match.params.id;
     const fileName = this.getValue(this.state.vidispineData.data, "originalFilename");
@@ -161,7 +177,7 @@ this.state = {
               {<TypeFormatter type={this.state.vidispineData.type}/>}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class={this.returnStatusForCSS(this.state.vidispineData.status)}>
             <div class="job_data_label">
               Status:
             </div>
