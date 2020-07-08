@@ -34,7 +34,7 @@ div.controls_box {
   grid-column-start: 1;
   grid-column-end: 1;
   display: grid;
-  grid-template-columns: 30px 30px 30px 160px 180px 200px 220px 150px 50px 230px 50px 230px 140px 54px 50px;
+  grid-template-columns: 30px 30px 30px 160px 130px 145px 195px 150px 50px 295px 50px 295px 140px 54px 50px;
   grid-template-rows: 35px 35px;
 }
 

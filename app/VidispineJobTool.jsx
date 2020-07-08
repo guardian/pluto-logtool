@@ -445,7 +445,7 @@ class VidispineJobTool extends Component {
     const statusStyles = {
       control: (provided, state) => ({
         ...provided,
-        width: '200px',
+        width: '270px',
         backgroundColor: 'black',
         fontSize: '13px',
         border: state.isFocused ? '2px solid white' : '2px solid white',
@@ -454,7 +454,7 @@ class VidispineJobTool extends Component {
            border: state.isFocused ? '2px solid white' : '2px solid white'
         }
       }),
-      menu: styles => ({ ...styles, backgroundColor: 'black', width: '200px', fontSize: '13px' }),
+      menu: styles => ({ ...styles, backgroundColor: 'black', width: '270px', fontSize: '13px' }),
       option: (styles, { data, isDisabled, isFocused, isSelected }) => {
         return {
           ...styles,
