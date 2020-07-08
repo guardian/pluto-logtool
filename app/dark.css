@@ -130,6 +130,7 @@ div.select_heading {
 
 div.id_heading {
   grid-column-start: 2;
+  cursor: pointer;
 }
 
 div.filename_heading {
@@ -138,10 +139,12 @@ div.filename_heading {
 
 div.type_heading {
   grid-column-start: 4;
+  cursor: pointer;
 }
 
 div.status_heading {
   grid-column-start: 5;
+  cursor: pointer;
 }
 
 div.progress_heading {
@@ -150,14 +153,17 @@ div.progress_heading {
 
 div.user_heading {
   grid-column-start: 7;
+  cursor: pointer;
 }
 
 div.started_heading {
   grid-column-start: 8;
+  cursor: pointer;
 }
 
 div.priority_heading {
   grid-column-start: 9;
+  cursor: pointer;
 }
 
 div.select_data {

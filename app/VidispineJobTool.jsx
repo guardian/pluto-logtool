@@ -27,6 +27,8 @@ class VidispineJobTool extends Component {
       autoRefresh: true,
       selectAllSwitch: false,
       open: false,
+      sortDirection: 'desc',
+      sortBy: 'jobId',
     };
     var loopPlace = 0;
     const loopSize = 127;
@@ -93,7 +95,7 @@ class VidispineJobTool extends Component {
         return `${result}${item.value},`
       }, "")
     }
-    this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+    this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=' + this.state.sortBy + '%20' + this.state.sortDirection + '&state=' + selectedData + '&type=' + selectedDataType);
   }
 
   componentDidMount() {
@@ -344,6 +346,17 @@ class VidispineJobTool extends Component {
     }
   }
 
+  changeSort(input) {
+    if (this.state.sortDirection == 'desc') {
+      this.state.sortDirection = 'asc';
+    } else {
+      this.state.sortDirection = 'desc';
+    }
+    this.state.sortBy = input;
+    this.clearSelections();
+    this.getJobDataWrapper();
+  }
+
   render() {
     const statusOptions = [
       { value: 'ABORTED', label: 'Aborted', color: '#ffffff' },
@@ -553,28 +566,28 @@ class VidispineJobTool extends Component {
           <div class="select_heading">
             &nbsp;
           </div>
-          <div class="id_heading">
+          <div class="id_heading" onClick={() => this.changeSort('jobId')}>
             Id.
           </div>
           <div class="filename_heading">
             Filename
           </div>
-          <div class="type_heading">
+          <div class="type_heading" onClick={() => this.changeSort('type')}>
             Type
           </div>
-          <div class="status_heading">
+          <div class="status_heading" onClick={() => this.changeSort('state')}>
             Status
           </div>
           <div class="progress_heading">
             Progress
           </div>
-          <div class="user_heading">
+          <div class="user_heading" onClick={() => this.changeSort('user')}>
             User
           </div>
-          <div class="started_heading">
+          <div class="started_heading" onClick={() => this.changeSort('startTime')}>
             Started
           </div>
-          <div class="priority_heading">
+          <div class="priority_heading" onClick={() => this.changeSort('priority')}>
             Priority
           </div>
         </div>
