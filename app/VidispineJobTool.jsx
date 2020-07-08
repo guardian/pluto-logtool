@@ -29,6 +29,10 @@ class VidispineJobTool extends Component {
       open: false,
       sortDirection: 'desc',
       sortBy: 'jobId',
+      sixteenGrey: false,
+      thirtyTwoGrey: true,
+      sixtyFourGrey: true,
+      oneHundredAndTwentyEightGrey: true,
     };
     var loopPlace = 0;
     const loopSize = 127;
@@ -132,7 +136,11 @@ class VidispineJobTool extends Component {
   pageSize16 = () => {
     this.setState({
       pageSize: 16,
-      autoRefresh: true
+      autoRefresh: true,
+      sixteenGrey: false,
+      thirtyTwoGrey: true,
+      sixtyFourGrey: true,
+      oneHundredAndTwentyEightGrey: true
     },() => {
       this.clearSelections();
       this.getJobDataWrapper();
@@ -150,7 +158,11 @@ class VidispineJobTool extends Component {
     this.setState({
       pageSize: 32,
       pageNumber: pageNumberToSet32,
-      autoRefresh: true
+      autoRefresh: true,
+      sixteenGrey: true,
+      thirtyTwoGrey: false,
+      sixtyFourGrey: true,
+      oneHundredAndTwentyEightGrey: true
     },() => {
       this.clearSelections();
       this.getJobDataWrapper();
@@ -168,7 +180,11 @@ class VidispineJobTool extends Component {
     this.setState({
       pageSize: 64,
       pageNumber: pageNumberToSet64,
-      autoRefresh: true
+      autoRefresh: true,
+      sixteenGrey: true,
+      thirtyTwoGrey: true,
+      sixtyFourGrey: false,
+      oneHundredAndTwentyEightGrey: true
     },() => {
       this.clearSelections();
       this.getJobDataWrapper();
@@ -186,7 +202,11 @@ class VidispineJobTool extends Component {
     this.setState({
       pageSize: 128,
       pageNumber: pageNumberToSet128,
-      autoRefresh: true
+      autoRefresh: true,
+      sixteenGrey: true,
+      thirtyTwoGrey: true,
+      sixtyFourGrey: true,
+      oneHundredAndTwentyEightGrey: false
     },() => {
       this.clearSelections();
       this.getJobDataWrapper();
@@ -357,6 +377,36 @@ class VidispineJobTool extends Component {
     this.getJobDataWrapper();
   }
 
+  returnCSSForPageSize(pageSizeInput) {
+    if (pageSizeInput == 16) {
+      if (this.state.sixteenGrey) {
+        return "size_button_16_grey";
+      }
+    }
+    if (pageSizeInput == 32) {
+      if (this.state.thirtyTwoGrey) {
+        return "size_button_32_grey";
+      } else {
+        return "size_button_32";
+      }
+    }
+    if (pageSizeInput == 64) {
+      if (this.state.sixtyFourGrey) {
+        return "size_button_64_grey";
+      } else {
+        return "size_button_64";
+      }
+    }
+    if (pageSizeInput == 128) {
+      if (this.state.oneHundredAndTwentyEightGrey) {
+        return "size_button_128_grey";
+      } else {
+        return "size_button_128";
+      }
+    }
+    return "size_button_16";
+  }
+
   render() {
     const statusOptions = [
       { value: 'ABORTED', label: 'Aborted', color: '#ffffff' },
@@ -450,16 +500,16 @@ class VidispineJobTool extends Component {
         <div class="grid">
         <div class="title_box">Vidispine Job Tool</div>
         <div class="controls_box">
-          <div class="size_button_16" onClick={this.pageSize16}>
+          <div class={this.returnCSSForPageSize(16)} onClick={this.pageSize16}>
             16
           </div>
-          <div class="size_button_32" onClick={this.pageSize32}>
+          <div class={this.returnCSSForPageSize(32)} onClick={this.pageSize32}>
             32
           </div>
-          <div class="size_button_64" onClick={this.pageSize64}>
+          <div class={this.returnCSSForPageSize(64)} onClick={this.pageSize64}>
             64
           </div>
-          <div class="size_button_128" onClick={this.pageSize128}>
+          <div class={this.returnCSSForPageSize(128)} onClick={this.pageSize128}>
             128
           </div>
           <div class="job_number">
