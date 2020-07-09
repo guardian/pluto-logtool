@@ -125,6 +125,8 @@ this.state = {
     const itemId = this.getValue(this.state.vidispineData.data, "itemId");
     const fullPath = this.getValue(this.state.vidispineData.data, "sourceUri");
     const tags = this.getValue(this.state.vidispineData.data, "tags");
+    const timeLeft = this.getValue(this.state.vidispineData.data, "transcodeEstimatedTimeLeft");
+    const transcoder = this.getValue(this.state.vidispineData.data, "transcoder");
     document.title = "Job " + id + " for " + fileName + " - Vidispine Job Tool";
     return (
       <div>
@@ -215,6 +217,22 @@ this.state = {
             </div>
             <div class="job_data_value">
               {tags}
+            </div>
+          </div>
+          <div class="job_data_box">
+            <div class="job_data_label">
+              Estimated Time Left:
+            </div>
+            <div class="job_data_value">
+              {timeLeft}
+            </div>
+          </div>
+          <div class="job_data_box">
+            <div class="job_data_label">
+              Transcoder Host:
+            </div>
+            <div class="job_data_value">
+              {transcoder}
             </div>
           </div>
           <div class="job_data_box">
