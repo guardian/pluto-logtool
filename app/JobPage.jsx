@@ -92,6 +92,11 @@ this.state = {
   }
 
   displayProgressBar(current, total) {
+    if (current < 1) {
+      return (
+        <div class="progress_bar_job_page" style={{width:'0%'}}></div>
+      )
+    }
     const percentNumber = 100 / total;
     var percentageDone = Math.round(percentNumber * current);
     if (percentageDone > 100) {

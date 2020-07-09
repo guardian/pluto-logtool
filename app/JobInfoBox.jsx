@@ -47,6 +47,11 @@ class JobInfoBox extends React.Component {
   }
 
   displayProgressBar(current, total) {
+    if (current < 1) {
+      return (
+        <div class="progress_bar" style={{width:'0%'}}></div>
+      )
+    }
     const percentNumber = 100 / total;
     var percentageDone = Math.round(percentNumber * current);
     if (percentageDone > 100) {
