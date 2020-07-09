@@ -118,6 +118,18 @@ this.state = {
     return "job_data_box";
   }
 
+  displayTime(input) {
+    if (input == 'Unknown') {
+      return input;
+    } else {
+      var d = Number(parseInt(input));
+      var h = Math.floor(d / 3600);
+      var m = Math.floor(d % 3600 / 60);
+      var s = Math.floor(d % 3600 % 60);
+      return h + ":" + ('0'  + m).slice(-2) + ":" +  ('0'  + s).slice(-2);
+    }
+  }
+
   render() {
     const id = this.props.match.params.id;
     const fileName = this.getValue(this.state.vidispineData.data, "originalFilename");
@@ -224,7 +236,7 @@ this.state = {
               Estimated Time Left:
             </div>
             <div class="job_data_value">
-              {timeLeft}
+              {this.displayTime(timeLeft)}
             </div>
           </div>
           <div class="job_data_box">

@@ -57,9 +57,22 @@ class JobInfoBox extends React.Component {
     )
   }
 
+  displayTime(input) {
+    if (input == 'Unknown') {
+      return input;
+    } else {
+      var d = Number(parseInt(input));
+      var h = Math.floor(d / 3600);
+      var m = Math.floor(d % 3600 / 60);
+      var s = Math.floor(d % 3600 % 60);
+      return h + ":" + ('0'  + m).slice(-2) + ":" +  ('0'  + s).slice(-2);
+    }
+  }
+
 render() {
   const stepNumber = this.props.jobData.hasOwnProperty("currentStep") ? this.props.jobData.currentStep.number : 0;
   const fileName = this.getValue(this.props.jobData.data, "originalFilename");
+  const timeLeft = this.getValue(this.props.jobData.data, "transcodeEstimatedTimeLeft");
   return <div class={this.returnStatusForCSS(this.props.jobData.status)}>
     <div class="select_data">
       <input type="checkbox" id={this.props.jobId} checked={this.props.value} onChange={this.props.onChangeValue} name={this.props.mapPlace} />
@@ -87,6 +100,9 @@ render() {
       </div>
       <div class="started_data">
         {moment(this.props.jobData.started).format("D/M/YYYY H:mm")}
+      </div>
+      <div class="time_left_data">
+        {this.displayTime(timeLeft)}
       </div>
       <div class="priority_data">
         {<PriorityFormatter priority={this.props.jobData.priority}/>}
