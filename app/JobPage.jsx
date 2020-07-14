@@ -12,6 +12,7 @@ import moment from 'moment';
 import StatusFormatter from './StatusFormatter.jsx';
 import TypeFormatter from './TypeFormatter.jsx';
 import PriorityFormatter from './PriorityFormatter.jsx';
+import StepInfoBox from './StepInfoBox.jsx';
 
 class JobPage extends Component {
 
@@ -25,8 +26,12 @@ constructor(props){
 super(props);
 this.state = {
   vidispineData: {
-    data: []
-  }
+    data: [],
+    log: [
+      {task: []}
+    ]
+  },
+  reversedTask: []
 }
 }
 
@@ -53,12 +58,24 @@ this.state = {
 
   getDataForRefresh = () => {
     this.getJobData('job/' + this.props.match.params.id + '?metadata=true');
+    if (this.state.vidispineData.log.task) {
+      this.state.reversedTask = this.state.vidispineData.log.task.reverse();
+    }
   }
 
   componentDidMount() {
     const idToLoad = this.props.match.params.id;
     this.getJobData('job/' + idToLoad + '?metadata=true');
-    setInterval(this.getDataForRefresh, 5000);
+
+    setTimeout(function(){
+      if (this.state.vidispineData.log.task) {
+        this.getJobData('job/' + idToLoad + '?metadata=true');
+        if (this.state.vidispineData.log.task) {
+          this.state.reversedTask = this.state.vidispineData.log.task.reverse();
+        }
+        setInterval(this.getDataForRefresh, 5000);
+      }
+    }.bind(this), 400);
   }
 
   getValue(data,findthis) {
@@ -268,6 +285,17 @@ this.state = {
               {stepNumber} of {this.state.vidispineData.totalSteps}
             </div>
           </div>
+          <div class="job_page_steps_title_box">
+            <div class="job_page_steps_title_boxtitle">
+              Steps
+            </div>
+          </div>
+          {this.state.vidispineData.log.task && this.state.vidispineData.log.task.length > 0 ? (
+            this.state.reversedTask.map((item, i) =><StepInfoBox mapPlace={i} stepData={item} />)
+          ) : (
+            <div class="no_jobs_found"></div>
+          )}
+
         </div>
       </div>
     )

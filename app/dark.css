@@ -223,7 +223,7 @@ div.priority_data {
 div.job_page_grid {
   display: grid;
   grid-template-columns: 1800px;
-  grid-template-rows: 50px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px auto;
+  grid-template-rows: 50px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px; auto;
 }
 
 div.job_page_title_box {
@@ -751,4 +751,101 @@ button.priority_cancel_button {
   height: 30px;
   margin-left: 8px;
   cursor: pointer;
+}
+
+div.job_page_steps_title_box {
+  background-color: #222222;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-left: 10px;
+  margin: 2px;
+  border-radius: 6px;
+  width: 1818px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+div.job_page_steps_title {
+  margin-right: 10px;
+}
+
+div.step_box {
+  background-color: #222222;
+  margin: 2px;
+  border-radius: 6px;
+  width: 1816px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  display: grid;
+  grid-template-columns: 80px 1300px 433px;
+  grid-template-rows: 40px auto;
+  padding: 6px;
+  min-height: 94px;
+}
+
+div.step_box_failed {
+  background-color: #400000;
+  margin: 2px;
+  border-radius: 6px;
+  width: 1816px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  display: grid;
+  grid-template-columns: 80px 1300px 433px;
+  grid-template-rows: 40px auto;
+  padding: 6px;
+  min-height: 94px;
+}
+
+div.step_box_finished {
+  background-color: #004000;
+  margin: 2px;
+  border-radius: 6px;
+  width: 1816px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  display: grid;
+  grid-template-columns: 80px 1300px 433px;
+  grid-template-rows: 40px auto;
+  padding: 6px;
+  min-height: 94px;
+}
+
+div.step_number {
+  background-color: #000000;
+  border-radius: 8px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  padding-left: 22px;
+  padding-top: 12px;
+}
+
+div.step_description {
+  background-color: #000000;
+  border-radius: 8px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  margin-left: 4px;
+  padding-left: 12px;
+  padding-top: 12px;
+}
+
+div.step_tasks {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  font-size: 14px;
+  margin-top: 8px;
+  margin-left: 8px;
+  line-height: 1.6;
+}
+
+div.step_data {
+  grid-column-start: 3;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  text-align: right;
+  font-size: 15px;
+  line-height: 1.6;
 }
