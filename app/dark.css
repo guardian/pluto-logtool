@@ -838,6 +838,7 @@ div.step_tasks {
   margin-top: 8px;
   margin-left: 8px;
   line-height: 1.6;
+  word-wrap: break-word;
 }
 
 div.step_data {
