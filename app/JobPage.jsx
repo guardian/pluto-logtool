@@ -58,24 +58,12 @@ this.state = {
 
   getDataForRefresh = () => {
     this.getJobData('job/' + this.props.match.params.id + '?metadata=true');
-    if (this.state.vidispineData.log.task) {
-      this.state.reversedTask = this.state.vidispineData.log.task.reverse();
-    }
   }
 
   componentDidMount() {
     const idToLoad = this.props.match.params.id;
     this.getJobData('job/' + idToLoad + '?metadata=true');
-
-    setTimeout(function(){
-      if (this.state.vidispineData.log.task) {
-        this.getJobData('job/' + idToLoad + '?metadata=true');
-        if (this.state.vidispineData.log.task) {
-          this.state.reversedTask = this.state.vidispineData.log.task.reverse();
-        }
-        setInterval(this.getDataForRefresh, 5000);
-      }
-    }.bind(this), 400);
+    setInterval(this.getDataForRefresh, 5000);
   }
 
   getValue(data,findthis) {
@@ -137,7 +125,7 @@ this.state = {
     if (status == 'ABORTED') {
       return "job_data_box_aborted";
     }
-    return "job_data_box";
+    return "job_data_box_middle";
   }
 
   displayTime(input) {
@@ -149,6 +137,15 @@ this.state = {
       var m = Math.floor(d % 3600 / 60);
       var s = Math.floor(d % 3600 % 60);
       return h + ":" + ('0'  + m).slice(-2) + ":" +  ('0'  + s).slice(-2);
+    }
+  }
+
+  handleReverseArray() {
+    if (this.state.vidispineData.log.task && this.state.vidispineData.log.task.length > 0) {
+      const reversedArray = this.state.vidispineData.log.task.slice().reverse();
+      return reversedArray.map((item, i) =><StepInfoBox mapPlace={i} stepData={item} />)
+    } else {
+      return
     }
   }
 
@@ -181,7 +178,7 @@ this.state = {
               </div>
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_left">
             <div class="job_data_label">
               Id.:
             </div>
@@ -189,7 +186,7 @@ this.state = {
               {id}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_middle">
             <div class="job_data_label">
               Started:
             </div>
@@ -197,7 +194,7 @@ this.state = {
               {moment(this.state.vidispineData.started).format("D/M/YYYY H:mm")}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_right">
             <div class="job_data_label">
               User:
             </div>
@@ -205,7 +202,7 @@ this.state = {
               {this.state.vidispineData.user}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_left">
             <div class="job_data_label">
               Type:
             </div>
@@ -221,7 +218,7 @@ this.state = {
               {<StatusFormatter status={this.state.vidispineData.status}/>}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_right">
             <div class="job_data_label">
               Target Object Id.:
             </div>
@@ -253,12 +250,28 @@ this.state = {
               {tags}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_left">
             <div class="job_data_label">
               Estimated Time Left:
             </div>
             <div class="job_data_value">
               {this.displayTime(timeLeft)}
+            </div>
+          </div>
+          <div class="job_data_box_middle">
+            <div class="job_data_label">
+              Job Steps:
+            </div>
+            <div class="job_data_value">
+              {stepNumber} of {this.state.vidispineData.totalSteps}
+            </div>
+          </div>
+          <div class="job_data_box_right">
+            <div class="job_data_label">
+              Priority:
+            </div>
+            <div class="job_data_value">
+              {<PriorityFormatter priority={this.state.vidispineData.priority}/>}
             </div>
           </div>
           <div class="job_data_box">
@@ -269,33 +282,12 @@ this.state = {
               {transcoder}
             </div>
           </div>
-          <div class="job_data_box">
-            <div class="job_data_label">
-              Priority:
-            </div>
-            <div class="job_data_value">
-              {<PriorityFormatter priority={this.state.vidispineData.priority}/>}
-            </div>
-          </div>
-          <div class="job_data_box">
-            <div class="job_data_label">
-              Job Steps:
-            </div>
-            <div class="job_data_value">
-              {stepNumber} of {this.state.vidispineData.totalSteps}
-            </div>
-          </div>
           <div class="job_page_steps_title_box">
             <div class="job_page_steps_title_boxtitle">
               Steps
             </div>
           </div>
-          {this.state.vidispineData.log.task && this.state.vidispineData.log.task.length > 0 ? (
-            this.state.reversedTask.map((item, i) =><StepInfoBox mapPlace={i} stepData={item} />)
-          ) : (
-            <div class="no_jobs_found"></div>
-          )}
-
+            {this.handleReverseArray()}
         </div>
       </div>
     )

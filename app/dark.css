@@ -222,8 +222,8 @@ div.priority_data {
 
 div.job_page_grid {
   display: grid;
-  grid-template-columns: 1800px;
-  grid-template-rows: 50px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px; auto;
+  grid-template-columns: 611px 611px 611px;
+  grid-template-rows: 50px 44px 44px 44px 44px 44px 44px 44px 44px 44px auto;
 }
 
 div.job_page_title_box {
@@ -262,16 +262,58 @@ div.job_data_box {
   font-size: 13px;
 }
 
-div.job_data_box_failed {
-  background-color: #400000;
+div.job_data_box_left {
+  background-color: #222222;
   padding: 0px;
   margin: 2px;
   border-radius: 6px;
   grid-column-start: 1;
   grid-column-end: 1;
-  width: 1828px;
+  width: 606px;
   display: grid;
-  grid-template-columns: 200px 1628px;
+  grid-template-columns: 200px 400px;
+  grid-template-rows: 40px;
+  font-size: 13px;
+}
+
+div.job_data_box_middle {
+  background-color: #222222;
+  padding: 0px;
+  margin: 2px;
+  border-radius: 6px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  width: 606px;
+  display: grid;
+  grid-template-columns: 120px 400px;
+  grid-template-rows: 40px;
+  font-size: 13px;
+}
+
+div.job_data_box_right {
+  background-color: #222222;
+  padding: 0px;
+  margin: 2px;
+  border-radius: 6px;
+  grid-column-start: 3;
+  grid-column-end: 3;
+  width: 606px;
+  display: grid;
+  grid-template-columns: 150px 400px;
+  grid-template-rows: 40px;
+  font-size: 13px;
+}
+
+div.job_data_box_failed {
+  background-color: #400000;
+  padding: 0px;
+  margin: 2px;
+  border-radius: 6px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  width: 606px;
+  display: grid;
+  grid-template-columns: 120px 400px;
   grid-template-rows: 40px;
   font-size: 13px;
 }
@@ -281,11 +323,11 @@ div.job_data_box_aborted {
   padding: 0px;
   margin: 2px;
   border-radius: 6px;
-  grid-column-start: 1;
-  grid-column-end: 1;
-  width: 1828px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  width: 606px;
   display: grid;
-  grid-template-columns: 200px 1628px;
+  grid-template-columns: 120px 400px;
   grid-template-rows: 40px;
   font-size: 13px;
 }
@@ -295,11 +337,11 @@ div.job_data_box_warning {
   padding: 0px;
   margin: 2px;
   border-radius: 6px;
-  grid-column-start: 1;
-  grid-column-end: 1;
-  width: 1828px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  width: 606px;
   display: grid;
-  grid-template-columns: 200px 1628px;
+  grid-template-columns: 120px 400px;
   grid-template-rows: 40px;
   font-size: 13px;
 }
@@ -309,11 +351,11 @@ div.job_data_box_finished {
   padding: 0px;
   margin: 2px;
   border-radius: 6px;
-  grid-column-start: 1;
-  grid-column-end: 1;
-  width: 1828px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  width: 606px;
   display: grid;
-  grid-template-columns: 200px 1628px;
+  grid-template-columns: 120px 400px;
   grid-template-rows: 40px;
   font-size: 13px;
 }
