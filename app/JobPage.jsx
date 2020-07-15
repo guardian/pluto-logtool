@@ -149,12 +149,25 @@ this.state = {
     }
   }
 
+  returnSourceFile() {
+    const possibleURI = this.getValue(this.state.vidispineData.data, "sourceUri");
+    if (possibleURI == 'Unknown') {
+      const filePathMap = this.getValue(this.state.vidispineData.data, "filePathMap");
+      if (filePathMap != 'Unknown') {
+        const lastPart = filePathMap.slice(filePathMap.lastIndexOf(',') + 1);
+        const lastPartOfLastPart = lastPart.slice(lastPart.lastIndexOf('=') + 1);
+        return lastPartOfLastPart;
+      }
+      return 'Unknown';
+    }
+    return possibleURI;
+  }
+
   render() {
     const id = this.props.match.params.id;
     const fileName = this.getValue(this.state.vidispineData.data, "originalFilename");
     const stepNumber = this.state.vidispineData.hasOwnProperty("currentStep") ? this.state.vidispineData.currentStep.number : 0;
     const itemId = this.getValue(this.state.vidispineData.data, "itemId");
-    const fullPath = this.getValue(this.state.vidispineData.data, "sourceUri");
     const tags = this.getValue(this.state.vidispineData.data, "tags");
     const timeLeft = this.getValue(this.state.vidispineData.data, "transcodeEstimatedTimeLeft");
     const transcoder = this.getValue(this.state.vidispineData.data, "transcoder");
@@ -239,7 +252,7 @@ this.state = {
               Source File:
             </div>
             <div class="job_data_value">
-              {fullPath}
+              {this.returnSourceFile()}
             </div>
           </div>
           <div class="job_data_box">
