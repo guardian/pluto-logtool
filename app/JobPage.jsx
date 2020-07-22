@@ -71,6 +71,21 @@ this.state = {
     return 'Unknown';
   }
 
+  abort = () => {
+    const encodedStringAbort = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
+    const urlAbort = this.props.vidispine_host + "/API/job/" + this.props.match.params.id;
+    fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringAbort}, method: 'DELETE'});
+    this.getJobData('job/' + this.props.match.params.id + '?metadata=true');
+  }
+
+  displayAbort(status) {
+    if ((status != 'ABORTED') && (status != 'ABORTED_PENDING') && (status != 'FINISHED_WARNING') && (status != 'FINISHED') && (status != 'FAILED_TOTAL')) {
+      return <div class="abort_button" onClick={this.abort}>Abort</div>
+    } else {
+      return <div></div>
+    }
+  }
+
   render() {
     const id = this.props.match.params.id;
     const fileName = this.getValue(this.state.vidispineData.data, "originalFilename");
@@ -82,7 +97,10 @@ this.state = {
       <div>
         <div class="job_page_grid">
           <div class="job_page_title_box">
-            Job {id} for {fileName}
+            <div>
+              Job {id} for {fileName}
+            </div>
+            {this.displayAbort(this.state.vidispineData.status)}
           </div>
           <div class="job_data_box">
             <div class="job_data_label">
