@@ -49,27 +49,33 @@ constructor(props){
   }
 
   pageHigher = () => {
-    this.setState({
-      pageNumber: this.state.pageNumber + 1
-    },() => {
-      var placeToLoad = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoad = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
-      }
-      this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc');
-    });
+    const totalNumberOfPages = this.totalPages();
+
+    if (this.state.pageNumber < totalNumberOfPages) {
+      this.setState({
+        pageNumber: this.state.pageNumber + 1
+      },() => {
+        var placeToLoad = 1;
+        if (this.state.pageNumber > 1) {
+          placeToLoad = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc');
+      });
+    }
   }
 
   pageLower = () => {
-    this.setState({
-      pageNumber: this.state.pageNumber - 1
-    },() => {
-      var placeToLoadTwo = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoadTwo = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
-      }
-      this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadTwo + '&sort=jobId%20desc');
-    });
+    if (this.state.pageNumber > 1) {
+      this.setState({
+        pageNumber: this.state.pageNumber - 1
+      },() => {
+        var placeToLoadTwo = 1;
+        if (this.state.pageNumber > 1) {
+          placeToLoadTwo = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadTwo + '&sort=jobId%20desc');
+      });
+    }
   }
 
   pageSize16 = () => {
@@ -85,8 +91,16 @@ constructor(props){
   }
 
   pageSize32 = () => {
+    const totalPages32 = Math.ceil(this.state.vidispineData.hits / 32);
+    var pageNumberToSet32 = this.state.pageNumber;
+
+    if (this.state.pageNumber > totalPages32) {
+      pageNumberToSet32= totalPages32;
+    }
+
     this.setState({
-      pageSize: 32
+      pageSize: 32,
+      pageNumber: pageNumberToSet32
     },() => {
       var placeToLoad32 = 1;
       if (this.state.pageNumber > 1) {
@@ -97,8 +111,16 @@ constructor(props){
   }
 
   pageSize64 = () => {
+    const totalPages64 = Math.ceil(this.state.vidispineData.hits / 64);
+    var pageNumberToSet64 = this.state.pageNumber;
+
+    if (this.state.pageNumber > totalPages64) {
+      pageNumberToSet64 = totalPages64;
+    }
+
     this.setState({
-      pageSize: 64
+      pageSize: 64,
+      pageNumber: pageNumberToSet64
     },() => {
       var placeToLoad64 = 1;
       if (this.state.pageNumber > 1) {
@@ -109,11 +131,19 @@ constructor(props){
   }
 
   pageSize128 = () => {
+    const totalPages128 = Math.ceil(this.state.vidispineData.hits / 128);
+    var pageNumberToSet128 = this.state.pageNumber;
+
+    if (this.state.pageNumber > totalPages128) {
+      pageNumberToSet128 = totalPages128;
+    }
+
     this.setState({
-      pageSize: 128
+      pageSize: 128,
+      pageNumber: pageNumberToSet128
     },() => {
       var placeToLoad128 = 1;
-      if (this.state.pageNumber > 1) {
+        if (this.state.pageNumber > 1) {
         placeToLoad128 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
       }
       this.getJobData('job?metadata=true&step=true&number=128&first=' + placeToLoad128 + '&sort=jobId%20desc');
@@ -147,15 +177,26 @@ constructor(props){
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({
-      pageNumber: parseInt(this.element.value)
-    },() => {
-      var placeToLoadSub = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoadSub = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-      }
-      this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc');
-    });
+    const totalNumberOfPagesSubmit = this.totalPages();
+    const inputNumber = parseInt(this.element.value);
+    var pageToGoTo = inputNumber;
+
+    if (inputNumber > totalNumberOfPagesSubmit) {
+      pageToGoTo = totalNumberOfPagesSubmit;
+    }
+
+    if (inputNumber > 0) {
+      this.setState({
+        pageNumber: pageToGoTo
+      },() => {
+        var placeToLoadSub = 1;
+        if (this.state.pageNumber > 1) {
+          placeToLoadSub = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
+        }
+        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc');
+        this.element.value = "";
+      });
+    }
   }
 
   render() {
