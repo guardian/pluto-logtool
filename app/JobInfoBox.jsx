@@ -10,7 +10,8 @@ class JobInfoBox extends React.Component {
 
   static propTypes = {
     jobData: PropTypes.object.isRequired,
-    jobId: PropTypes.string.isRequired
+    jobId: PropTypes.string.isRequired,
+    mapPlace: PropTypes.string.isRequired
   };
 
   returnStatusForCSS(status) {
@@ -59,37 +60,39 @@ class JobInfoBox extends React.Component {
 render() {
   const stepNumber = this.props.jobData.hasOwnProperty("currentStep") ? this.props.jobData.currentStep.number : 0;
   const fileName = this.getValue(this.props.jobData.data, "originalFilename");
-  return <Link to={"/job/" + this.props.jobData.jobId} class={this.returnStatusForCSS(this.props.jobData.status)} id={this.props.jobId} target="_blank">
+  return <div class={this.returnStatusForCSS(this.props.jobData.status)}>
     <div class="select_data">
-      &nbsp;
+      <input type="checkbox" id={this.props.jobId} checked={this.props.value} onChange={this.props.onChangeValue} name={this.props.mapPlace} />
     </div>
-    <div class="id_data">
-      {this.props.jobData.jobId}
-    </div>
-    <div class="filename_data">
-      {fileName}
-    </div>
-    <div class="type_data">
-      {<TypeFormatter type={this.props.jobData.type}/>}
-    </div>
-    <div class="status_data">
-      {<StatusFormatter status={this.props.jobData.status}/>}
-    </div>
-    <div class="progress_data">
-      <div class="progress_bar_background">
-        {this.displayProgressBar(stepNumber, this.props.jobData.totalSteps)}
+    <Link to={"/job/" + this.props.jobData.jobId} class="job_page_link" id={this.props.jobId} target="_blank">
+      <div class="id_data">
+        {this.props.jobData.jobId}
       </div>
-    </div>
-    <div class="user_data">
-      {this.props.jobData.user}
-    </div>
-    <div class="started_data">
-      {moment(this.props.jobData.started).format("D/M/YYYY H:mm")}
-    </div>
-    <div class="priority_data">
-      {<PriorityFormatter priority={this.props.jobData.priority}/>}
-    </div>
-  </Link>
+      <div class="filename_data">
+        {fileName}
+      </div>
+      <div class="type_data">
+        {<TypeFormatter type={this.props.jobData.type}/>}
+      </div>
+      <div class="status_data">
+        {<StatusFormatter status={this.props.jobData.status}/>}
+      </div>
+      <div class="progress_data">
+        <div class="progress_bar_background">
+          {this.displayProgressBar(stepNumber, this.props.jobData.totalSteps)}
+        </div>
+      </div>
+      <div class="user_data">
+        {this.props.jobData.user}
+      </div>
+      <div class="started_data">
+        {moment(this.props.jobData.started).format("D/M/YYYY H:mm")}
+      </div>
+      <div class="priority_data">
+        {<PriorityFormatter priority={this.props.jobData.priority}/>}
+      </div>
+    </Link>
+  </div>
   }
 }
 

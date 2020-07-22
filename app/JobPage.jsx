@@ -51,9 +51,14 @@ this.state = {
     }
   }
 
+  getDataForRefresh = () => {
+    this.getJobData('job/' + this.props.match.params.id + '?metadata=true');
+  }
+
   componentDidMount() {
     const idToLoad = this.props.match.params.id;
     this.getJobData('job/' + idToLoad + '?metadata=true');
+    setInterval(this.getDataForRefresh, 5000);
   }
 
   getValue(data,findthis) {
@@ -104,6 +109,7 @@ this.state = {
     const itemId = this.getValue(this.state.vidispineData.data, "itemId");
     const fullPath = this.getValue(this.state.vidispineData.data, "sourceUri");
     const tags = this.getValue(this.state.vidispineData.data, "tags");
+    document.title = "Job " + id + " for " + fileName + " - Vidispine Job Tool";
     return (
       <div>
         <div class="job_page_grid">
