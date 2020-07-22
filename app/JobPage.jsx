@@ -86,6 +86,17 @@ this.state = {
     }
   }
 
+  displayProgressBar(current, total) {
+    const percentNumber = 100 / total;
+    var percentageDone = Math.round(percentNumber * current);
+    if (percentageDone > 100) {
+      percentageDone = 100;
+    }
+    return (
+      <div class="progress_bar_job_page" style={{width:percentageDone+'%'}}></div>
+    )
+  }
+
   render() {
     const id = this.props.match.params.id;
     const fileName = this.getValue(this.state.vidispineData.data, "originalFilename");
@@ -106,8 +117,10 @@ this.state = {
             <div class="job_data_label">
               Progress:
             </div>
-            <div class="job_data_value">
-              {stepNumber}/{this.state.vidispineData.totalSteps}
+            <div class="job_data_progress_bar">
+              <div class="progress_bar_background_job_page">
+                {this.displayProgressBar(stepNumber, this.state.vidispineData.totalSteps)}
+              </div>
             </div>
           </div>
           <div class="job_data_box">

@@ -39,6 +39,17 @@ class JobInfoBox extends React.Component {
     return 'Unknown';
   }
 
+  displayProgressBar(current, total) {
+    const percentNumber = 100 / total;
+    var percentageDone = Math.round(percentNumber * current);
+    if (percentageDone > 100) {
+      percentageDone = 100;
+    }
+    return (
+      <div class="progress_bar" style={{width:percentageDone+'%'}}></div>
+    )
+  }
+
 render() {
   const stepNumber = this.props.jobData.hasOwnProperty("currentStep") ? this.props.jobData.currentStep.number : 0;
   const fileName = this.getValue(this.props.jobData.data, "originalFilename");
@@ -59,7 +70,9 @@ render() {
       {<StatusFormatter status={this.props.jobData.status}/>}
     </div>
     <div class="progress_data">
-      {stepNumber}/{this.props.jobData.totalSteps}
+      <div class="progress_bar_background">
+        {this.displayProgressBar(stepNumber, this.props.jobData.totalSteps)}
+      </div>
     </div>
     <div class="user_data">
       {this.props.jobData.user}
