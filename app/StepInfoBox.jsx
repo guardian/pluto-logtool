@@ -10,12 +10,10 @@ class StepInfoBox extends React.Component {
 
   static propTypes = {
     stepData: PropTypes.object.isRequired,
-    //jobId: PropTypes.string.isRequired,
-    //mapPlace: PropTypes.string.isRequired
   };
 
   returnCSSForStatus(status) {
-    // Accepts a status. If the status has a special CSS statement with a custom background colour, return the name of the correct CSS statement. If not return the name of the CSS statement for normal job boxes.
+    // Accepts a status. If the status has a special CSS statement with a custom background colour, return the name of the correct CSS statement. If not return the name of the CSS statement for normal step boxes.
     if (status == 'FAILED_TOTAL') {
       return "step_box_failed";
     }
@@ -57,9 +55,6 @@ class StepInfoBox extends React.Component {
   }
 
 render() {
-  //const stepNumber = this.props.jobData.hasOwnProperty("currentStep") ? this.props.jobData.currentStep.number : 0;
-  //const fileName = this.getValue(this.props.jobData.data, "originalFilename");
-  //const timeLeft = this.getValue(this.props.jobData.data, "transcodeEstimatedTimeLeft");
   return <div class={this.returnCSSForStatus(this.props.stepData.status)}>
     <div class="step_number">
       {this.props.stepData.step}

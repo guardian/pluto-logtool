@@ -30,8 +30,7 @@ this.state = {
     log: [
       {task: []}
     ]
-  },
-  reversedTask: []
+  }
 }
 }
 
