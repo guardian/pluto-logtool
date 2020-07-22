@@ -250,6 +250,7 @@ div.last_page {
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 21px;
+  cursor: pointer;
 }
 
 div.next_page {
@@ -263,6 +264,7 @@ div.next_page {
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 21px;
+  cursor: pointer;
 }
 
 div.arrow_right {
@@ -319,6 +321,7 @@ div.size_button_16 {
   grid-row-start: 1;
   margin-top: 12px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 div.size_button_32 {
@@ -332,6 +335,7 @@ div.size_button_32 {
   grid-row-start: 1;
   margin-top: 12px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 div.size_button_64 {
@@ -345,6 +349,7 @@ div.size_button_64 {
   grid-row-start: 1;
   margin-top: 12px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 div.size_button_128 {
@@ -358,6 +363,7 @@ div.size_button_128 {
   grid-row-start: 1;
   margin-top: 12px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 div.left_placeholder {
@@ -413,6 +419,7 @@ input.go_button {
   border-radius: 2px;
   height: 22px;
   margin-left: 4px;
+  cursor: pointer;
 }
 
 input.page_input {
@@ -434,6 +441,7 @@ div.abort_button {
   width: 100px;
   padding-left: 56px;
   height: 22px;
+  cursor: pointer;
 }
 
 div.progress_bar_background {
