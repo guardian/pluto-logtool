@@ -8,12 +8,16 @@ class PriorityFormatter extends React.Component {
   };
 
   returnPriority(priority) {
-    return priority.replace(
-        /\w\S*/g,
-        function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        }
-    );
+    if (typeof(priority) !== 'undefined' || priority != null) {
+      return priority.replace(
+          /\w\S*/g,
+          function(txt) {
+              return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+          }
+      );
+    } else {
+      return 'Unknown';
+    }
   }
 
 render() {
