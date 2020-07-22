@@ -93,6 +93,34 @@ a.job_box_finished {
   font-size: 14px;
 }
 
+a.job_box_warning {
+  background-color: #424100;
+  padding-top: 18px;
+  margin: 2px;
+  border-radius: 6px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  width: 1400px;
+  display: grid;
+  grid-template-columns: 40px 100px 280px 180px 180px 160px 160px 140px 100px;
+  grid-template-rows: 50px;
+  font-size: 14px;
+}
+
+a.job_box_aborted {
+  background-color: #492200;
+  padding-top: 18px;
+  margin: 2px;
+  border-radius: 6px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  width: 1400px;
+  display: grid;
+  grid-template-columns: 40px 100px 280px 180px 180px 160px 160px 140px 100px;
+  grid-template-rows: 50px;
+  font-size: 14px;
+}
+
 div.select_heading {
   grid-column-start: 1;
 }
