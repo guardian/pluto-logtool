@@ -34,7 +34,7 @@ div.controls_box {
   grid-column-start: 1;
   grid-column-end: 1;
   display: grid;
-  grid-template-columns: 30px 30px 30px 160px 180px 200px 220px 150px 50px 230px 50px 230px 140px 54px 50px;
+  grid-template-columns: 30px 30px 30px 160px 130px 145px 195px 150px 50px 295px 50px 295px 140px 54px 50px;
   grid-template-rows: 35px 35px;
 }
 
@@ -130,6 +130,7 @@ div.select_heading {
 
 div.id_heading {
   grid-column-start: 2;
+  cursor: pointer;
 }
 
 div.filename_heading {
@@ -138,10 +139,12 @@ div.filename_heading {
 
 div.type_heading {
   grid-column-start: 4;
+  cursor: pointer;
 }
 
 div.status_heading {
   grid-column-start: 5;
+  cursor: pointer;
 }
 
 div.progress_heading {
@@ -150,14 +153,17 @@ div.progress_heading {
 
 div.user_heading {
   grid-column-start: 7;
+  cursor: pointer;
 }
 
 div.started_heading {
   grid-column-start: 8;
+  cursor: pointer;
 }
 
 div.priority_heading {
   grid-column-start: 9;
+  cursor: pointer;
 }
 
 div.select_data {
@@ -172,6 +178,10 @@ div.id_data {
 
 div.filename_data {
   grid-column-start: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
 }
 
 div.type_data {
@@ -188,6 +198,10 @@ div.progress_data {
 
 div.user_data {
   grid-column-start: 6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
 }
 
 div.started_data {
@@ -200,7 +214,7 @@ div.priority_data {
 
 div.job_page_grid {
   display: grid;
-  grid-template-columns: 1400px;
+  grid-template-columns: 1800px;
   grid-template-rows: 50px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px 44px auto;
 }
 
@@ -211,12 +225,19 @@ div.job_page_title_box {
   padding-left: 10px;
   margin: 2px;
   border-radius: 6px;
-  width: 1418px;
+  width: 1818px;
   grid-column-start: 1;
   grid-column-end: 1;
   display: grid;
-  grid-template-columns: 1250px 150px;
+  grid-template-columns: 1650px 150px;
   grid-template-rows: 45px;
+}
+
+div.job_page_title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
 }
 
 div.job_data_box {
@@ -226,9 +247,65 @@ div.job_data_box {
   border-radius: 6px;
   grid-column-start: 1;
   grid-column-end: 1;
-  width: 1428px;
+  width: 1828px;
   display: grid;
-  grid-template-columns: 200px 1228px;
+  grid-template-columns: 200px 1628px;
+  grid-template-rows: 40px;
+  font-size: 13px;
+}
+
+div.job_data_box_failed {
+  background-color: #400000;
+  padding: 0px;
+  margin: 2px;
+  border-radius: 6px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  width: 1828px;
+  display: grid;
+  grid-template-columns: 200px 1628px;
+  grid-template-rows: 40px;
+  font-size: 13px;
+}
+
+div.job_data_box_aborted {
+  background-color: #492200;
+  padding: 0px;
+  margin: 2px;
+  border-radius: 6px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  width: 1828px;
+  display: grid;
+  grid-template-columns: 200px 1628px;
+  grid-template-rows: 40px;
+  font-size: 13px;
+}
+
+div.job_data_box_warning {
+  background-color: #424100;
+  padding: 0px;
+  margin: 2px;
+  border-radius: 6px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  width: 1828px;
+  display: grid;
+  grid-template-columns: 200px 1628px;
+  grid-template-rows: 40px;
+  font-size: 13px;
+}
+
+div.job_data_box_finished {
+  background-color: #004000;
+  padding: 0px;
+  margin: 2px;
+  border-radius: 6px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  width: 1828px;
+  display: grid;
+  grid-template-columns: 200px 1628px;
   grid-template-rows: 40px;
   font-size: 13px;
 }
@@ -242,6 +319,10 @@ div.job_data_label {
 div.job_data_value {
   padding-top: 14px;
   grid-column-start: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
 }
 
 div.last_page {
@@ -329,6 +410,21 @@ div.size_button_16 {
   cursor: pointer;
 }
 
+div.size_button_16_grey {
+  background-color: #222222;
+  width: 21px;
+  height: 17px;
+  padding-top: 4px;
+  padding-left: 2px;
+  border-radius: 2px;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  margin-top: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #bbbbbb;
+}
+
 div.size_button_32 {
   background-color: #222222;
   width: 21px;
@@ -341,6 +437,21 @@ div.size_button_32 {
   margin-top: 12px;
   font-size: 14px;
   cursor: pointer;
+}
+
+div.size_button_32_grey {
+  background-color: #222222;
+  width: 21px;
+  height: 17px;
+  padding-top: 4px;
+  padding-left: 2px;
+  border-radius: 2px;
+  grid-column-start: 2;
+  grid-row-start: 1;
+  margin-top: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #bbbbbb;
 }
 
 div.size_button_64 {
@@ -357,6 +468,21 @@ div.size_button_64 {
   cursor: pointer;
 }
 
+div.size_button_64_grey {
+  background-color: #222222;
+  width: 21px;
+  height: 17px;
+  padding-top: 4px;
+  padding-left: 2px;
+  border-radius: 2px;
+  grid-column-start: 3;
+  grid-row-start: 1;
+  margin-top: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #bbbbbb;
+}
+
 div.size_button_128 {
   background-color: #222222;
   width: 27px;
@@ -369,6 +495,21 @@ div.size_button_128 {
   margin-top: 12px;
   font-size: 14px;
   cursor: pointer;
+}
+
+div.size_button_128_grey {
+  background-color: #222222;
+  width: 27px;
+  height: 17px;
+  padding-top: 4px;
+  padding-left: 2px;
+  border-radius: 2px;
+  grid-column-start: 4;
+  grid-row-start: 1;
+  margin-top: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #bbbbbb;
 }
 
 div.select_all {
@@ -402,6 +543,32 @@ div.abort_selected {
   grid-column-start: 8;
   grid-row-start: 1;
   grid-row-end: 2;
+}
+
+button.priority_button {
+  background-color: #222222;
+  color: #ffffff;
+  border: 0px;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding: 6px;
+  border-radius: 2px;
+  margin-left: 2px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+input.rerun_selected_button {
+  background-color: #222222;
+  color: #ffffff;
+  border: 0px;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding: 6px;
+  border-radius: 2px;
+  margin-left: 2px;
+  margin-top: 30px;
+  cursor: pointer;
 }
 
 input.abort_selected_button {
@@ -505,7 +672,7 @@ div.progress_bar {
 div.progress_bar_background_job_page {
   background-color: #000000;
   border-radius: 3px;
-  width: 1218px;
+  width: 1618px;
   height: 19px;
 }
 
@@ -523,4 +690,57 @@ div.job_data_progress_bar {
 div.no_jobs_found {
   margin: 20px;
   font-size: 30px;
+}
+
+.modal {
+  font-size: 12px;
+}
+.modal > .header {
+  width: 100%;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #000000;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+input.priority_submit_button {
+  background-color: #222222;
+  color: #ffffff;
+  border: 0px;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding-top: 4px;
+  border-radius: 2px;
+  height: 30px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+button.priority_cancel_button {
+  background-color: #222222;
+  color: #ffffff;
+  border: 0px;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding-top: 4px;
+  border-radius: 2px;
+  height: 30px;
+  margin-left: 8px;
+  cursor: pointer;
 }

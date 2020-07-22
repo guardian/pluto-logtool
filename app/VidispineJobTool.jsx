@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select'
 import JobInfoBox from './JobInfoBox.jsx';
+import Popup from "reactjs-popup";
 
 class VidispineJobTool extends Component {
 
@@ -25,6 +26,13 @@ class VidispineJobTool extends Component {
       button: 1,
       autoRefresh: true,
       selectAllSwitch: false,
+      open: false,
+      sortDirection: 'desc',
+      sortBy: 'jobId',
+      sixteenGrey: false,
+      thirtyTwoGrey: true,
+      sixtyFourGrey: true,
+      oneHundredAndTwentyEightGrey: true,
     };
     var loopPlace = 0;
     const loopSize = 127;
@@ -34,6 +42,9 @@ class VidispineJobTool extends Component {
       loopPlace++;
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitPriority = this.handleSubmitPriority.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   handleChangeValue = e => {
@@ -66,6 +77,12 @@ class VidispineJobTool extends Component {
   }
 
   getDataForRefresh = () => {
+    if (this.state.autoRefresh) {
+      this.getJobDataWrapper();
+    }
+  }
+
+  getJobDataWrapper() {
     var placeToLoad = 1;
     if (this.state.pageNumber > 1) {
       placeToLoad = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
@@ -82,9 +99,7 @@ class VidispineJobTool extends Component {
         return `${result}${item.value},`
       }, "")
     }
-    if (this.state.autoRefresh) {
-      this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
-    }
+    this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=' + this.state.sortBy + '%20' + this.state.sortDirection + '&state=' + selectedData + '&type=' + selectedDataType);
   }
 
   componentDidMount() {
@@ -100,24 +115,8 @@ class VidispineJobTool extends Component {
         pageNumber: this.state.pageNumber + 1,
         autoRefresh: true
       },() => {
-        var placeToLoad = 1;
-        if (this.state.pageNumber > 1) {
-          placeToLoad = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
-        }
-        var selectedData = 'all';
-        if (this.state.selectedOption != null) {
-          selectedData = this.state.selectedOption.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
-        var selectedDataType = 'all';
-        if (this.state.selectedOptionType != null) {
-          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
         this.clearSelections();
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+        this.getJobDataWrapper();
       });
     }
   }
@@ -128,24 +127,8 @@ class VidispineJobTool extends Component {
         pageNumber: this.state.pageNumber - 1,
         autoRefresh: true
       },() => {
-        var placeToLoadTwo = 1;
-        if (this.state.pageNumber > 1) {
-          placeToLoadTwo = this.state.pageNumber * this.state.pageSize - this.state.pageSize + 1;
-        }
-        var selectedData = 'all';
-        if (this.state.selectedOption != null) {
-          selectedData = this.state.selectedOption.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
-        var selectedDataType = 'all';
-        if (this.state.selectedOptionType != null) {
-          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
         this.clearSelections();
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadTwo + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+        this.getJobDataWrapper();
       });
     }
   }
@@ -153,26 +136,14 @@ class VidispineJobTool extends Component {
   pageSize16 = () => {
     this.setState({
       pageSize: 16,
-      autoRefresh: true
+      autoRefresh: true,
+      sixteenGrey: false,
+      thirtyTwoGrey: true,
+      sixtyFourGrey: true,
+      oneHundredAndTwentyEightGrey: true
     },() => {
-      var placeToLoad16 = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoad16 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-      }
-      var selectedData = 'all';
-      if (this.state.selectedOption != null) {
-        selectedData = this.state.selectedOption.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
-      var selectedDataType = 'all';
-      if (this.state.selectedOptionType != null) {
-        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
       this.clearSelections();
-      this.getJobData('job?metadata=true&step=true&number=16&first=' + placeToLoad16 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+      this.getJobDataWrapper();
     });
   }
 
@@ -187,26 +158,14 @@ class VidispineJobTool extends Component {
     this.setState({
       pageSize: 32,
       pageNumber: pageNumberToSet32,
-      autoRefresh: true
+      autoRefresh: true,
+      sixteenGrey: true,
+      thirtyTwoGrey: false,
+      sixtyFourGrey: true,
+      oneHundredAndTwentyEightGrey: true
     },() => {
-      var placeToLoad32 = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoad32 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-      }
-      var selectedData = 'all';
-      if (this.state.selectedOption != null) {
-        selectedData = this.state.selectedOption.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
-      var selectedDataType = 'all';
-      if (this.state.selectedOptionType != null) {
-        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
       this.clearSelections();
-      this.getJobData('job?metadata=true&step=true&number=32&first=' + placeToLoad32 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+      this.getJobDataWrapper();
     });
   }
 
@@ -221,26 +180,14 @@ class VidispineJobTool extends Component {
     this.setState({
       pageSize: 64,
       pageNumber: pageNumberToSet64,
-      autoRefresh: true
+      autoRefresh: true,
+      sixteenGrey: true,
+      thirtyTwoGrey: true,
+      sixtyFourGrey: false,
+      oneHundredAndTwentyEightGrey: true
     },() => {
-      var placeToLoad64 = 1;
-      if (this.state.pageNumber > 1) {
-        placeToLoad64 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-      }
-      var selectedData = 'all';
-      if (this.state.selectedOption != null) {
-        selectedData = this.state.selectedOption.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
-      var selectedDataType = 'all';
-      if (this.state.selectedOptionType != null) {
-        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
       this.clearSelections();
-      this.getJobData('job?metadata=true&step=true&number=64&first=' + placeToLoad64 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+      this.getJobDataWrapper();
     });
   }
 
@@ -255,26 +202,14 @@ class VidispineJobTool extends Component {
     this.setState({
       pageSize: 128,
       pageNumber: pageNumberToSet128,
-      autoRefresh: true
+      autoRefresh: true,
+      sixteenGrey: true,
+      thirtyTwoGrey: true,
+      sixtyFourGrey: true,
+      oneHundredAndTwentyEightGrey: false
     },() => {
-      var placeToLoad128 = 1;
-        if (this.state.pageNumber > 1) {
-        placeToLoad128 = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-      }
-      var selectedData = 'all';
-      if (this.state.selectedOption != null) {
-        selectedData = this.state.selectedOption.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
-      var selectedDataType = 'all';
-      if (this.state.selectedOptionType != null) {
-        selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-          return `${result}${item.value},`
-        }, "")
-      }
       this.clearSelections();
-      this.getJobData('job?metadata=true&step=true&number=128&first=' + placeToLoad128 + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+      this.getJobDataWrapper();
     });
   }
 
@@ -309,59 +244,47 @@ class VidispineJobTool extends Component {
     const inputNumber = parseInt(this.element.value);
     var pageToGoTo = inputNumber;
 
-    if (this.state.button === 1) {
-      console.log('handleSubmit', event)
-      console.log('this.state', this.state);
-      const target = event.target;
-      var formData = new FormData(target);
-
-      for (var [key, value] of formData.entries()) {
-        console.log(key, value);
-      }
-
-      var loopPlaceSubmit = 0;
-      const loopSizeSubmit = 127;
-      while (loopPlaceSubmit <= loopSizeSubmit) {
-        if (this.state[`value${loopPlaceSubmit}`] == true) {
-          console.log('Found one at place: '+loopPlaceSubmit);
-          const encodedStringAbort = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
-          const urlAbort = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceSubmit}`];
-          fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringAbort}, method: 'DELETE'});
-        }
-        loopPlaceSubmit++;
-      }
+    if (inputNumber > totalNumberOfPagesSubmit) {
+      pageToGoTo = totalNumberOfPagesSubmit;
     }
-    if (this.state.button === 2) {
-      if (inputNumber > totalNumberOfPagesSubmit) {
-        pageToGoTo = totalNumberOfPagesSubmit;
-      }
 
-      if (inputNumber > 0) {
-        this.setState({
-          pageNumber: pageToGoTo,
-          autoRefresh: true
-        },() => {
-          var placeToLoadSub = 1;
-          if (this.state.pageNumber > 1) {
-            placeToLoadSub = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-          }
-          var selectedData = 'all';
-          if (this.state.selectedOption != null) {
-            selectedData = this.state.selectedOption.reduce((result, item) => {
-              return `${result}${item.value},`
-            }, "")
-          }
-          var selectedDataType = 'all';
-          if (this.state.selectedOptionType != null) {
-            selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-              return `${result}${item.value},`
-            }, "")
-          }
-          this.clearSelections();
-          this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadSub + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
-          this.element.value = "";
-        });
+    if (inputNumber > 0) {
+      this.setState({
+        pageNumber: pageToGoTo,
+        autoRefresh: true
+      },() => {
+        this.clearSelections();
+        this.getJobDataWrapper();
+        this.element.value = "";
+      });
+    }
+  }
+
+  handleSubmitPriority(event) {
+    event.preventDefault();
+    this.closeModal();
+    var loopPlacePriority = 0;
+    const loopSizePriority = 127;
+    const encodedStringPriority = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
+    while (loopPlacePriority <= loopSizePriority) {
+      if (this.state[`value${loopPlacePriority}`] == true) {
+        var urlPriority = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlacePriority}`] + "?priority=" + this.elementPriority.value;
+        fetch(urlPriority, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringPriority}, method: 'PUT'});
       }
+      loopPlacePriority++;
+    }
+  }
+
+  abortSelected = () => {
+    var loopPlaceSubmit = 0;
+    const loopSizeSubmit = 127;
+    const encodedStringAbort = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
+    while (loopPlaceSubmit <= loopSizeSubmit) {
+      if (this.state[`value${loopPlaceSubmit}`] == true) {
+        var urlAbort = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceSubmit}`];
+        fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringAbort}, method: 'DELETE'});
+      }
+      loopPlaceSubmit++;
     }
   }
 
@@ -372,24 +295,8 @@ class VidispineJobTool extends Component {
         autoRefresh: true
       },
       () => {
-        var placeToLoadStatus = 1;
-        if (this.state.pageNumber > 1) {
-          placeToLoadStatus = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-        }
-        var selectedData = 'all';
-        if (this.state.selectedOption != null) {
-          selectedData = this.state.selectedOption.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
-        var selectedDataType = 'all';
-        if (this.state.selectedOptionType != null) {
-          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
         this.clearSelections();
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadStatus + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+        this.getJobDataWrapper();
       }
     );
   };
@@ -401,24 +308,8 @@ class VidispineJobTool extends Component {
         autoRefresh: true
       },
       () => {
-        var placeToLoadStatus = 1;
-        if (this.state.pageNumber > 1) {
-          placeToLoadStatus = (this.state.pageNumber * this.state.pageSize) - this.state.pageSize + 1;
-        }
-        var selectedData = 'all';
-        if (this.state.selectedOption != null) {
-          selectedData = this.state.selectedOption.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
-        var selectedDataType = 'all';
-        if (this.state.selectedOptionType != null) {
-          selectedDataType = this.state.selectedOptionType.reduce((result, item) => {
-            return `${result}${item.value},`
-          }, "")
-        }
         this.clearSelections();
-        this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoadStatus + '&sort=jobId%20desc&state=' + selectedData + '&type=' + selectedDataType);
+        this.getJobDataWrapper();
       }
     );
   };
@@ -452,6 +343,68 @@ class VidispineJobTool extends Component {
         autoRefresh: true
       });
     }
+  }
+
+  openModal() {
+    this.setState({ open: true });
+  }
+
+  closeModal() {
+    this.setState({ open: false });
+  }
+
+  rerunSelected = () => {
+    var loopPlaceRe = 0;
+    const loopSizeRe = 127;
+    const encodedStringRe = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
+    while (loopPlaceRe <= loopSizeRe) {
+      if (this.state[`value${loopPlaceRe}`] == true) {
+        var urlRe = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceRe}`] + "/re-run";
+        fetch(urlRe, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringRe}, method: 'POST'});
+      }
+      loopPlaceRe++;
+    }
+  }
+
+  changeSort(input) {
+    if (this.state.sortDirection == 'desc') {
+      this.state.sortDirection = 'asc';
+    } else {
+      this.state.sortDirection = 'desc';
+    }
+    this.state.sortBy = input;
+    this.clearSelections();
+    this.getJobDataWrapper();
+  }
+
+  returnCSSForPageSize(pageSizeInput) {
+    if (pageSizeInput == 16) {
+      if (this.state.sixteenGrey) {
+        return "size_button_16_grey";
+      }
+    }
+    if (pageSizeInput == 32) {
+      if (this.state.thirtyTwoGrey) {
+        return "size_button_32_grey";
+      } else {
+        return "size_button_32";
+      }
+    }
+    if (pageSizeInput == 64) {
+      if (this.state.sixtyFourGrey) {
+        return "size_button_64_grey";
+      } else {
+        return "size_button_64";
+      }
+    }
+    if (pageSizeInput == 128) {
+      if (this.state.oneHundredAndTwentyEightGrey) {
+        return "size_button_128_grey";
+      } else {
+        return "size_button_128";
+      }
+    }
+    return "size_button_16";
   }
 
   render() {
@@ -492,7 +445,7 @@ class VidispineJobTool extends Component {
     const statusStyles = {
       control: (provided, state) => ({
         ...provided,
-        width: '200px',
+        width: '270px',
         backgroundColor: 'black',
         fontSize: '13px',
         border: state.isFocused ? '2px solid white' : '2px solid white',
@@ -501,7 +454,7 @@ class VidispineJobTool extends Component {
            border: state.isFocused ? '2px solid white' : '2px solid white'
         }
       }),
-      menu: styles => ({ ...styles, backgroundColor: 'black', width: '200px', fontSize: '13px' }),
+      menu: styles => ({ ...styles, backgroundColor: 'black', width: '270px', fontSize: '13px' }),
       option: (styles, { data, isDisabled, isFocused, isSelected }) => {
         return {
           ...styles,
@@ -544,20 +497,19 @@ class VidispineJobTool extends Component {
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
         <div class="grid">
         <div class="title_box">Vidispine Job Tool</div>
         <div class="controls_box">
-          <div class="size_button_16" onClick={this.pageSize16}>
+          <div class={this.returnCSSForPageSize(16)} onClick={this.pageSize16}>
             16
           </div>
-          <div class="size_button_32" onClick={this.pageSize32}>
+          <div class={this.returnCSSForPageSize(32)} onClick={this.pageSize32}>
             32
           </div>
-          <div class="size_button_64" onClick={this.pageSize64}>
+          <div class={this.returnCSSForPageSize(64)} onClick={this.pageSize64}>
             64
           </div>
-          <div class="size_button_128" onClick={this.pageSize128}>
+          <div class={this.returnCSSForPageSize(128)} onClick={this.pageSize128}>
             128
           </div>
           <div class="job_number">
@@ -567,13 +519,47 @@ class VidispineJobTool extends Component {
               Select All
           </div>
           <div class="rerun_selected">
-            &nbsp;
+            <input class="rerun_selected_button" onClick={this.rerunSelected} type="submit" value="Rerun Selected" />
           </div>
           <div class="priority_selected">
-            &nbsp;
+            <button class="priority_button" onClick={this.openModal}>
+              Set Priority of Selected
+            </button>
+            <Popup
+              open={this.state.open}
+              onClose={this.closeModal}
+              contentStyle={{width: "280px", height: "90px", border: "0px", backgroundColor: "black", borderRadius: "10px"}}
+            >
+                <div className="modal">
+                  <a className="close" onClick={this.closeModal}>
+                    &times;
+                  </a>
+                  <div className="header"> Change Priority of Jobs </div>
+                  <div className="content">
+                    {" "}
+                    <form onSubmit={this.handleSubmitPriority}>
+                      <select ref={el => this.elementPriority = el}>
+                        <option>IMMEDIATE</option>
+                        <option>HIGHEST</option>
+                        <option>HIGH</option>
+                        <option>MEDIUM</option>
+                        <option>LOW</option>
+                        <option>LOWEST</option>
+                      </select>
+                      <input class="priority_submit_button" type="submit" value="Change" />
+                      <button
+                        class="priority_cancel_button"
+                        onClick={this.closeModal}
+                      >
+                        Cancel
+                      </button>
+                    </form>
+                  </div>
+                </div>
+            </Popup>
           </div>
           <div class="abort_selected">
-            <input class="abort_selected_button" onClick={() => (this.state.button = 1)} type="submit" value="Abort Selected" />
+            <input class="abort_selected_button" onClick={this.abortSelected} type="submit" value="Abort Selected" />
           </div>
           <div class="state_label">
             State:
@@ -614,10 +600,10 @@ class VidispineJobTool extends Component {
             Page {this.state.pageNumber} of {this.totalPages()}
           </div>
           <div class="page_form">
-
+            <form onSubmit={this.handleSubmit}>
               <input class="page_input" size="4" type="text" ref={el => this.element = el} />
               <input onClick={() => (this.state.button = 2)} class="go_button" type="submit" value="Go" onclick="clicked='Go'"/>
-
+            </form>
           </div>
           <div class="last_page" onClick={this.pageLower}>
             <div class="arrow_left"></div>
@@ -630,28 +616,28 @@ class VidispineJobTool extends Component {
           <div class="select_heading">
             &nbsp;
           </div>
-          <div class="id_heading">
+          <div class="id_heading" onClick={() => this.changeSort('jobId')}>
             Id.
           </div>
           <div class="filename_heading">
             Filename
           </div>
-          <div class="type_heading">
+          <div class="type_heading" onClick={() => this.changeSort('type')}>
             Type
           </div>
-          <div class="status_heading">
+          <div class="status_heading" onClick={() => this.changeSort('state')}>
             Status
           </div>
           <div class="progress_heading">
             Progress
           </div>
-          <div class="user_heading">
+          <div class="user_heading" onClick={() => this.changeSort('user')}>
             User
           </div>
-          <div class="started_heading">
+          <div class="started_heading" onClick={() => this.changeSort('startTime')}>
             Started
           </div>
-          <div class="priority_heading">
+          <div class="priority_heading" onClick={() => this.changeSort('priority')}>
             Priority
           </div>
         </div>
@@ -661,7 +647,6 @@ class VidispineJobTool extends Component {
              <div class="no_jobs_found">No jobs found</div>
            )}
           </div>
-          </form>
       </div>
     )
   }
