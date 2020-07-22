@@ -12,7 +12,7 @@ a {
 div.grid {
   display: grid;
   grid-template-columns: 1400px;
-  grid-template-rows: 50px 90px 40px repeat(16, 56px) auto;
+  grid-template-rows: 50px 90px 40px repeat(128, 56px) auto;
 }
 
 div.title_box {
@@ -29,14 +29,13 @@ div.title_box {
 
 div.controls_box {
   height: 80px;
-  padding: 8px;
   margin: 2px;
   width: 1400px;
   grid-column-start: 1;
   grid-column-end: 1;
   display: grid;
-  grid-template-columns: 1190px 100px 50px 50px;
-  grid-template-rows: 70px;
+  grid-template-columns: 30px 30px 30px 160px 910px 140px 54px 50px;
+  grid-template-rows: 35px 35px;
 }
 
 div.headings_box {
@@ -212,8 +211,11 @@ div.last_page {
   height: 40px;
   padding-top: 5px;
   padding-left: 6px;
-  border-radius: 3px;
-  grid-column-start: 3;
+  border-radius: 5px;
+  grid-column-start: 7;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 21px;
 }
 
 div.next_page {
@@ -222,8 +224,11 @@ div.next_page {
   height: 40px;
   padding-top: 5px;
   padding-left: 6px;
-  border-radius: 3px;
-  grid-column-start: 4;
+  border-radius: 5px;
+  grid-column-start: 8;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 21px;
 }
 
 div.arrow_right {
@@ -244,8 +249,113 @@ div.arrow_left {
 
 div.job_number {
   grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  margin-top: 16px;
+  padding-top: 8px;
+  padding-left: 8px;
+  border-radius: 3px;
+  background-color: #222222;
+  font-size: 14px;
+  height: 20px;
+  min-width: 180px;
+  max-width: 300px;
 }
 
 div.page_number {
+  grid-column-start: 6;
+  width: 120px;
+  margin-top: 12px;
+  border-radius: 3px;
+  background-color: #222222;
+  font-size: 14px;
+  padding-top: 6px;
+  padding-left: 6px;
+  height: 20px;
+}
+
+div.size_button_16 {
+  background-color: #222222;
+  width: 21px;
+  height: 17px;
+  padding-top: 4px;
+  padding-left: 2px;
+  border-radius: 2px;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+div.size_button_32 {
+  background-color: #222222;
+  width: 21px;
+  height: 17px;
+  padding-top: 4px;
+  padding-left: 2px;
+  border-radius: 2px;
   grid-column-start: 2;
+  grid-row-start: 1;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+div.size_button_64 {
+  background-color: #222222;
+  width: 21px;
+  height: 17px;
+  padding-top: 4px;
+  padding-left: 2px;
+  border-radius: 2px;
+  grid-column-start: 3;
+  grid-row-start: 1;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+div.size_button_128 {
+  background-color: #222222;
+  width: 27px;
+  height: 17px;
+  padding-top: 4px;
+  padding-left: 2px;
+  border-radius: 2px;
+  grid-column-start: 4;
+  grid-row-start: 1;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+div.middle_placeholder {
+  grid-column-start: 5;
+}
+
+div.page_form {
+  margin-top: 18px;
+  grid-row-start: 2;
+  grid-column-start: 6;
+  margin-left: 32px;
+}
+
+input.go_button {
+  background-color: #222222;
+  color: #ffffff;
+  border: 0px;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding-top: 4px;
+  border-radius: 2px;
+  height: 22px;
+  margin-left: 4px;
+}
+
+input.page_input {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  padding-top: 4px;
+  border-radius: 6px;
+  height: 22px;
+  border: 2px solid #ffffff;
 }
