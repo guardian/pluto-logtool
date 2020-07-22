@@ -92,6 +92,11 @@ this.state = {
   }
 
   displayProgressBar(current, total) {
+    if (current < 1) {
+      return (
+        <div class="progress_bar_job_page" style={{width:'0%'}}></div>
+      )
+    }
     const percentNumber = 100 / total;
     var percentageDone = Math.round(percentNumber * current);
     if (percentageDone > 100) {
@@ -118,6 +123,18 @@ this.state = {
     return "job_data_box";
   }
 
+  displayTime(input) {
+    if (input == 'Unknown') {
+      return input;
+    } else {
+      var d = Number(parseInt(input));
+      var h = Math.floor(d / 3600);
+      var m = Math.floor(d % 3600 / 60);
+      var s = Math.floor(d % 3600 % 60);
+      return h + ":" + ('0'  + m).slice(-2) + ":" +  ('0'  + s).slice(-2);
+    }
+  }
+
   render() {
     const id = this.props.match.params.id;
     const fileName = this.getValue(this.state.vidispineData.data, "originalFilename");
@@ -125,6 +142,8 @@ this.state = {
     const itemId = this.getValue(this.state.vidispineData.data, "itemId");
     const fullPath = this.getValue(this.state.vidispineData.data, "sourceUri");
     const tags = this.getValue(this.state.vidispineData.data, "tags");
+    const timeLeft = this.getValue(this.state.vidispineData.data, "transcodeEstimatedTimeLeft");
+    const transcoder = this.getValue(this.state.vidispineData.data, "transcoder");
     document.title = "Job " + id + " for " + fileName + " - Vidispine Job Tool";
     return (
       <div>
@@ -215,6 +234,22 @@ this.state = {
             </div>
             <div class="job_data_value">
               {tags}
+            </div>
+          </div>
+          <div class="job_data_box">
+            <div class="job_data_label">
+              Estimated Time Left:
+            </div>
+            <div class="job_data_value">
+              {this.displayTime(timeLeft)}
+            </div>
+          </div>
+          <div class="job_data_box">
+            <div class="job_data_label">
+              Transcoder Host:
+            </div>
+            <div class="job_data_value">
+              {transcoder}
             </div>
           </div>
           <div class="job_data_box">

@@ -637,6 +637,9 @@ class VidispineJobTool extends Component {
           <div class="started_heading" onClick={() => this.changeSort('startTime')}>
             Started
           </div>
+          <div class="time_left_heading">
+            Time Left
+          </div>
           <div class="priority_heading" onClick={() => this.changeSort('priority')}>
             Priority
           </div>
