@@ -12,6 +12,7 @@ import moment from 'moment';
 import StatusFormatter from './StatusFormatter.jsx';
 import TypeFormatter from './TypeFormatter.jsx';
 import PriorityFormatter from './PriorityFormatter.jsx';
+import StepInfoBox from './StepInfoBox.jsx';
 
 class JobPage extends Component {
 
@@ -25,7 +26,10 @@ constructor(props){
 super(props);
 this.state = {
   vidispineData: {
-    data: []
+    data: [],
+    log: [
+      {task: []}
+    ]
   }
 }
 }
@@ -120,7 +124,7 @@ this.state = {
     if (status == 'ABORTED') {
       return "job_data_box_aborted";
     }
-    return "job_data_box";
+    return "job_data_box_middle";
   }
 
   displayTime(input) {
@@ -135,12 +139,34 @@ this.state = {
     }
   }
 
+  handleReverseArray() {
+    if (this.state.vidispineData.log.task && this.state.vidispineData.log.task.length > 0) {
+      const reversedArray = this.state.vidispineData.log.task.slice().reverse();
+      return reversedArray.map((item, i) =><StepInfoBox mapPlace={i} stepData={item} />)
+    } else {
+      return
+    }
+  }
+
+  returnSourceFile() {
+    const possibleURI = this.getValue(this.state.vidispineData.data, "sourceUri");
+    if (possibleURI == 'Unknown') {
+      const filePathMap = this.getValue(this.state.vidispineData.data, "filePathMap");
+      if (filePathMap != 'Unknown') {
+        const lastPart = filePathMap.slice(filePathMap.lastIndexOf(',') + 1);
+        const lastPartOfLastPart = lastPart.slice(lastPart.lastIndexOf('=') + 1);
+        return lastPartOfLastPart;
+      }
+      return 'Unknown';
+    }
+    return possibleURI;
+  }
+
   render() {
     const id = this.props.match.params.id;
     const fileName = this.getValue(this.state.vidispineData.data, "originalFilename");
     const stepNumber = this.state.vidispineData.hasOwnProperty("currentStep") ? this.state.vidispineData.currentStep.number : 0;
     const itemId = this.getValue(this.state.vidispineData.data, "itemId");
-    const fullPath = this.getValue(this.state.vidispineData.data, "sourceUri");
     const tags = this.getValue(this.state.vidispineData.data, "tags");
     const timeLeft = this.getValue(this.state.vidispineData.data, "transcodeEstimatedTimeLeft");
     const transcoder = this.getValue(this.state.vidispineData.data, "transcoder");
@@ -164,7 +190,7 @@ this.state = {
               </div>
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_left">
             <div class="job_data_label">
               Id.:
             </div>
@@ -172,7 +198,7 @@ this.state = {
               {id}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_middle">
             <div class="job_data_label">
               Started:
             </div>
@@ -180,7 +206,7 @@ this.state = {
               {moment(this.state.vidispineData.started).format("D/M/YYYY H:mm")}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_right">
             <div class="job_data_label">
               User:
             </div>
@@ -188,7 +214,7 @@ this.state = {
               {this.state.vidispineData.user}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_left">
             <div class="job_data_label">
               Type:
             </div>
@@ -204,7 +230,7 @@ this.state = {
               {<StatusFormatter status={this.state.vidispineData.status}/>}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_right">
             <div class="job_data_label">
               Target Object Id.:
             </div>
@@ -225,7 +251,7 @@ this.state = {
               Source File:
             </div>
             <div class="job_data_value">
-              {fullPath}
+              {this.returnSourceFile()}
             </div>
           </div>
           <div class="job_data_box">
@@ -236,12 +262,28 @@ this.state = {
               {tags}
             </div>
           </div>
-          <div class="job_data_box">
+          <div class="job_data_box_left">
             <div class="job_data_label">
               Estimated Time Left:
             </div>
             <div class="job_data_value">
               {this.displayTime(timeLeft)}
+            </div>
+          </div>
+          <div class="job_data_box_middle">
+            <div class="job_data_label">
+              Job Steps:
+            </div>
+            <div class="job_data_value">
+              {stepNumber} of {this.state.vidispineData.totalSteps}
+            </div>
+          </div>
+          <div class="job_data_box_right">
+            <div class="job_data_label">
+              Priority:
+            </div>
+            <div class="job_data_value">
+              {<PriorityFormatter priority={this.state.vidispineData.priority}/>}
             </div>
           </div>
           <div class="job_data_box">
@@ -252,22 +294,12 @@ this.state = {
               {transcoder}
             </div>
           </div>
-          <div class="job_data_box">
-            <div class="job_data_label">
-              Priority:
-            </div>
-            <div class="job_data_value">
-              {<PriorityFormatter priority={this.state.vidispineData.priority}/>}
+          <div class="job_page_steps_title_box">
+            <div class="job_page_steps_title_boxtitle">
+              Steps
             </div>
           </div>
-          <div class="job_data_box">
-            <div class="job_data_label">
-              Job Steps:
-            </div>
-            <div class="job_data_value">
-              {stepNumber} of {this.state.vidispineData.totalSteps}
-            </div>
-          </div>
+            {this.handleReverseArray()}
         </div>
       </div>
     )
