@@ -329,7 +329,8 @@ class VidispineJobTool extends Component {
       var loopPlaceAll = 0;
       while (loopPlaceAll < this.state.pageSize) {
         this.state[`value${loopPlaceAll}`] = true;
-        this.state[`id${loopPlaceAll}`] = this.state.vidispineData.job[`${loopPlaceAll}`].jobId;
+        var jobIdAll = this.state.vidispineData.job.hasOwnProperty(`${loopPlaceAll}`) ? this.state.vidispineData.job[`${loopPlaceAll}`].jobId : '';
+        this.state[`id${loopPlaceAll}`] = jobIdAll;
         loopPlaceAll++;
       }
       this.setState({
