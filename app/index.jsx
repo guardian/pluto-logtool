@@ -25,4 +25,4 @@ class App extends React.Component {
 }
 
 const AppWithRouter = withRouter(App);
-render(<BrowserRouter root="/"><AppWithRouter/></BrowserRouter>, document.getElementById("app"));
+render(<BrowserRouter basename={DEPLOYMENT_PATH}><AppWithRouter/></BrowserRouter>, document.getElementById("app"));
