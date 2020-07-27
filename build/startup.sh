@@ -8,6 +8,10 @@ if [ "${DEPLOYMENTPATH}" == "" ]; then
   echo Continuing with a root DEPLOYMENTPATH which may not be what you want.
 fi
 
-cat index.template.html | sed "s/__DEPLOYMENTPATH__/${DEPLOYMENTPATH}/g" > index.html
+if [ "${VIDISPINEHOST}" == "" ]; then
+  echo WARNING: You should set the VIDISPINEHOST environment variable to the URL of the server that Vidispine is deployed at.
+fi
+
+cat index.template.html | sed "s/__DEPLOYMENTPATH__/${DEPLOYMENTPATH}/g; s/__VIDISPINEHOST__/${VIDISPINEHOST}/g" > index.html
 
 nginx -g "daemon off;"

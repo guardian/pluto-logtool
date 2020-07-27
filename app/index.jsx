@@ -18,8 +18,8 @@ class App extends React.Component {
   render(){
           return <div>
               <Switch>
-                  <Route path="/job/:id" component={()=><JobPage vidispine_host="http://localhost:8080" username={this.state.username ?? "admin"} password={this.state.password ?? "admin"} />}/>
-                  <Route path="/" component={()=><VidispineJobTool vidispine_host="http://localhost:8080" username={this.state.username ?? "admin"} password={this.state.password ?? "admin"} />}/>
+                  <Route path="/job/:id" component={()=><JobPage vidispine_host={VS_HOST} username={this.state.username ?? "admin"} password={this.state.password ?? "admin"} />}/>
+                  <Route path="/" component={()=><VidispineJobTool vidispine_host={VS_HOST} username={this.state.username ?? "admin"} password={this.state.password ?? "admin"} />}/>
               </Switch>
           </div>
       }
