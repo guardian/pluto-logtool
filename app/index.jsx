@@ -8,14 +8,20 @@ import "./dark.css"
 class App extends React.Component {
 
   render(){
+
           return <div>
               <Switch>
                   <Route path="/job/:id" component={()=><JobPage vidispine_host={VS_HOST} />}/>
                   <Route path="/" component={()=><VidispineJobTool vidispine_host={VS_HOST} />}/>
               </Switch>
           </div>
-      }
+  }
 }
 
 const AppWithRouter = withRouter(App);
-render(<BrowserRouter basename={DEPLOYMENT_PATH}><AppWithRouter/></BrowserRouter>, document.getElementById("app"));
+
+if (window.sessionStorage["pluto:access-token"] != '') {
+  render(<BrowserRouter basename={DEPLOYMENT_PATH}><AppWithRouter/></BrowserRouter>, document.getElementById("app"));
+} else {
+  render(<Redirect to='/' />, document.getElementById("app"));
+}
