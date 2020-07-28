@@ -31,7 +31,7 @@ class VidispineJobTool extends Component {
       thirtyTwoGrey: true,
       sixtyFourGrey: true,
       oneHundredAndTwentyEightGrey: true,
-      error403: false,
+      error401: false,
       error500: false,
     };
     var loopPlace = 0;
@@ -69,8 +69,8 @@ class VidispineJobTool extends Component {
     case 200:
       const returnedData = await result.json();
       return this.setStatePromise({loading: false, vidispineData: returnedData});
-    case 403:
-      return this.setStatePromise({loading: false, error403: true});
+    case 401:
+      return this.setStatePromise({loading: false, error401: true});
     case 500:
       return this.setStatePromise({loading: false, error500: true});
     default:
@@ -507,7 +507,7 @@ class VidispineJobTool extends Component {
             Vidispine Job Tool
           </div>
           <div class="possible_error">
-          { this.state.error403 == true
+          { this.state.error401 == true
             ? <div>Permission denied by server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
             : ( this.state.error500 == true
               ? <div>Server is not responding correctly. Please inform <a href="mailto:multimediatech@theguardian.com">multimediatech@theguardian.com</a></div>
