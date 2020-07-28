@@ -18,8 +18,6 @@ class JobPage extends Component {
 
   static propTypes = {
       vidispine_host: PropTypes.string.isRequired,
-      username: PropTypes.string.isRequired,
-      password: PropTypes.string.isRequired,
     };
 
 constructor(props){
@@ -40,10 +38,9 @@ this.state = {
 
   async getJobData(endpoint) {
     const headers = new Headers();
-    const encodedString = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
     const url = this.props.vidispine_host + "/API/" + endpoint;
     await this.setStatePromise({loading: true});
-    const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Basic " + encodedString}});
+    const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}});
 
     switch(result.status) {
     case 200:
