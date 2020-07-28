@@ -96,11 +96,11 @@ class VidispineJobTool extends Component {
         return `${result}${item.value},`
       }, "")
     }
-    this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=' + this.state.sortBy + '%20' + this.state.sortDirection + '&state=' + selectedData + '&type=' + selectedDataType);
+    this.getJobData('job?metadata=true&user=false&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=' + this.state.sortBy + '%20' + this.state.sortDirection + '&state=' + selectedData + '&type=' + selectedDataType);
   }
 
   componentDidMount() {
-    this.getJobData('job?metadata=true&step=true&number=16&first=1&sort=jobId%20desc');
+    this.getJobData('job?metadata=true&step=true&number=16&first=1&sort=jobId%20desc&user=false');
     setInterval(this.getDataForRefresh, 5000);
   }
 
