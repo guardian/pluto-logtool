@@ -31,6 +31,8 @@ class VidispineJobTool extends Component {
       thirtyTwoGrey: true,
       sixtyFourGrey: true,
       oneHundredAndTwentyEightGrey: true,
+      error403: false,
+      error500: false,
     };
     var loopPlace = 0;
     const loopSize = 127;
@@ -67,6 +69,10 @@ class VidispineJobTool extends Component {
     case 200:
       const returnedData = await result.json();
       return this.setStatePromise({loading: false, vidispineData: returnedData});
+    case 403:
+      return this.setStatePromise({loading: false, error403: true});
+    case 500:
+      return this.setStatePromise({loading: false, error500: true});
     default:
       const errorContent = await result.text();
       return this.setStatePromise({loading: false, lastError: errorContent});
@@ -496,7 +502,20 @@ class VidispineJobTool extends Component {
     return (
       <div>
         <div class="grid">
-        <div class="title_box">Vidispine Job Tool</div>
+        <div class="title_box">
+          <div class="title">
+            Vidispine Job Tool
+          </div>
+          <div class="possible_error">
+          { this.state.error403 == true
+            ? <div>Permission denied by server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
+            : ( this.state.error500 == true
+              ? <div>Server is not responding correctly. Please inform <a href="mailto:multimediatech@theguardian.com">multimediatech@theguardian.com</a></div>
+              : <div> </div>
+            )
+          }
+          </div>
+        </div>
         <div class="controls_box">
           <div class={this.returnCSSForPageSize(16)} onClick={this.pageSize16}>
             16
