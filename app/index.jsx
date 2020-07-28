@@ -23,5 +23,5 @@ const AppWithRouter = withRouter(App);
 if (window.sessionStorage["pluto:access-token"] != undefined) {
   render(<BrowserRouter basename={DEPLOYMENT_PATH}><AppWithRouter/></BrowserRouter>, document.getElementById("app"));
 } else {
-  render(<BrowserRouter><Redirect to='/' /></BrowserRouter>, document.getElementById("app"));
+  render(<BrowserRouter forceRefresh={true}><Redirect to='/' /></BrowserRouter>, document.getElementById("app"));
 }
