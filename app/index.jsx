@@ -20,7 +20,7 @@ class App extends React.Component {
 
 const AppWithRouter = withRouter(App);
 
-if (window.sessionStorage["pluto:access-token"] != '') {
+if (window.sessionStorage["pluto:access-token"] != undefined) {
   render(<BrowserRouter basename={DEPLOYMENT_PATH}><AppWithRouter/></BrowserRouter>, document.getElementById("app"));
 } else {
   render(<Redirect to='/' />, document.getElementById("app"));
