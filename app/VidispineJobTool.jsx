@@ -32,6 +32,8 @@ class VidispineJobTool extends Component {
       sixtyFourGrey: true,
       oneHundredAndTwentyEightGrey: true,
       networkAccessError: false,
+      error401: false,
+      error500: false,
     };
     var loopPlace = 0;
     const loopSize = 127;
@@ -70,6 +72,10 @@ class VidispineJobTool extends Component {
       case 200:
         const returnedData = await result.json();
         return this.setStatePromise({loading: false, vidispineData: returnedData});
+      case 401:
+        return this.setStatePromise({loading: false, error401: true});
+      case 500:
+        return this.setStatePromise({loading: false, error500: true});
       default:
         const errorContent = await result.text();
         return this.setStatePromise({loading: false, lastError: errorContent});
@@ -508,12 +514,16 @@ class VidispineJobTool extends Component {
           <div class="title">
             Vidispine Job Tool
           </div>
-          <div class="possible_error">
-          { this.state.networkAccessError == true
-            ? <div>Could not connect to the server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
-            : <div> </div>
+          {this.state.error401
+            ? <div class="possible_error">Permission denied by server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
+            : ( this.state.error500
+              ? <div class="possible_error">Server is not responding correctly. Please inform <a href="mailto:multimediatech@theguardian.com">multimediatech@theguardian.com</a></div>
+              : ( this.state.networkAccessError
+                ? <div class="possible_error">Could not connect to the server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
+                : ''
+              )
+            )
           }
-          </div>
         </div>
         <div class="controls_box">
           <div class={this.returnCSSForPageSize(16)} onClick={this.pageSize16}>

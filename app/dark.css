@@ -242,7 +242,6 @@ div.job_page_grid {
 
 div.job_page_title_box {
   background-color: #222222;
-  font-size: 26px;
   padding-top: 10px;
   padding-left: 10px;
   margin: 2px;
@@ -256,10 +255,18 @@ div.job_page_title_box {
 }
 
 div.job_page_title {
+  font-size: 26px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-right: 10px;
+}
+
+div.job_page_error {
+  margin-right: 10px;
+  color: #ff9191;
+  margin-top: 5px;
+  margin-left: 7px;
 }
 
 div.job_data_box {
