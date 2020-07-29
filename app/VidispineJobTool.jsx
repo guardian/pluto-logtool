@@ -31,8 +31,7 @@ class VidispineJobTool extends Component {
       thirtyTwoGrey: true,
       sixtyFourGrey: true,
       oneHundredAndTwentyEightGrey: true,
-      error401: false,
-      error500: false,
+      networkAccessError: false,
     };
     var loopPlace = 0;
     const loopSize = 127;
@@ -60,22 +59,25 @@ class VidispineJobTool extends Component {
   }
 
   async getJobData(endpoint) {
-    const headers = new Headers();
-    const url = this.props.vidispine_host + "/API/" + endpoint;
-    await this.setStatePromise({loading: true});
-    const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}});
+    try {
+      const headers = new Headers();
+      const url = this.props.vidispine_host + "/API/" + endpoint;
 
-    switch(result.status) {
-    case 200:
-      const returnedData = await result.json();
-      return this.setStatePromise({loading: false, vidispineData: returnedData});
-    case 401:
-      return this.setStatePromise({loading: false, error401: true});
-    case 500:
-      return this.setStatePromise({loading: false, error500: true});
-    default:
-      const errorContent = await result.text();
-      return this.setStatePromise({loading: false, lastError: errorContent});
+      await this.setStatePromise({loading: true});
+      const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}});
+
+      switch(result.status) {
+      case 200:
+        const returnedData = await result.json();
+        return this.setStatePromise({loading: false, vidispineData: returnedData});
+      default:
+        const errorContent = await result.text();
+        return this.setStatePromise({loading: false, lastError: errorContent});
+      }
+    } catch {
+      this.setState({
+        networkAccessError: true
+      });
     }
   }
 
@@ -507,12 +509,9 @@ class VidispineJobTool extends Component {
             Vidispine Job Tool
           </div>
           <div class="possible_error">
-          { this.state.error401 == true
-            ? <div>Permission denied by server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
-            : ( this.state.error500 == true
-              ? <div>Server is not responding correctly. Please inform <a href="mailto:multimediatech@theguardian.com">multimediatech@theguardian.com</a></div>
-              : <div> </div>
-            )
+          { this.state.networkAccessError == true
+            ? <div>Could not connect to the server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
+            : <div> </div>
           }
           </div>
         </div>
