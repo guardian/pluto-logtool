@@ -38,6 +38,7 @@ div.possible_error {
   font-size: 14px;
   margin-top: 6px;
   grid-column-start: 2;
+  color: #ff9191;
 }
 
 div.controls_box {
