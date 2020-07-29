@@ -8,8 +8,6 @@ class VidispineJobTool extends Component {
 
   static propTypes = {
       vidispine_host: PropTypes.string.isRequired,
-      username: PropTypes.string.isRequired,
-      password: PropTypes.string.isRequired,
     };
 
   constructor(props){
@@ -33,6 +31,9 @@ class VidispineJobTool extends Component {
       thirtyTwoGrey: true,
       sixtyFourGrey: true,
       oneHundredAndTwentyEightGrey: true,
+      networkAccessError: false,
+      error401: false,
+      error500: false,
     };
     var loopPlace = 0;
     const loopSize = 127;
@@ -60,19 +61,29 @@ class VidispineJobTool extends Component {
   }
 
   async getJobData(endpoint) {
-    const headers = new Headers();
-    const encodedString = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
-    const url = this.props.vidispine_host + "/API/" + endpoint;
-    await this.setStatePromise({loading: true});
-    const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Basic " + encodedString}});
+    try {
+      const headers = new Headers();
+      const url = this.props.vidispine_host + "/API/" + endpoint;
 
-    switch(result.status) {
-    case 200:
-      const returnedData = await result.json();
-      return this.setStatePromise({loading: false, vidispineData: returnedData});
-    default:
-      const errorContent = await result.text();
-      return this.setStatePromise({loading: false, lastError: errorContent});
+      await this.setStatePromise({loading: true});
+      const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}});
+
+      switch(result.status) {
+      case 200:
+        const returnedData = await result.json();
+        return this.setStatePromise({loading: false, vidispineData: returnedData});
+      case 401:
+        return this.setStatePromise({loading: false, error401: true});
+      case 500:
+        return this.setStatePromise({loading: false, error500: true});
+      default:
+        const errorContent = await result.text();
+        return this.setStatePromise({loading: false, lastError: errorContent});
+      }
+    } catch {
+      this.setState({
+        networkAccessError: true
+      });
     }
   }
 
@@ -99,11 +110,11 @@ class VidispineJobTool extends Component {
         return `${result}${item.value},`
       }, "")
     }
-    this.getJobData('job?metadata=true&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=' + this.state.sortBy + '%20' + this.state.sortDirection + '&state=' + selectedData + '&type=' + selectedDataType);
+    this.getJobData('job?metadata=true&user=false&step=true&number=' + this.state.pageSize + '&first=' + placeToLoad + '&sort=' + this.state.sortBy + '%20' + this.state.sortDirection + '&state=' + selectedData + '&type=' + selectedDataType);
   }
 
   componentDidMount() {
-    this.getJobData('job?metadata=true&step=true&number=16&first=1&sort=jobId%20desc');
+    this.getJobData('job?metadata=true&step=true&number=16&first=1&sort=jobId%20desc&user=false');
     setInterval(this.getDataForRefresh, 5000);
   }
 
@@ -499,7 +510,21 @@ class VidispineJobTool extends Component {
     return (
       <div>
         <div class="grid">
-        <div class="title_box">Vidispine Job Tool</div>
+        <div class="title_box">
+          <div class="title">
+            Vidispine Job Tool
+          </div>
+          {this.state.error401
+            ? <div class="possible_error">Permission denied by server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
+            : ( this.state.error500
+              ? <div class="possible_error">Server is not responding correctly. Please inform <a href="mailto:multimediatech@theguardian.com">multimediatech@theguardian.com</a></div>
+              : ( this.state.networkAccessError
+                ? <div class="possible_error">Could not connect to the server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
+                : ''
+              )
+            )
+          }
+        </div>
         <div class="controls_box">
           <div class={this.returnCSSForPageSize(16)} onClick={this.pageSize16}>
             16

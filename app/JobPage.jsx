@@ -18,40 +18,50 @@ class JobPage extends Component {
 
   static propTypes = {
       vidispine_host: PropTypes.string.isRequired,
-      username: PropTypes.string.isRequired,
-      password: PropTypes.string.isRequired,
     };
 
-constructor(props){
-super(props);
-this.state = {
-  vidispineData: {
-    data: [],
-    log: [
-      {task: []}
-    ]
+  constructor(props){
+    super(props);
+    this.state = {
+      vidispineData: {
+        data: [],
+        log: [
+          {task: []}
+        ]
+      },
+      networkAccessError: false,
+      error401: false,
+      error500: false,
+    }
   }
-}
-}
 
   setStatePromise(newState) {
     return new Promise((resolve,reject)=>this.setState(newState, ()=>resolve()));
   }
 
   async getJobData(endpoint) {
-    const headers = new Headers();
-    const encodedString = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
-    const url = this.props.vidispine_host + "/API/" + endpoint;
-    await this.setStatePromise({loading: true});
-    const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Basic " + encodedString}});
+    try {
+      const headers = new Headers();
+      const url = this.props.vidispine_host + "/API/" + endpoint;
+      await this.setStatePromise({loading: true});
+      const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}});
 
-    switch(result.status) {
-    case 200:
-      const returnedData = await result.json();
-      return this.setStatePromise({loading: false, vidispineData: returnedData});
-    default:
-      const errorContent = await result.text();
-      return this.setStatePromise({loading: false, lastError: errorContent});
+      switch(result.status) {
+      case 200:
+        const returnedData = await result.json();
+        return this.setStatePromise({loading: false, vidispineData: returnedData});
+      case 401:
+        return this.setStatePromise({loading: false, error401: true});
+      case 500:
+        return this.setStatePromise({loading: false, error500: true});
+      default:
+        const errorContent = await result.text();
+        return this.setStatePromise({loading: false, lastError: errorContent});
+      }
+    } catch {
+      this.setState({
+        networkAccessError: true
+      });
     }
   }
 
@@ -175,9 +185,16 @@ this.state = {
       <div>
         <div class="job_page_grid">
           <div class="job_page_title_box">
-            <div class="job_page_title">
-              Job {id} for {fileName}
-            </div>
+            {this.state.error401
+              ? <div class="job_page_error">Permission denied by server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
+              : ( this.state.error500
+                ? <div class="job_page_error">Server is not responding correctly. Please inform <a href="mailto:multimediatech@theguardian.com">multimediatech@theguardian.com</a></div>
+                : ( this.state.networkAccessError
+                  ? <div class="job_page_error">Could not connect to the server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
+                  : <div class="job_page_title">Job {id} for {fileName}</div>
+                )
+              )
+            }
             {this.displayAbort(this.state.vidispineData.status)}
           </div>
           <div class="job_data_box">
