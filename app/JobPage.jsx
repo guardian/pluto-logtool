@@ -186,11 +186,11 @@ class JobPage extends Component {
         <div class="job_page_grid">
           <div class="job_page_title_box">
             {this.state.error401
-              ? <div class="job_page_error">Permission denied by server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
+              ? <div class="job_page_error">Permission denied by server. Maybe your login has expired? Click <a href="../../">here</a> to log in again.</div>
               : ( this.state.error500
                 ? <div class="job_page_error">Server is not responding correctly. Please inform <a href="mailto:multimediatech@theguardian.com">multimediatech@theguardian.com</a></div>
                 : ( this.state.networkAccessError
-                  ? <div class="job_page_error">Could not connect to the server. Maybe your login has expired? Click <a href="../">here</a> to log in again.</div>
+                  ? <div class="job_page_error">Could not connect to the server. Maybe your login has expired? Click <a href="../../">here</a> to log in again.</div>
                   : <div class="job_page_title">Job {id} for {fileName}</div>
                 )
               )
