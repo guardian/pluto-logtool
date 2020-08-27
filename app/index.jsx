@@ -104,7 +104,7 @@ class App extends React.Component {
           <Header></Header>
           <AppSwitcher onLoginValid={this.onLoginValid}></AppSwitcher>
         </>
-        <div>
+        <div class="main_job_div">
             <Switch>
                 <Route path="/job/:id" component={()=><JobPage vidispine_host={VS_HOST} />}/>
                 <Route path="/" component={()=><VidispineJobTool vidispine_host={VS_HOST} />}/>
