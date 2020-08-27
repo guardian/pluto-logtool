@@ -8,7 +8,7 @@ import axios from "axios";
 import { Header, AppSwitcher, handleUnauthorized } from "pluto-headers";
 import VidispineJobTool from './VidispineJobTool.jsx';
 import JobPage from './JobPage.jsx';
-import NotLoggedIn from "./NotLoggedIn";
+import NotLoggedIn from "./NotLoggedIn.jsx";
 import "./dark.css"
 
 
