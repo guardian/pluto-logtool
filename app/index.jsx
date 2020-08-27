@@ -26,7 +26,7 @@ const theme = createMuiTheme({
 });
 
 //This is set in the html template file and gives us the value of deployment-root from the server config
-axios.defaults.baseURL = deploymentRootPath;
+axios.defaults.baseURL = DEPLOYMENT_PATH;
 axios.interceptors.request.use(function (config) {
   const token = window.sessionStorage.getItem("pluto:access-token");
   if (token) config.headers.Authorization = `Bearer ${token}`;
