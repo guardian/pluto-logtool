@@ -9,12 +9,12 @@ class App extends React.Component {
 
   render(){
 
-          return <div>
-              <Switch>
-                  <Route path="/job/:id" component={()=><JobPage vidispine_host={VS_HOST} />}/>
-                  <Route path="/" component={()=><VidispineJobTool vidispine_host={VS_HOST} />}/>
-              </Switch>
-          </div>
+    return <div>
+        <Switch>
+            <Route path="/job/:id" component={()=><JobPage vidispine_host={VS_HOST} />}/>
+            <Route path="/" component={()=><VidispineJobTool vidispine_host={VS_HOST} />}/>
+        </Switch>
+    </div>
   }
 }
 
