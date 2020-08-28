@@ -1,5 +1,9 @@
 body {
   background-color: #000000;
+}
+
+div.main_job_div {
+  margin-top: 10px;
   color: #ffffff;
   font-family: "Avant Garde", "Century Gothic", Helvetica, Arial, sans-serif;
 }

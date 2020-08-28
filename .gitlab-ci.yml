@@ -6,6 +6,8 @@ buildntest:
   image: node:12.18-alpine3.12
   stage: buildntest
   script:
+    - apk add git --no-cache
+    - sh ./ci-scripts/setup_headers.sh
     - yarn install
     - yarn test
     - yarn compile
