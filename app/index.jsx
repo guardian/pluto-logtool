@@ -100,10 +100,8 @@ class App extends React.Component {
 
     return (
       <ThemeProvider theme={theme}>
-        <>
-          <Header></Header>
-          <AppSwitcher onLoginValid={this.onLoginValid}></AppSwitcher>
-        </>
+        <Header></Header>
+        <AppSwitcher onLoginValid={this.onLoginValid}></AppSwitcher>
         <div class="main_job_div">
             <Switch>
                 <Route path="/job/:id" component={()=><JobPage vidispine_host={VS_HOST} />}/>
