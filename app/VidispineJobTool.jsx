@@ -276,11 +276,10 @@ class VidispineJobTool extends Component {
     this.closeModal();
     var loopPlacePriority = 0;
     const loopSizePriority = 127;
-    const encodedStringPriority = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
     while (loopPlacePriority <= loopSizePriority) {
       if (this.state[`value${loopPlacePriority}`] == true) {
         var urlPriority = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlacePriority}`] + "?priority=" + this.elementPriority.value;
-        fetch(urlPriority, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringPriority}, method: 'PUT'});
+        fetch(urlPriority, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}, method: 'PUT'});
       }
       loopPlacePriority++;
     }
@@ -289,11 +288,10 @@ class VidispineJobTool extends Component {
   abortSelected = () => {
     var loopPlaceSubmit = 0;
     const loopSizeSubmit = 127;
-    const encodedStringAbort = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
     while (loopPlaceSubmit <= loopSizeSubmit) {
       if (this.state[`value${loopPlaceSubmit}`] == true) {
         var urlAbort = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceSubmit}`];
-        fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringAbort}, method: 'DELETE'});
+        fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}, method: 'DELETE'});
       }
       loopPlaceSubmit++;
     }
@@ -368,11 +366,10 @@ class VidispineJobTool extends Component {
   rerunSelected = () => {
     var loopPlaceRe = 0;
     const loopSizeRe = 127;
-    const encodedStringRe = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
     while (loopPlaceRe <= loopSizeRe) {
       if (this.state[`value${loopPlaceRe}`] == true) {
         var urlRe = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceRe}`] + "/re-run";
-        fetch(urlRe, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringRe}, method: 'POST'});
+        fetch(urlRe, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}, method: 'POST'});
       }
       loopPlaceRe++;
     }
