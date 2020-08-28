@@ -770,7 +770,7 @@ div.no_jobs_found {
 .modal {
   font-size: 12px;
 }
-.modal > .header {
+.modal > .job_header {
   width: 100%;
   font-size: 18px;
   text-align: center;
