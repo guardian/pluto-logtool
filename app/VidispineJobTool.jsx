@@ -560,7 +560,7 @@ class VidispineJobTool extends Component {
                   <a className="close" onClick={this.closeModal}>
                     &times;
                   </a>
-                  <div className="header"> Change Priority of Jobs </div>
+                  <div className="job_header"> Change Priority of Jobs </div>
                   <div className="content">
                     {" "}
                     <form onSubmit={this.handleSubmitPriority}>
