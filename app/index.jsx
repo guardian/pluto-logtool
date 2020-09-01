@@ -28,7 +28,7 @@ const theme = createMuiTheme({
 //This is set in the html template file and gives us the value of deployment-root from the server config
 axios.defaults.baseURL = DEPLOYMENT_PATH;
 axios.interceptors.request.use(function (config) {
-  const token = window.sessionStorage.getItem("pluto:access-token");
+  const token = window.localStorage.getItem("pluto:access-token");
   if (token) config.headers.Authorization = `Bearer ${token}`;
 
   return config;
@@ -115,7 +115,7 @@ class App extends React.Component {
 
 const AppWithRouter = withRouter(App);
 
-if (window.sessionStorage["pluto:access-token"] != undefined) {
+if (window.localStorage["pluto:access-token"] != undefined) {
   render(<BrowserRouter basename={DEPLOYMENT_PATH}><AppWithRouter/></BrowserRouter>, document.getElementById("app"));
 } else {
   render(<BrowserRouter forceRefresh={true}><Redirect to='/' /></BrowserRouter>, document.getElementById("app"));

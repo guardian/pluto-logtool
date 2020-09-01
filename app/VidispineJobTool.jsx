@@ -66,7 +66,7 @@ class VidispineJobTool extends Component {
       const url = this.props.vidispine_host + "/API/" + endpoint;
 
       await this.setStatePromise({loading: true});
-      const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}});
+      const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Bearer " + window.localStorage["pluto:access-token"]}});
 
       switch(result.status) {
       case 200:
@@ -279,7 +279,7 @@ class VidispineJobTool extends Component {
     while (loopPlacePriority <= loopSizePriority) {
       if (this.state[`value${loopPlacePriority}`] == true) {
         var urlPriority = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlacePriority}`] + "?priority=" + this.elementPriority.value;
-        fetch(urlPriority, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}, method: 'PUT'});
+        fetch(urlPriority, {headers: {Accept: "application/json", Authorization: "Bearer " + window.localStorage["pluto:access-token"]}, method: 'PUT'});
       }
       loopPlacePriority++;
     }
@@ -291,7 +291,7 @@ class VidispineJobTool extends Component {
     while (loopPlaceSubmit <= loopSizeSubmit) {
       if (this.state[`value${loopPlaceSubmit}`] == true) {
         var urlAbort = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceSubmit}`];
-        fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}, method: 'DELETE'});
+        fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Bearer " + window.localStorage["pluto:access-token"]}, method: 'DELETE'});
       }
       loopPlaceSubmit++;
     }
@@ -369,7 +369,7 @@ class VidispineJobTool extends Component {
     while (loopPlaceRe <= loopSizeRe) {
       if (this.state[`value${loopPlaceRe}`] == true) {
         var urlRe = this.props.vidispine_host + "/API/job/" + this.state[`id${loopPlaceRe}`] + "/re-run";
-        fetch(urlRe, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}, method: 'POST'});
+        fetch(urlRe, {headers: {Accept: "application/json", Authorization: "Bearer " + window.localStorage["pluto:access-token"]}, method: 'POST'});
       }
       loopPlaceRe++;
     }
