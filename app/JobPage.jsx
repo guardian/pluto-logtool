@@ -91,9 +91,8 @@ class JobPage extends Component {
   }
 
   abort = () => {
-    const encodedStringAbort = new Buffer(this.props.username + ":" + this.props.password).toString('base64');
     const urlAbort = this.props.vidispine_host + "/API/job/" + this.props.match.params.id;
-    fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Basic " + encodedStringAbort}, method: 'DELETE'});
+    fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}, method: 'DELETE'});
     this.getJobData('job/' + this.props.match.params.id + '?metadata=true');
   }
 
