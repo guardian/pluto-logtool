@@ -16,8 +16,8 @@ function validateAndDecode(token, signingKey, refreshToken) {
                 reject(err);
             }
             // console.log("decoded JWT");
-            sessionStorage.setItem("adfs-test:token", token);    //it validates so save the token
-            if(refreshToken) sessionStorage.setItem("adfs-test:refresh", refreshToken);
+            localStorage.setItem("adfs-test:token", token);    //it validates so save the token
+            if(refreshToken) localStorage.setItem("adfs-test:refresh", refreshToken);
             resolve(decoded);
         });
     });
@@ -43,7 +43,7 @@ async function loadInSigningKey() {
  * @returns {string} the JWT, or null if it is not set.
  */
 function getRawToken() {
-    return sessionStorage.getItem("adfs-test:token");
+    return localStorage.getItem("adfs-test:token");
 }
 
 export {validateAndDecode, loadInSigningKey, getRawToken};

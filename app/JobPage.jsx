@@ -44,7 +44,7 @@ class JobPage extends Component {
       const headers = new Headers();
       const url = this.props.vidispine_host + "/API/" + endpoint;
       await this.setStatePromise({loading: true});
-      const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}});
+      const result = await fetch(url, {headers: {Accept: "application/json", Authorization: "Bearer " + window.localStorage["pluto:access-token"]}});
 
       switch(result.status) {
       case 200:
@@ -92,7 +92,7 @@ class JobPage extends Component {
 
   abort = () => {
     const urlAbort = this.props.vidispine_host + "/API/job/" + this.props.match.params.id;
-    fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Bearer " + window.sessionStorage["pluto:access-token"]}, method: 'DELETE'});
+    fetch(urlAbort, {headers: {Accept: "application/json", Authorization: "Bearer " + window.localStorage["pluto:access-token"]}, method: 'DELETE'});
     this.getJobData('job/' + this.props.match.params.id + '?metadata=true');
   }
 
