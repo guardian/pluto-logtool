@@ -52,7 +52,7 @@ div.controls_box {
   grid-column-start: 1;
   grid-column-end: 1;
   display: grid;
-  grid-template-columns: 30px 30px 30px 160px 130px 145px 195px 150px 50px 295px 50px 295px 140px 54px 50px;
+  grid-template-columns: 30px 30px 30px 300px 175px 245px 50px 295px 50px 295px 200px 54px 50px;
   grid-template-rows: 35px 35px;
 }
 
@@ -407,7 +407,7 @@ div.last_page {
   padding-top: 5px;
   padding-left: 6px;
   border-radius: 5px;
-  grid-column-start: 14;
+  grid-column-start: 12;
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 21px;
@@ -421,7 +421,7 @@ div.next_page {
   padding-top: 5px;
   padding-left: 6px;
   border-radius: 5px;
-  grid-column-start: 15;
+  grid-column-start: 13;
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 21px;
@@ -456,12 +456,12 @@ div.job_number {
   font-size: 14px;
   height: 20px;
   min-width: 180px;
-  max-width: 300px;
+  max-width: 380px;
 }
 
 div.page_number {
-  grid-column-start: 13;
-  width: 120px;
+  grid-column-start: 11;
+  width: 180px;
   margin-top: 12px;
   border-radius: 3px;
   background-color: #222222;
@@ -590,12 +590,12 @@ div.size_button_128_grey {
 div.select_all {
   grid-column-start: 5;
   grid-row-start: 1;
-  grid-row-end: 3;
+  grid-row-end: 2;
   background-color: #222222;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 30px;
-  margin-top: 30px;
+  margin-left: 69px;
+  margin-top: 10px;
   padding: 6px;
   font-size: 14px;
   width: 62px;
@@ -603,21 +603,21 @@ div.select_all {
 }
 
 div.rerun_selected {
+  grid-column-start: 5;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+div.priority_selected {
   grid-column-start: 6;
   grid-row-start: 1;
   grid-row-end: 2;
 }
 
-div.priority_selected {
-  grid-column-start: 7;
-  grid-row-start: 1;
-  grid-row-end: 2;
-}
-
 div.abort_selected {
-  grid-column-start: 8;
-  grid-row-start: 1;
-  grid-row-end: 2;
+  grid-column-start: 6;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 
 button.priority_button {
@@ -628,8 +628,8 @@ button.priority_button {
   font-size: 14px;
   padding: 6px;
   border-radius: 2px;
-  margin-left: 2px;
-  margin-top: 30px;
+  margin-left: 30px;
+  margin-top: 10px;
   cursor: pointer;
 }
 
@@ -641,8 +641,8 @@ input.rerun_selected_button {
   font-size: 14px;
   padding: 6px;
   border-radius: 2px;
-  margin-left: 2px;
-  margin-top: 30px;
+  margin-left: 50px;
+  margin-top: 15px;
   cursor: pointer;
 }
 
@@ -654,13 +654,13 @@ input.abort_selected_button {
   font-size: 14px;
   padding: 6px;
   border-radius: 2px;
-  margin-left: 2px;
-  margin-top: 30px;
+  margin-left: 56px;
+  margin-top: 15px;
   cursor: pointer;
 }
 
 div.state_label{
-  grid-column-start: 9;
+  grid-column-start: 7;
   font-size: 14px;
   grid-row-start: 1;
   grid-row-end: 2;
@@ -668,14 +668,14 @@ div.state_label{
 }
 
 div.state_input {
-  grid-column-start: 10;
+  grid-column-start: 8;
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 4px;
 }
 
 div.type_label{
-  grid-column-start: 11;
+  grid-column-start: 9;
   font-size: 14px;
   grid-row-start: 1;
   grid-row-end: 2;
@@ -683,7 +683,7 @@ div.type_label{
 }
 
 div.type_input {
-  grid-column-start: 12;
+  grid-column-start: 10;
   grid-row-start: 1;
   grid-row-end: 2;
   margin-top: 4px;
@@ -692,8 +692,8 @@ div.type_input {
 div.page_form {
   margin-top: 18px;
   grid-row-start: 2;
-  grid-column-start: 13;
-  margin-left: 32px;
+  grid-column-start: 11;
+  margin-left: 48px;
 }
 
 input.go_button {
