@@ -7,6 +7,15 @@ var APP_DIR = path.resolve(__dirname, 'app');
 
 var config = {
     entry: APP_DIR + '/index.jsx',
+    resolve: {
+        extensions: [".js",".jsx"],
+        fallback: {
+            stream: require.resolve("stream-browserify"),
+            util: require.resolve("util/"),
+            crypto: require.resolve("crypto-browserify"),
+            buffer: require.resolve("buffer/")
+        },
+    },
     output: {
         path: BUILD_DIR,
         filename: 'bundle.js'
@@ -26,7 +35,12 @@ var config = {
                 use: ['style-loader', 'css-loader']
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            process: "process/browser",
+        }),
+    ],
 };
 
 module.exports = config;
