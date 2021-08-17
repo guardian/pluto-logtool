@@ -1,4 +1,4 @@
-FROM nginx:1.19-alpine
+FROM nginx:mainline-alpine
 
 COPY startup.sh /
 COPY nginx-server.conf /etc/nginx/conf.d/default.conf
