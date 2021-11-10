@@ -13,6 +13,7 @@ import StatusFormatter from './StatusFormatter.jsx';
 import TypeFormatter from './TypeFormatter.jsx';
 import PriorityFormatter from './PriorityFormatter.jsx';
 import StepInfoBox from './StepInfoBox.jsx';
+import DataInfoBox from './DataInfoBox.jsx';
 
 class JobPage extends Component {
 
@@ -171,6 +172,14 @@ class JobPage extends Component {
     return possibleURI;
   }
 
+  handleArrayData() {
+    if (this.state.vidispineData.data && this.state.vidispineData.data.length > 0) {
+      return this.state.vidispineData.data.slice().map((item, i) =><DataInfoBox mapPlace={i} dataData={item} />)
+    } else {
+      return
+    }
+  }
+
   render() {
     const id = this.props.match.params.id;
     const fileName = this.getValue(this.state.vidispineData.data, "originalFilename");
@@ -250,9 +259,11 @@ class JobPage extends Component {
             <div class="job_data_label">
               Target Object Id.:
             </div>
-            <div class="job_data_value">
-              {itemId}
-            </div>
+            <a href={"/vs/item/" + itemId} target="_blank">
+              <div class="job_data_value">
+                {itemId}
+              </div>
+            </a>
           </div>
           <div class="job_data_box">
             <div class="job_data_label">
@@ -311,11 +322,29 @@ class JobPage extends Component {
             </div>
           </div>
           <div class="job_page_steps_title_box">
-            <div class="job_page_steps_title_boxtitle">
+            <div class="job_page_steps_title">
               Steps
             </div>
           </div>
             {this.handleReverseArray()}
+          <div class="job_page_data_title_box">
+            <div class="job_page_data_title">
+              Data
+            </div>
+          </div>
+            {this.handleArrayData()}
+          <div class="job_page_json_title_box">
+            <div class="job_page_json_title">
+              Job Data as JSON
+            </div>
+          </div>
+          <div class="job_page_json_box">
+            <div class="job_page_json">
+              <pre class="job_page_json">
+                {JSON.stringify(this.state.vidispineData, null, 2)}
+              </pre>
+            </div>
+          </div>
         </div>
       </div>
     )
