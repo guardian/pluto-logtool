@@ -71,6 +71,16 @@ render() {
       <div></div>
     )}
     </div>
+    {this.props.stepData.errorMessage ? (
+      <div class="step_error">
+        <div class="step_error_lable">
+          Error:
+        </div>
+        <div class="step_error_text">
+          {this.props.stepData.errorMessage}
+        </div>
+      </div>
+    ) : null}
     <div class="step_data">
       Status: {this.props.stepData.status}
       <br />
