@@ -906,6 +906,29 @@ div.step_tasks {
   margin-left: 8px;
   line-height: 1.6;
   word-wrap: break-word;
+  margin-bottom: 6px;
+}
+
+div.step_error {
+  background-color: #000000;
+  border-radius: 8px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding-left: 22px;
+  padding-top: 12px;
+  font-size: 14px;
+  display: grid;
+  grid-template-columns: 80px 1260px;
+  grid-template-rows: auto;
+  padding-bottom: 8px;
+}
+
+div.step_error_label {
+  grid-column-start: 1;
+}
+
+div.step_error_text {
+  grid-column-start: 2;
 }
 
 div.step_data {
