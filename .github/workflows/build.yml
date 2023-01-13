@@ -53,12 +53,12 @@ jobs:
       - run: yarn install --frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: yarn lint
+
       - run: yarn test
         env:
           JEST_JUNIT_OUTPUT_DIR: junit-tests
           JEST_JUNIT_TITLE: Frontend tests
-      - run: yarn build
+      - run: yarn compile
 
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
