@@ -5,7 +5,7 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core";
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { Header, AppSwitcher, handleUnauthorized } from "pluto-headers";
+import { Header, AppSwitcher, handleUnauthorized } from "@guardian/pluto-headers";
 import VidispineJobTool from './VidispineJobTool.jsx';
 import JobPage from './JobPage.jsx';
 import NotLoggedIn from "./NotLoggedIn.jsx";
