@@ -5,7 +5,17 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core";
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { Header, AppSwitcher, handleUnauthorized } from "@guardian/pluto-headers";
+import {
+  AppSwitcher,
+  Header,
+  JwtDataShape,
+  OAuthContextData,
+  OAuthContextProvider,
+  SystemNotification,
+  UserContextProvider,
+  verifyExistingLogin,
+  handleUnauthorized,
+} from "@guardian/pluto-headers";
 import VidispineJobTool from './VidispineJobTool.jsx';
 import JobPage from './JobPage.jsx';
 import NotLoggedIn from "./NotLoggedIn.jsx";
@@ -43,10 +53,12 @@ class App extends React.Component {
       isLoggedIn: false,
       tokenExpired: false,
       plutoConfig: {},
+      userProfile: undefined,
     };
 
     this.handleUnauthorizedFailed = this.handleUnauthorizedFailed.bind(this);
     this.onLoginValid = this.onLoginValid.bind(this);
+    this.oAuthConfigLoaded = this.oAuthConfigLoaded.bind(this);
 
     axios.interceptors.response.use(
       (response) => response,
@@ -91,6 +103,22 @@ class App extends React.Component {
     );
   }
 
+  haveToken() {
+    return window.localStorage.getItem("pluto:access-token");
+  }
+
+  oAuthConfigLoaded(oAuthConfig) {
+    //If we already have a user token at mount, verify it and update our internal state.
+    //If we do not, ignore for the time being; it will be set dynamically when the login occurs.
+    console.log("Loaded oAuthConfig: ", oAuthConfig);
+    if (this.haveToken()) {
+      verifyExistingLogin(oAuthConfig)
+        .then((profile) => this.setState({ userProfile: profile }))
+        .catch((err) => {
+          console.error("Could not verify existing user profile: ", err);
+        });
+    }
+  }
 
   render(){
     if (!this.state.loading && !this.state.isLoggedIn) {
@@ -99,16 +127,26 @@ class App extends React.Component {
     }
 
     return (
-      <ThemeProvider theme={theme}>
-        <Header></Header>
-        <AppSwitcher onLoginValid={this.onLoginValid}></AppSwitcher>
-        <div class="main_job_div">
-            <Switch>
-                <Route path="/job/:id" component={()=><JobPage vidispine_host={VS_HOST} />}/>
-                <Route path="/" component={()=><VidispineJobTool vidispine_host={VS_HOST} />}/>
-            </Switch>
-        </div>
-      </ThemeProvider>
+      <OAuthContextProvider onLoaded={this.oAuthConfigLoaded}>
+        <UserContextProvider
+          value={{
+            profile: this.state.userProfile,
+            updateProfile: (newValue) =>
+              this.setState({ userProfile: newValue }),
+          }}
+        >
+          <ThemeProvider theme={theme}>
+            <Header></Header>
+            <AppSwitcher onLoginValid={this.onLoginValid}></AppSwitcher>
+            <div class="main_job_div">
+                <Switch>
+                    <Route path="/job/:id" component={()=><JobPage vidispine_host={VS_HOST} />}/>
+                    <Route path="/" component={()=><VidispineJobTool vidispine_host={VS_HOST} />}/>
+                </Switch>
+            </div>
+          </ThemeProvider>
+        </UserContextProvider>
+      </OAuthContextProvider>
     );
   }
 }
