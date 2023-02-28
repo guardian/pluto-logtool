@@ -65,7 +65,7 @@ div.headings_box {
   grid-column-end: 1;
   width: 1800px;
   display: grid;
-  grid-template-columns: 60px 160px 520px 180px 180px 160px 200px 140px 100px 100px;
+  grid-template-columns: 60px 160px 470px 180px 180px 160px 250px 140px 100px 100px;
   grid-template-rows: 30px;
 }
 
@@ -138,7 +138,7 @@ a.job_page_link {
   grid-column-start: 2;
   padding-top: 18px;
   display: grid;
-  grid-template-columns: 160px 520px 180px 180px 160px 200px 140px 100px 100px;
+  grid-template-columns: 160px 470px 180px 180px 160px 250px 140px 100px 100px;
   grid-template-rows: 50px;
 }
 
