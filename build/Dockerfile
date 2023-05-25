@@ -1,4 +1,4 @@
-FROM nginx:1.23.2-alpine
+FROM nginx:1.24-alpine
 
 COPY startup.sh /
 COPY nginx-server.conf /etc/nginx/conf.d/default.conf
