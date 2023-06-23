@@ -53,7 +53,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "axios": "^0.21.1",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^9.0.0",
     "buffer": "^6.0.3",
     "cross-storage": "^1.0.0",
     "crypto-browserify": "^3.12.0",
