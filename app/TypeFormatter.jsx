@@ -55,6 +55,8 @@ class TypeFormatter extends React.Component {
         return "Export";
       case "COPY_FILE":
         return "Copy File";
+      case "DELETE_USER":
+        return "Delete User";
       default:
        return type;
     }

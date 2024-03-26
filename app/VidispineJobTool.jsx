@@ -434,6 +434,7 @@ class VidispineJobTool extends Component {
       { value: 'CONFORM', label: 'Conform', color: '#ffffff' },
       { value: 'COPY_FILE', label: 'Copy File', color: '#ffffff' },
       { value: 'DELETE_FILE', label: 'Delete File', color: '#ffffff' },
+      { value: 'DELETE_USER', label: 'Delete User', color: '#ffffff' },
       { value: 'ESSENCE_VERSION', label: 'Essence Version', color: '#ffffff' },
       { value: 'EXPORT', label: 'Export', color: '#ffffff' },
       { value: 'IMPORT', label: 'Import', color: '#ffffff' },
