@@ -14,6 +14,8 @@ import TypeFormatter from './TypeFormatter.jsx';
 import PriorityFormatter from './PriorityFormatter.jsx';
 import StepInfoBox from './StepInfoBox.jsx';
 import DataInfoBox from './DataInfoBox.jsx';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { gradientDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 class JobPage extends Component {
 
@@ -340,9 +342,9 @@ class JobPage extends Component {
           </div>
           <div class="job_page_json_box">
             <div class="job_page_json">
-              <pre class="job_page_json">
+              <SyntaxHighlighter language="json" style={gradientDark} wrapLines="true" wrapLongLines="true">
                 {JSON.stringify(this.state.vidispineData, null, 2)}
-              </pre>
+              </SyntaxHighlighter>
             </div>
           </div>
         </div>
